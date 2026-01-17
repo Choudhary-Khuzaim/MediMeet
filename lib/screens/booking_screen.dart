@@ -142,7 +142,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.25),
+                    color: AppColors.primary.withValues(alpha: 0.25),
                     blurRadius: 15,
                     offset: const Offset(0, 8),
                   ),
@@ -158,7 +158,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -188,7 +188,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -270,7 +270,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     shape: BoxShape.circle,
                   ),
                   todayDecoration: BoxDecoration(
-                    color: AppColors.secondary.withOpacity(0.2),
+                    color: AppColors.secondary.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: AppColors.secondary,
@@ -278,7 +278,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                   disabledDecoration: BoxDecoration(
-                    color: AppColors.divider.withOpacity(0.3),
+                    color: AppColors.divider.withValues(alpha: 0.3),
                     shape: BoxShape.circle,
                   ),
                   defaultTextStyle: const TextStyle(
@@ -362,7 +362,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.2),
+                              color: AppColors.primary.withValues(alpha: 0.2),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),

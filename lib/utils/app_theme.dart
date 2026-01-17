@@ -10,7 +10,6 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: AppColors.surface,
-        background: AppColors.background,
         error: AppColors.error,
         brightness: Brightness.light,
       ),
@@ -30,9 +29,7 @@ class AppTheme {
       ),
       cardTheme: CardThemeData(
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         color: AppColors.surface,
         shadowColor: AppColors.shadowColor,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -43,8 +40,8 @@ class AppTheme {
           foregroundColor: Colors.white,
           elevation: 2,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
           textStyle: const TextStyle(
             fontSize: 16,
@@ -56,16 +53,16 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          textStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surface,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.border),
@@ -147,7 +144,6 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: const Color(0xFF1E1E1E),
-        background: const Color(0xFF121212),
         error: AppColors.error,
         brightness: Brightness.dark,
       ),
@@ -167,11 +163,9 @@ class AppTheme {
       ),
       cardTheme: CardThemeData(
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         color: const Color(0xFF1E1E1E),
-        shadowColor: Colors.black.withOpacity(0.3),
+        shadowColor: Colors.black.withValues(alpha: 0.3),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -193,16 +187,16 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.secondary,
-          textStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: const Color(0xFF1E1E1E),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: Colors.grey.shade700),

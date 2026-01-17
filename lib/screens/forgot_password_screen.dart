@@ -59,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.2),
+                        color: AppColors.primary.withValues(alpha: 0.2),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -71,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -95,7 +95,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         'Enter the email associated with your account and we\'ll send a link to reset your password.',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withValues(alpha: 0.9),
                           height: 1.5,
                         ),
                       ),

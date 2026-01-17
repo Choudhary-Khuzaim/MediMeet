@@ -1,135 +1,169 @@
-# MEDIMEET - Health & Doctor Appointment App
+# 🏥 MediMeet - Your Personal Healthcare Companion
 
-A comprehensive Flutter mobile application for managing doctor appointments, viewing medical records, and finding healthcare providers.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Choudhary-Khuzaim/MediMeet/main/assets/readme/medimeet_banner.png" alt="MediMeet Banner">
+</p>
 
-## Features
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-v3.27.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter Version">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-lightgrey?style=for-the-badge" alt="Platform">
+</p>
 
-- **Doctors List**: Browse and search for doctors by specialty, name, or hospital
-- **Doctor Details**: View comprehensive doctor profiles with ratings, experience, and availability
-- **Appointment Booking**: Book appointments with calendar selection and time slots
-- **Appointment Management**: View upcoming, completed, and all appointments
-- **Medical Records**: Access and view your medical history and records
-- **Modern UI**: Beautiful, intuitive interface with Material Design 3
+---
 
-## Project Structure
+## 📖 Table of Contents
+- [🌟 Overview](#-overview)
+- [✨ Key Features](#-key-features)
+- [🎨 Design System](#-design-system)
+- [📱 App Screenshots](#-app-screenshots)
+- [🛠️ Tech Stack](#-tech-stack)
+- [📂 Project Structure](#-project-structure)
+- [🚀 Installation](#-installation)
+- [🗺️ Roadmap](#-roadmap)
+- [🤝 Contributing](#-contributing)
+- [📬 Contact](#-contact)
 
-```
+---
+
+## 🌟 Overview
+**MediMeet** is a premium, high-fidelity healthcare application built with **Flutter** and **Dart**. It simplifies the healthcare experience by connecting patients with top-rated doctors, managing medical records, and streamlining the appointment booking process. 
+
+Designed with a focus on **User Experience (UX)** and **Visual Excellence**, MediMeet provides a seamless, state-of-the-art interface for all your medical needs. Whether you're booking a specialist or tracking your medical history, MediMeet makes it effortless.
+
+---
+
+## ✨ Key Features
+
+### 👨‍⚕️ Doctor Discovery
+- **Smart Search**: Find doctors by name, specialty, or clinic location.
+- **Detailed Profiles**: Comprehensive doctor information including experience, ratings, and availability.
+- **Specialty Categories**: Quick filters for Cardiology, Neurology, Pediatrics, etc.
+
+### 📅 Appointment Management
+- **Instant Booking**: Secure your slot with a few taps using an interactive calendar.
+- **Dynamic Slots**: Real-time availability tracking for time slots.
+- **Status Updates**: Track "Upcoming", "Completed", and "Cancelled" appointments.
+
+### 📋 Digital Medical Records
+- **Secure Records**: Keep your diagnoses, prescriptions, and lab notes in one safe place.
+- **Searchable History**: Access your medical timeline with ease.
+- **Detail View**: Full breakdown of each medical visit.
+
+### 🎨 Premium UI/UX & Localization
+- **Theme Awareness**: Full support for **Dark Mode** and **Light Mode**.
+- **Localization**: Supports **English** and **Urdu (اردو)** out of the box.
+- **Material 3**: Clean, modern aesthetics following the latest design patterns.
+
+---
+
+## 🎨 Design System
+
+We believe in visual excellence. MediMeet follows a curated color palette:
+
+| Color | Hex | Role |
+| :--- | :--- | :--- |
+| **Deep Navy** | `#1D3557` | Primary Brand Color |
+| **Teal** | `#00A0AB` | Secondary / Success |
+| **Warm Amber** | `#FFB703` | Call to Action / Accents |
+| **Soft Background**| `#F5F7FA` | Primary Surface / Background |
+
+---
+
+## � App Screenshots
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Choudhary-Khuzaim/MediMeet/main/assets/readme/medimeet_mockup.png" width="400" title="MediMeet App Dashboard">
+</p>
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Flutter](https://flutter.dev) (v3.27.0+)
+- **Language**: [Dart](https://dart.dev)
+- **State Management**: [Provider](https://pub.dev/packages/provider)
+- **Localization**: `flutter_localizations` (English & Urdu)
+- **Utilities**: 
+  - `Geolocator` & `Geocoding` (for location tracking)
+  - `Intl` (for date/time formatting)
+  - `Table Calendar` (for booking)
+
+---
+
+## 📂 Project Structure
+
+```text
 lib/
-├── main.dart                 # App entry point with navigation
-├── models/                   # Data models
-│   ├── doctor.dart          # Doctor model
-│   ├── appointment.dart     # Appointment model
-│   └── medical_record.dart  # Medical record model
-├── screens/                  # App screens
-│   ├── home_screen.dart     # Home/Dashboard screen
-│   ├── doctors_list_screen.dart
-│   ├── doctor_detail_screen.dart
-│   ├── booking_screen.dart
-│   ├── appointments_screen.dart
-│   └── medical_records_screen.dart
-├── widgets/                  # Reusable UI components
-│   ├── doctor_card.dart
-│   ├── appointment_card.dart
-│   └── medical_record_card.dart
-├── providers/                # State management
-│   └── appointment_provider.dart
-├── services/                 # Data services
-│   ├── doctor_service.dart
-│   └── medical_record_service.dart
-└── utils/                    # Utilities
-    ├── app_colors.dart
-    └── app_theme.dart
+├── models/         # Data blueprints for Doctors, Appointments & Records
+├── providers/      # Global state management logic
+├── screens/        # High-fidelity UI screens and layouts
+├── services/       # Business logic and mock/real API services
+├── utils/          # App constants, themes, and design tokens
+└── widgets/        # Modular, reusable UI components
 ```
 
-## Getting Started
+---
+
+## 🚀 Installation
 
 ### Prerequisites
+1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+2. Setup your favorite IDE (VS Code or Android Studio)
+3. Connect an emulator or physical device
 
-- Flutter SDK (3.9.2 or higher)
-- Dart SDK
-- Android Studio / VS Code with Flutter extensions
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies:
+### Steps to Run
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Choudhary-Khuzaim/MediMeet.git
+   ```
+2. **Navigate to project directory**
+   ```bash
+   cd medimeet
+   ```
+3. **Download packages**
    ```bash
    flutter pub get
    ```
-
-3. Run the app:
+4. **Generate localization (if needed)**
+   ```bash
+   flutter gen-l10n
+   ```
+5. **Launch the app**
    ```bash
    flutter run
    ```
 
-## Dependencies
+---
 
-- `flutter`: SDK
-- `provider`: State management
-- `intl`: Date/time formatting
-- `table_calendar`: Calendar widget for booking
-- `flutter_svg`: SVG support (optional)
+## 🗺️ Roadmap
+- [ ] **Push Notifications**: Real-time alerts for appointments.
+- [ ] **AI Symptoms Checker**: Basic AI-driven health suggestions.
+- [ ] **Lab Integration**: Directly download lab results in the app.
+- [ ] **Payment Gateway**: Seamless checkout for consultation fees.
+- [ ] **Video Consultation**: Online doctor meetings via WebRTC.
 
-## App Screens
+---
 
-### Home Screen
-- Quick action cards for navigation
-- Upcoming appointments preview
-- Top doctors list
-- Search functionality
+## 🤝 Contributing
+Contributions make the community better! 
 
-### Doctors List Screen
-- Search and filter doctors
-- Specialty filter chips
-- Doctor cards with ratings and reviews
+1. **Fork** the project
+2. Create your **Feature Branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. Open a **Pull Request**
 
-### Doctor Detail Screen
-- Complete doctor profile
-- Ratings and reviews
-- Available days
-- Book appointment button
+---
 
-### Booking Screen
-- Calendar date selection
-- Time slot selection
-- Reason and notes input
-- Appointment confirmation
+## � Contact
+**Khuzaim Sajjad** - [@Choudhary-Khuzaim](https://github.com/Choudhary-Khuzaim)
 
-### Appointments Screen
-- Tabbed view (Upcoming, Completed, All)
-- Appointment cards with details
-- Cancel appointment functionality
+Project Link: [https://github.com/Choudhary-Khuzaim/MediMeet](https://github.com/Choudhary-Khuzaim/MediMeet)
 
-### Medical Records Screen
-- List of medical records
-- Detailed record view
-- Diagnosis, prescription, and notes
+---
 
-## State Management
-
-The app uses Provider for state management:
-- `AppointmentProvider`: Manages appointments (add, cancel, filter)
-
-## UI/UX Features
-
-- Material Design 3
-- Custom color scheme (green/medical theme)
-- Responsive layouts
-- Smooth navigation
-- Empty states
-- Loading indicators
-- Error handling
-
-## Future Enhancements
-
-- User authentication
-- Push notifications
-- Video consultations
-- Prescription management
-- Lab reports integration
-- Payment integration
-- Doctor reviews and ratings
-
-## License
-
-This project is created for educational purposes.
+<p align="center">
+  <b>Built for a healthier tomorrow.</b><br>
+  Developed with ❤️ by Khuzaim Sajjad
+</p>

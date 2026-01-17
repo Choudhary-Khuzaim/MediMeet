@@ -34,7 +34,7 @@ class DoctorDetailScreen extends StatelessWidget {
                         height: 200,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withValues(alpha: 0.1),
                         ),
                       ),
                     ),
@@ -46,7 +46,7 @@ class DoctorDetailScreen extends StatelessWidget {
                         height: 150,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withValues(alpha: 0.1),
                         ),
                       ),
                     ),
@@ -64,7 +64,7 @@ class DoctorDetailScreen extends StatelessWidget {
                               border: Border.all(color: Colors.white, width: 4),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.15),
+                                  color: Colors.black.withValues(alpha: 0.15),
                                   blurRadius: 20,
                                   offset: const Offset(0, 10),
                                 ),
@@ -91,7 +91,7 @@ class DoctorDetailScreen extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
@@ -255,7 +255,7 @@ class DoctorDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           decoration: BoxDecoration(
                             color: AppColors.surface,
-                            border: Border.all(color: AppColors.primary.withOpacity(0.4)),
+                            border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
@@ -382,7 +382,7 @@ class _StatItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, color: color, size: 24),
@@ -443,7 +443,7 @@ class _InfoCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(icon, color: color, size: 28),

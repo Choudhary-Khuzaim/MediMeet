@@ -230,7 +230,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Location services are disabled. Please enable them in settings.'),
+              content: Text(
+                'Location services are disabled. Please enable them in settings.',
+              ),
               backgroundColor: AppColors.error,
             ),
           );
@@ -259,7 +261,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Location permissions are permanently denied. Please enable them in settings.'),
+              content: Text(
+                'Location permissions are permanently denied. Please enable them in settings.',
+              ),
               backgroundColor: AppColors.error,
             ),
           );
@@ -272,15 +276,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
-            child: CircularProgressIndicator(),
-          ),
+          builder: (context) =>
+              const Center(child: CircularProgressIndicator()),
         );
       }
 
       // Get current position
       Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
       );
 
       // Get address from coordinates
@@ -292,7 +297,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks[0];
         String address = '';
-        
+
         // Build address string
         if (place.street != null && place.street!.isNotEmpty) {
           address += place.street!;
@@ -305,7 +310,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (address.isNotEmpty) address += ', ';
           address += place.locality!;
         }
-        if (place.administrativeArea != null && place.administrativeArea!.isNotEmpty) {
+        if (place.administrativeArea != null &&
+            place.administrativeArea!.isNotEmpty) {
           if (address.isNotEmpty) address += ', ';
           address += place.administrativeArea!;
         }
@@ -322,7 +328,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // Update location
         if (mounted) {
           setState(() {
-            _location = address.isNotEmpty ? address : '${place.locality ?? ''}, ${place.country ?? ''}';
+            _location = address.isNotEmpty
+                ? address
+                : '${place.locality ?? ''}, ${place.country ?? ''}';
           });
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -414,7 +422,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                     ),
                     onChanged: (value) {
                       setDialogState(() {
@@ -422,9 +433,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           filteredCountries = List.from(_countryCodes);
                         } else {
                           filteredCountries = _countryCodes
-                              .where((country) =>
-                                  country['name']!.toLowerCase().contains(value.toLowerCase()) ||
-                                  country['code']!.contains(value))
+                              .where(
+                                (country) =>
+                                    country['name']!.toLowerCase().contains(
+                                      value.toLowerCase(),
+                                    ) ||
+                                    country['code']!.contains(value),
+                              )
                               .toList();
                         }
                       });
@@ -448,18 +463,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: Text(
                           country['name']!,
                           style: TextStyle(
-                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                            color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.textPrimary,
                           ),
                         ),
                         subtitle: Text(
                           country['code']!,
                           style: TextStyle(
-                            color: isSelected ? AppColors.primary : AppColors.textSecondary,
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.textSecondary,
                           ),
                         ),
                         trailing: isSelected
-                            ? const Icon(Icons.check_circle_rounded, color: AppColors.primary)
+                            ? const Icon(
+                                Icons.check_circle_rounded,
+                                color: AppColors.primary,
+                              )
                             : null,
                         onTap: () {
                           onCountrySelected(country['code']!);
@@ -483,7 +507,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     required String fieldType,
     DateTime? initialDate,
   }) {
-    final TextEditingController controller = TextEditingController(text: currentValue);
+    final TextEditingController controller = TextEditingController(
+      text: currentValue,
+    );
     DateTime? selectedDate = initialDate;
 
     // Parse phone number for country code and number
@@ -494,7 +520,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       for (var country in _countryCodes) {
         if (currentValue.startsWith(country['code']!)) {
           initialCountryCode = country['code']!;
-          phoneNumberOnly = currentValue.substring(country['code']!.length).trim();
+          phoneNumberOnly = currentValue
+              .substring(country['code']!.length)
+              .trim();
           break;
         }
       }
@@ -506,15 +534,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       controller.text = currentValue;
     }
 
-    final TextEditingController phoneController = TextEditingController(text: phoneNumberOnly);
+    final TextEditingController phoneController = TextEditingController(
+      text: phoneNumberOnly,
+    );
     String currentCountryCode = initialCountryCode;
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text('Edit $title'),
         content: fieldType == 'date'
             ? StatefulBuilder(
@@ -567,195 +595,212 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               )
             : fieldType == 'phone'
-                ? StatefulBuilder(
-                    builder: (context, setDialogState) {
-                      // Find current country name
-                      String currentCountryName = _countryCodes.firstWhere(
-                        (c) => c['code'] == currentCountryCode,
-                        orElse: () => {'code': '+92', 'name': 'Pakistan', 'flag': '🇵🇰'},
-                      )['name']!;
-                      String currentCountryFlag = _countryCodes.firstWhere(
-                        (c) => c['code'] == currentCountryCode,
-                        orElse: () => {'code': '+92', 'name': 'Pakistan', 'flag': '🇵🇰'},
-                      )['flag']!;
-
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Country Code Selector Button
-                          InkWell(
-                            onTap: () {
-                              _showCountryPickerDialog(
-                                context,
-                                currentCountryCode,
-                                (selectedCode) {
-                                  setDialogState(() {
-                                    currentCountryCode = selectedCode;
-                                  });
-                                },
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey.shade300),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.flag_rounded, color: AppColors.primary),
-                                  const SizedBox(width: 12),
-                                  Text(
-                                    currentCountryFlag,
-                                    style: const TextStyle(fontSize: 24),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          'Country Code',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: AppColors.textSecondary,
-                                          ),
-                                        ),
-                                        Text(
-                                          '$currentCountryCode $currentCountryName',
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColors.textPrimary,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Icon(Icons.arrow_drop_down_rounded, color: AppColors.textSecondary),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          // Phone Number Input
-                          TextField(
-                            controller: phoneController,
-                            decoration: const InputDecoration(
-                              labelText: 'Phone Number',
-                              border: OutlineInputBorder(),
-                              prefixIcon: Icon(Icons.phone_rounded),
-                              hintText: '300 1234567',
-                            ),
-                            autofocus: true,
-                            keyboardType: TextInputType.phone,
-                          ),
-                        ],
-                      );
+            ? StatefulBuilder(
+                builder: (context, setDialogState) {
+                  // Find current country name
+                  String currentCountryName = _countryCodes.firstWhere(
+                    (c) => c['code'] == currentCountryCode,
+                    orElse: () => {
+                      'code': '+92',
+                      'name': 'Pakistan',
+                      'flag': '🇵🇰',
                     },
-                  )
-                : fieldType == 'location'
-                    ? Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextField(
-                            controller: controller,
-                            decoration: InputDecoration(
-                              labelText: title,
-                              border: const OutlineInputBorder(),
-                              prefixIcon: const Icon(Icons.location_on_outlined),
-                            ),
-                            autofocus: true,
-                            keyboardType: TextInputType.text,
-                            maxLines: 2,
-                          ),
-                          const SizedBox(height: 16),
-                          OutlinedButton.icon(
-                            onPressed: () async {
-                              Navigator.pop(context);
-                              await _getCurrentLocation();
-                            },
-                            icon: const Icon(Icons.my_location_rounded),
-                            label: const Text('Use Current Location'),
-                            style: OutlinedButton.styleFrom(
-                              minimumSize: const Size(double.infinity, 50),
-                              foregroundColor: AppColors.primary,
-                              side: const BorderSide(color: AppColors.primary),
-                            ),
-                          ),
-                        ],
-                      )
-                    : fieldType == 'bloodGroup'
-                        ? StatefulBuilder(
-                            builder: (context, setDialogState) {
-                              String selectedBloodGroup = currentValue;
-                              final List<String> bloodGroups = [
-                                'A+',
-                                'A-',
-                                'B+',
-                                'B-',
-                                'AB+',
-                                'AB-',
-                                'O+',
-                                'O-',
-                              ];
+                  )['name']!;
+                  String currentCountryFlag = _countryCodes.firstWhere(
+                    (c) => c['code'] == currentCountryCode,
+                    orElse: () => {
+                      'code': '+92',
+                      'name': 'Pakistan',
+                      'flag': '🇵🇰',
+                    },
+                  )['flag']!;
 
-                              return DropdownButtonFormField<String>(
-                                value: selectedBloodGroup,
-                                decoration: const InputDecoration(
-                                  labelText: 'Blood Group',
-                                  border: OutlineInputBorder(),
-                                  prefixIcon: Icon(Icons.favorite_outline),
-                                ),
-                                items: bloodGroups.map((group) {
-                                  return DropdownMenuItem<String>(
-                                    value: group,
-                                    child: Text(
-                                      group,
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    setDialogState(() {
-                                      selectedBloodGroup = value;
-                                    });
-                                    // Update controller for save button
-                                    controller.text = value;
-                                  }
-                                },
-                              );
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Country Code Selector Button
+                      InkWell(
+                        onTap: () {
+                          _showCountryPickerDialog(
+                            context,
+                            currentCountryCode,
+                            (selectedCode) {
+                              setDialogState(() {
+                                currentCountryCode = selectedCode;
+                              });
                             },
-                          )
-                        : fieldType == 'allergies' || fieldType == 'medications'
-                            ? TextField(
-                                controller: controller,
-                                decoration: InputDecoration(
-                                  labelText: title,
-                                  border: const OutlineInputBorder(),
-                                  prefixIcon: Icon(
-                                    fieldType == 'allergies'
-                                        ? Icons.medical_services_outlined
-                                        : Icons.medication_outlined,
-                                  ),
-                                  hintText: fieldType == 'allergies'
-                                      ? 'Enter your allergies (e.g., Peanuts, Dust)'
-                                      : 'Enter current medications',
-                                ),
-                                autofocus: true,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 3,
-                              )
-                            : TextField(
-                                controller: controller,
-                                decoration: InputDecoration(
-                                  labelText: title,
-                                  border: const OutlineInputBorder(),
-                                ),
-                                autofocus: true,
-                                keyboardType: TextInputType.text,
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.flag_rounded,
+                                color: AppColors.primary,
                               ),
+                              const SizedBox(width: 12),
+                              Text(
+                                currentCountryFlag,
+                                style: const TextStyle(fontSize: 24),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Country Code',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.textSecondary,
+                                      ),
+                                    ),
+                                    Text(
+                                      '$currentCountryCode $currentCountryName',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.textPrimary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_drop_down_rounded,
+                                color: AppColors.textSecondary,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      // Phone Number Input
+                      TextField(
+                        controller: phoneController,
+                        decoration: const InputDecoration(
+                          labelText: 'Phone Number',
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.phone_rounded),
+                          hintText: '300 1234567',
+                        ),
+                        autofocus: true,
+                        keyboardType: TextInputType.phone,
+                      ),
+                    ],
+                  );
+                },
+              )
+            : fieldType == 'location'
+            ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                      labelText: title,
+                      border: const OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.location_on_outlined),
+                    ),
+                    autofocus: true,
+                    keyboardType: TextInputType.text,
+                    maxLines: 2,
+                  ),
+                  const SizedBox(height: 16),
+                  OutlinedButton.icon(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await _getCurrentLocation();
+                    },
+                    icon: const Icon(Icons.my_location_rounded),
+                    label: const Text('Use Current Location'),
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                      foregroundColor: AppColors.primary,
+                      side: const BorderSide(color: AppColors.primary),
+                    ),
+                  ),
+                ],
+              )
+            : fieldType == 'bloodGroup'
+            ? StatefulBuilder(
+                builder: (context, setDialogState) {
+                  String selectedBloodGroup = currentValue;
+                  final List<String> bloodGroups = [
+                    'A+',
+                    'A-',
+                    'B+',
+                    'B-',
+                    'AB+',
+                    'AB-',
+                    'O+',
+                    'O-',
+                  ];
+
+                  return DropdownButtonFormField<String>(
+                    initialValue: selectedBloodGroup,
+                    decoration: const InputDecoration(
+                      labelText: 'Blood Group',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.favorite_outline),
+                    ),
+                    items: bloodGroups.map((group) {
+                      return DropdownMenuItem<String>(
+                        value: group,
+                        child: Text(
+                          group,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        setDialogState(() {
+                          selectedBloodGroup = value;
+                        });
+                        // Update controller for save button
+                        controller.text = value;
+                      }
+                    },
+                  );
+                },
+              )
+            : fieldType == 'allergies' || fieldType == 'medications'
+            ? TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  labelText: title,
+                  border: const OutlineInputBorder(),
+                  prefixIcon: Icon(
+                    fieldType == 'allergies'
+                        ? Icons.medical_services_outlined
+                        : Icons.medication_outlined,
+                  ),
+                  hintText: fieldType == 'allergies'
+                      ? 'Enter your allergies (e.g., Peanuts, Dust)'
+                      : 'Enter current medications',
+                ),
+                autofocus: true,
+                keyboardType: TextInputType.multiline,
+                maxLines: 3,
+              )
+            : TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  labelText: title,
+                  border: const OutlineInputBorder(),
+                ),
+                autofocus: true,
+                keyboardType: TextInputType.text,
+              ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -770,13 +815,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               } else if (fieldType == 'phone') {
                 if (phoneController.text.isNotEmpty) {
                   setState(() {
-                    _phoneNumber = '$currentCountryCode ${phoneController.text}';
+                    _phoneNumber =
+                        '$currentCountryCode ${phoneController.text}';
                   });
                 }
               } else if (fieldType == 'bloodGroup') {
                 // Blood group is always saved (has default value)
                 setState(() {
-                  _bloodGroup = controller.text.isNotEmpty ? controller.text : _bloodGroup;
+                  _bloodGroup = controller.text.isNotEmpty
+                      ? controller.text
+                      : _bloodGroup;
                 });
               } else if (controller.text.isNotEmpty) {
                 setState(() {
@@ -808,9 +856,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
+      appBar: AppBar(title: const Text('Profile')),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -838,7 +884,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
+                              color: Colors.black.withValues(alpha: 0.2),
                               blurRadius: 20,
                               offset: const Offset(0, 10),
                             ),
@@ -888,14 +934,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     'khuzaim.sajjad@gmail.com',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                     ),
                   ),
                   const SizedBox(height: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -955,12 +1004,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       _InfoTile(
                         icon: Icons.calendar_today_outlined,
                         title: 'Date of Birth',
-                        subtitle: DateFormat('MMMM dd, yyyy').format(_dateOfBirth),
+                        subtitle: DateFormat(
+                          'MMMM dd, yyyy',
+                        ).format(_dateOfBirth),
                         showArrow: true,
                         onTap: () {
                           _showEditDialog(
                             title: 'Date of Birth',
-                            currentValue: DateFormat('MMMM dd, yyyy').format(_dateOfBirth),
+                            currentValue: DateFormat(
+                              'MMMM dd, yyyy',
+                            ).format(_dateOfBirth),
                             fieldType: 'date',
                             initialDate: _dateOfBirth,
                           );
@@ -1149,9 +1202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text('Logout'),
         content: const Text('Are you sure you want to logout?'),
         actions: [
@@ -1162,12 +1213,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              final authProvider = Provider.of<AuthProvider>(context, listen: false);
+              final authProvider = Provider.of<AuthProvider>(
+                context,
+                listen: false,
+              );
               authProvider.logout();
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.error,
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
             child: const Text('Logout'),
           ),
         ],
@@ -1180,10 +1232,7 @@ class _InfoSection extends StatelessWidget {
   final String title;
   final List<Widget> children;
 
-  const _InfoSection({
-    required this.title,
-    required this.children,
-  });
+  const _InfoSection({required this.title, required this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -1242,7 +1291,7 @@ class _InfoTile extends StatelessWidget {
       leading: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: AppColors.primary, size: 24),
@@ -1294,7 +1343,7 @@ class _StatItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, color: color, size: 24),
@@ -1311,10 +1360,7 @@ class _StatItem extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppColors.textSecondary,
-          ),
+          style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
         ),
       ],
     );

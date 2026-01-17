@@ -26,13 +26,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    final languageProvider = Provider.of<LanguageProvider>(context, listen: true);
+    final languageProvider = Provider.of<LanguageProvider>(
+      context,
+      listen: true,
+    );
     final themeProvider = Provider.of<ThemeProvider>(context, listen: true);
-    
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.settings),
-      ),
+      appBar: AppBar(title: Text(localizations.settings)),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -107,7 +108,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _ListTile(
                     icon: Icons.palette_outlined,
                     title: localizations.theme,
-                    subtitle: themeProvider.isDarkMode ? localizations.dark : localizations.light,
+                    subtitle: themeProvider.isDarkMode
+                        ? localizations.dark
+                        : localizations.light,
                     onTap: () {
                       _showThemeDialog(context, themeProvider);
                     },
@@ -216,7 +219,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _showLanguageDialog(BuildContext context, LanguageProvider languageProvider) {
+  void _showLanguageDialog(
+    BuildContext context,
+    LanguageProvider languageProvider,
+  ) {
     final localizations = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
@@ -318,9 +324,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text('About MEDIMEET'),
         content: const Column(
           mainAxisSize: MainAxisSize.min,
@@ -337,10 +341,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(height: 12),
             Text(
               'MEDIMEET is a comprehensive healthcare app that helps you manage your appointments, medical records, and connect with doctors.',
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.textSecondary,
-              ),
+              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),
           ],
         ),
@@ -359,10 +360,7 @@ class _SettingsSection extends StatelessWidget {
   final String title;
   final List<Widget> children;
 
-  const _SettingsSection({
-    required this.title,
-    required this.children,
-  });
+  const _SettingsSection({required this.title, required this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -421,7 +419,7 @@ class _SwitchTile extends StatelessWidget {
       leading: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: AppColors.primary, size: 24),
@@ -436,15 +434,12 @@ class _SwitchTile extends StatelessWidget {
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(
-          fontSize: 13,
-          color: AppColors.textSecondary,
-        ),
+        style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
       ),
       trailing: Switch(
         value: value,
         onChanged: onChanged,
-        activeColor: AppColors.primary,
+        activeThumbColor: AppColors.primary,
       ),
     );
   }
@@ -469,7 +464,7 @@ class _ListTile extends StatelessWidget {
       leading: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: AppColors.primary, size: 24),
@@ -484,10 +479,7 @@ class _ListTile extends StatelessWidget {
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(
-          fontSize: 13,
-          color: AppColors.textSecondary,
-        ),
+        style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
       ),
       trailing: const Icon(
         Icons.chevron_right_rounded,
@@ -557,4 +549,3 @@ class _ThemeOption extends StatelessWidget {
     );
   }
 }
-

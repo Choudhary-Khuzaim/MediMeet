@@ -49,7 +49,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                   Icon(
                     Icons.medical_services_outlined,
                     size: 80,
-                    color: AppColors.textSecondary.withOpacity(0.5),
+                    color: AppColors.textSecondary.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -117,7 +117,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.08),
+                      color: AppColors.primary.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Icon(
@@ -248,9 +248,9 @@ class _DetailSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

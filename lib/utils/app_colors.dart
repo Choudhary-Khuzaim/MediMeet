@@ -27,7 +27,6 @@ class AppColors {
   static const Color divider = Color(0xFFE6E9EF);
 
   // Shadows
-  static Color shadowColor = Colors.black.withOpacity(0.06);
-  static Color shadowColorDark = Colors.black.withOpacity(0.12);
+  static Color shadowColor = Colors.black.withValues(alpha: 0.06);
+  static Color shadowColorDark = Colors.black.withValues(alpha: 0.12);
 }
-

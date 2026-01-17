@@ -89,7 +89,7 @@ class DoctorCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.secondary.withOpacity(0.12),
+                          color: AppColors.secondary.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -107,7 +107,7 @@ class DoctorCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: Colors.amber.withOpacity(0.1),
+                              color: Colors.amber.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Row(
@@ -168,7 +168,7 @@ class DoctorCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.08),
+                    color: AppColors.primary.withValues(alpha: 0.08),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(

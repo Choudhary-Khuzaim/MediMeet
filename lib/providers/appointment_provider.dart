@@ -2,21 +2,22 @@ import 'package:flutter/foundation.dart';
 import '../models/appointment.dart';
 
 class AppointmentProvider with ChangeNotifier {
-  List<Appointment> _appointments = [];
+  final List<Appointment> _appointments = [];
 
   List<Appointment> get appointments => _appointments;
 
   List<Appointment> get upcomingAppointments {
     return _appointments
-        .where((apt) => apt.status == 'upcoming' && apt.dateTime.isAfter(DateTime.now()))
+        .where(
+          (apt) =>
+              apt.status == 'upcoming' && apt.dateTime.isAfter(DateTime.now()),
+        )
         .toList()
       ..sort((a, b) => a.dateTime.compareTo(b.dateTime));
   }
 
   List<Appointment> get completedAppointments {
-    return _appointments
-        .where((apt) => apt.status == 'completed')
-        .toList()
+    return _appointments.where((apt) => apt.status == 'completed').toList()
       ..sort((a, b) => b.dateTime.compareTo(a.dateTime));
   }
 
@@ -47,4 +48,3 @@ class AppointmentProvider with ChangeNotifier {
     updateAppointmentStatus(id, 'cancelled');
   }
 }
-

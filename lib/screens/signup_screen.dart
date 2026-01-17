@@ -100,7 +100,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primary.withOpacity(0.3),
+                      color: AppColors.primary.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 10),
                     ),
@@ -123,11 +123,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withValues(alpha: 0.2),
                             blurRadius: 15,
                             offset: const Offset(0, 8),
                           ),
@@ -155,7 +155,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                         fontWeight: FontWeight.w500,
                       ),
                     ),

@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primary.withOpacity(0.3),
+                      color: AppColors.primary.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 10),
                     ),
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withValues(alpha: 0.1),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -310,7 +310,7 @@ class _QuickActionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
         boxShadow: [
           BoxShadow(
             color: AppColors.shadowColor,
@@ -332,7 +332,7 @@ class _QuickActionCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.12),
+                    color: color.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(icon, color: color, size: 28),
@@ -434,7 +434,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: AppColors.secondary.withOpacity(0.12),
+                    color: AppColors.secondary.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Text(
@@ -460,7 +460,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.08),
+                      color: AppColors.primary.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Icon(

@@ -70,7 +70,7 @@ class MedicalRecordCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: AppColors.secondary.withOpacity(0.12),
+                              color: AppColors.secondary.withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -99,7 +99,7 @@ class MedicalRecordCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.08),
+                          color: AppColors.primary.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
@@ -128,7 +128,7 @@ class MedicalRecordCard extends StatelessWidget {
                       color: AppColors.surfaceMuted,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: AppColors.primary.withOpacity(0.15),
+                        color: AppColors.primary.withValues(alpha: 0.15),
                       ),
                     ),
                     child: Column(
