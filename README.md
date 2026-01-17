@@ -1,8 +1,8 @@
-# 🏥 MediMeet - Your Personal Healthcare Companion
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Choudhary-Khuzaim/MediMeet/main/assets/readme/medimeet_banner.png" alt="MediMeet Banner">
+  <img src="assets/readme/medimeet_banner.png" alt="MediMeet Banner">
 </p>
+
+# 🏥 MediMeet - Your Personal Healthcare Companion
 
 <p align="center">
   <img src="https://img.shields.io/badge/Flutter-v3.27.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter Version">
@@ -70,11 +70,16 @@ We believe in visual excellence. MediMeet follows a curated color palette:
 
 ---
 
-## � App Screenshots
+## 📱 App Showcase
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Choudhary-Khuzaim/MediMeet/main/assets/readme/medimeet_mockup.png" width="400" title="MediMeet App Dashboard">
+  <img src="assets/readme/medimeet_mockup.png" width="800" title="MediMeet App Overview">
 </p>
+
+### Key Screens
+| Dashboard | Booking | Records |
+| :---: | :---: | :---: |
+| ![Home](assets/readme/medimeet_mockup.png) | *Coming Soon* | *Coming Soon* |
 
 ---
 
