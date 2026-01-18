@@ -16,6 +16,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<Doctor> _doctors = [];
   List<Doctor> _filteredDoctors = [];
+  String _selectedCategory = 'All';
 
   @override
   void initState() {
@@ -33,16 +34,32 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
 
   void _filterDoctors() {
     setState(() {
-      _filteredDoctors = DoctorService.searchDoctors(_searchController.text);
+      _filteredDoctors = DoctorService.getDoctors().where((doctor) {
+        final matchesSearch =
+            _searchController.text.isEmpty ||
+            doctor.name.toLowerCase().contains(
+              _searchController.text.toLowerCase(),
+            ) ||
+            doctor.specialty.toLowerCase().contains(
+              _searchController.text.toLowerCase(),
+            ) ||
+            doctor.hospital.toLowerCase().contains(
+              _searchController.text.toLowerCase(),
+            );
+
+        final matchesCategory =
+            _selectedCategory == 'All' ||
+            doctor.specialty.toLowerCase() == _selectedCategory.toLowerCase();
+
+        return matchesSearch && matchesCategory;
+      }).toList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Find Doctors'),
-      ),
+      appBar: AppBar(title: const Text('Find Doctors')),
       body: Column(
         children: [
           // Search Bar
@@ -70,27 +87,48 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
             ),
           ),
 
-          // Filter Chips
           SizedBox(
             height: 50,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              children: [
-                _FilterChip(label: 'All', isSelected: true),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Cardiologist'),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Neurologist'),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Pediatrician'),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Orthopedic'),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Dermatologist'),
-                const SizedBox(width: 8),
-                _FilterChip(label: 'Psychiatrist'),
-              ],
+              children:
+                  [
+                    'All',
+                    'Cardiologist',
+                    'Neurologist',
+                    'Pediatrician',
+                    'Orthopedic Surgeon',
+                    'Dermatologist',
+                    'Psychiatrist',
+                  ].map((category) {
+                    final isSelected = _selectedCategory == category;
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: FilterChip(
+                        label: Text(category),
+                        selected: isSelected,
+                        onSelected: (selected) {
+                          if (selected) {
+                            setState(() {
+                              _selectedCategory = category;
+                              _filterDoctors();
+                            });
+                          }
+                        },
+                        selectedColor: AppColors.primary,
+                        checkmarkColor: Colors.white,
+                        labelStyle: TextStyle(
+                          color: isSelected
+                              ? Colors.white
+                              : AppColors.textPrimary,
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    );
+                  }).toList(),
             ),
           ),
 
@@ -129,7 +167,8 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DoctorDetailScreen(doctor: doctor),
+                              builder: (context) =>
+                                  DoctorDetailScreen(doctor: doctor),
                             ),
                           );
                         },
@@ -142,45 +181,3 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
     );
   }
 }
-
-class _FilterChip extends StatefulWidget {
-  final String label;
-  final bool isSelected;
-
-  const _FilterChip({
-    required this.label,
-    this.isSelected = false,
-  });
-
-  @override
-  State<_FilterChip> createState() => _FilterChipState();
-}
-
-class _FilterChipState extends State<_FilterChip> {
-  bool _isSelected = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isSelected = widget.isSelected;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FilterChip(
-      label: Text(widget.label),
-      selected: _isSelected,
-      onSelected: (selected) {
-        setState(() {
-          _isSelected = selected;
-        });
-      },
-      selectedColor: AppColors.primary,
-      checkmarkColor: Colors.white,
-      labelStyle: TextStyle(
-        color: _isSelected ? Colors.white : AppColors.textPrimary,
-      ),
-    );
-  }
-}
-

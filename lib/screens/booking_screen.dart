@@ -78,7 +78,9 @@ class _BookingScreenState extends State<BookingScreen> {
     final hour = int.parse(time[0]);
     final minute = int.parse(time[1]);
     final isPM = timeParts[1] == 'PM' && hour != 12;
-    final finalHour = isPM ? hour + 12 : (hour == 12 && timeParts[1] == 'AM' ? 0 : hour);
+    final finalHour = isPM
+        ? hour + 12
+        : (hour == 12 && timeParts[1] == 'AM' ? 0 : hour);
 
     final appointmentDateTime = DateTime(
       _selectedDay.year,
@@ -87,6 +89,16 @@ class _BookingScreenState extends State<BookingScreen> {
       finalHour,
       minute,
     );
+
+    if (appointmentDateTime.isBefore(DateTime.now())) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Cannot book an appointment in the past'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+      return;
+    }
 
     final appointment = Appointment(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -100,7 +112,10 @@ class _BookingScreenState extends State<BookingScreen> {
       notes: _notesController.text,
     );
 
-    Provider.of<AppointmentProvider>(context, listen: false).addAppointment(appointment);
+    Provider.of<AppointmentProvider>(
+      context,
+      listen: false,
+    ).addAppointment(appointment);
 
     Navigator.pop(context);
     Navigator.pop(context);
@@ -116,9 +131,7 @@ class _BookingScreenState extends State<BookingScreen> {
         ),
         backgroundColor: AppColors.success,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }
@@ -126,9 +139,7 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Book Appointment'),
-      ),
+      appBar: AppBar(title: const Text('Book Appointment')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -186,7 +197,10 @@ class _BookingScreenState extends State<BookingScreen> {
                         ),
                         const SizedBox(height: 6),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(8),
@@ -272,10 +286,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   todayDecoration: BoxDecoration(
                     color: AppColors.secondary.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColors.secondary,
-                      width: 1.5,
-                    ),
+                    border: Border.all(color: AppColors.secondary, width: 1.5),
                   ),
                   disabledDecoration: BoxDecoration(
                     color: AppColors.divider.withValues(alpha: 0.3),
@@ -309,7 +320,10 @@ class _BookingScreenState extends State<BookingScreen> {
                       color: AppColors.surfaceMuted,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.chevron_left, color: AppColors.primary),
+                    child: const Icon(
+                      Icons.chevron_left,
+                      color: AppColors.primary,
+                    ),
                   ),
                   rightChevronIcon: Container(
                     padding: const EdgeInsets.all(8),
@@ -317,7 +331,10 @@ class _BookingScreenState extends State<BookingScreen> {
                       color: AppColors.surfaceMuted,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.chevron_right, color: AppColors.primary),
+                    child: const Icon(
+                      Icons.chevron_right,
+                      color: AppColors.primary,
+                    ),
                   ),
                 ),
                 daysOfWeekStyle: const DaysOfWeekStyle(
@@ -379,12 +396,19 @@ class _BookingScreenState extends State<BookingScreen> {
                       },
                       borderRadius: BorderRadius.circular(16),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 14,
+                        ),
                         child: Text(
                           time,
                           style: TextStyle(
-                            color: isSelected ? Colors.white : AppColors.textPrimary,
-                            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
+                            color: isSelected
+                                ? Colors.white
+                                : AppColors.textPrimary,
+                            fontWeight: isSelected
+                                ? FontWeight.w700
+                                : FontWeight.w600,
                             fontSize: 15,
                           ),
                         ),
@@ -477,4 +501,3 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 }
-

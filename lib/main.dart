@@ -35,9 +35,6 @@ class MedimeetApp extends StatelessWidget {
       child: Consumer2<ThemeProvider, LanguageProvider>(
         builder: (context, themeProvider, languageProvider, child) {
           return MaterialApp(
-            key: ValueKey(
-              '${themeProvider.isDarkMode}_${languageProvider.locale}',
-            ),
             title: 'MEDIMEET',
             debugShowCheckedModeBanner: false,
             theme: themeProvider.theme,

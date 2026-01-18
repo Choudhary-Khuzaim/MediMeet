@@ -29,17 +29,7 @@ class AppointmentProvider with ChangeNotifier {
   void updateAppointmentStatus(String id, String status) {
     final index = _appointments.indexWhere((apt) => apt.id == id);
     if (index != -1) {
-      _appointments[index] = Appointment(
-        id: _appointments[index].id,
-        doctorId: _appointments[index].doctorId,
-        doctorName: _appointments[index].doctorName,
-        doctorSpecialty: _appointments[index].doctorSpecialty,
-        doctorImageUrl: _appointments[index].doctorImageUrl,
-        dateTime: _appointments[index].dateTime,
-        status: status,
-        reason: _appointments[index].reason,
-        notes: _appointments[index].notes,
-      );
+      _appointments[index] = _appointments[index].copyWith(status: status);
       notifyListeners();
     }
   }

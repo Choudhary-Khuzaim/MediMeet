@@ -20,4 +20,28 @@ class Appointment {
     required this.reason,
     required this.notes,
   });
+
+  Appointment copyWith({
+    String? id,
+    String? doctorId,
+    String? doctorName,
+    String? doctorSpecialty,
+    String? doctorImageUrl,
+    DateTime? dateTime,
+    String? status,
+    String? reason,
+    String? notes,
+  }) {
+    return Appointment(
+      id: id ?? this.id,
+      doctorId: doctorId ?? this.doctorId,
+      doctorName: doctorName ?? this.doctorName,
+      doctorSpecialty: doctorSpecialty ?? this.doctorSpecialty,
+      doctorImageUrl: doctorImageUrl ?? this.doctorImageUrl,
+      dateTime: dateTime ?? this.dateTime,
+      status: status ?? this.status,
+      reason: reason ?? this.reason,
+      notes: notes ?? this.notes,
+    );
+  }
 }

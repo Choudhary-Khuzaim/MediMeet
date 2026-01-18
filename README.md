@@ -38,11 +38,11 @@ Designed with a focus on **User Experience (UX)** and **Visual Excellence**, Med
 ### 👨‍⚕️ Doctor Discovery
 - **Smart Search**: Find doctors by name, specialty, or clinic location.
 - **Detailed Profiles**: Comprehensive doctor information including experience, ratings, and availability.
-- **Specialty Categories**: Quick filters for Cardiology, Neurology, Pediatrics, etc.
+- **Functional Category Filters**: Filter doctors instantly by specialties like Cardiology, Neurology, and more.
 
 ### 📅 Appointment Management
 - **Instant Booking**: Secure your slot with a few taps using an interactive calendar.
-- **Dynamic Slots**: Real-time availability tracking for time slots.
+- **Smart Validation**: Prevents booking appointments in the past or on days the doctor is unavailable.
 - **Status Updates**: Track "Upcoming", "Completed", and "Cancelled" appointments.
 
 ### 📋 Digital Medical Records
@@ -51,7 +51,7 @@ Designed with a focus on **User Experience (UX)** and **Visual Excellence**, Med
 - **Detail View**: Full breakdown of each medical visit.
 
 ### 🎨 Premium UI/UX & Localization
-- **Theme Awareness**: Full support for **Dark Mode** and **Light Mode**.
+- **Theme Awareness**: Full support for **Dark Mode** and **Light Mode** with persistent navigation.
 - **Localization**: Supports **English** and **Urdu (اردو)** out of the box.
 - **Material 3**: Clean, modern aesthetics following the latest design patterns.
 
@@ -85,8 +85,8 @@ We believe in visual excellence. MediMeet follows a curated color palette:
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Flutter](https://flutter.dev) (v3.27.0+)
-- **Language**: [Dart](https://dart.dev)
+- **Framework**: [Flutter](https://flutter.dev) (v3.35.0+)
+- **Language**: [Dart](https://dart.dev) (v3.9.0+)
 - **State Management**: [Provider](https://pub.dev/packages/provider)
 - **Localization**: `flutter_localizations` (English & Urdu)
 - **Utilities**: 
@@ -142,9 +142,9 @@ lib/
 ---
 
 ## 🗺️ Roadmap
+- [ ] **Real-time Chat**: Connect directly with doctors for quick queries.
 - [ ] **Push Notifications**: Real-time alerts for appointments.
 - [ ] **AI Symptoms Checker**: Basic AI-driven health suggestions.
-- [ ] **Lab Integration**: Directly download lab results in the app.
 - [ ] **Payment Gateway**: Seamless checkout for consultation fees.
 - [ ] **Video Consultation**: Online doctor meetings via WebRTC.
 
