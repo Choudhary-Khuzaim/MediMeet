@@ -14,6 +14,8 @@ import 'screens/profile_screen.dart';
 import 'utils/app_colors.dart';
 import 'utils/app_localizations.dart';
 
+import 'screens/splash_screen.dart';
+
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 void main() {
@@ -47,7 +49,7 @@ class MedimeetApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: const [Locale('en', 'US'), Locale('ur', 'PK')],
-            home: const AuthWrapper(),
+            home: const SplashScreen(),
           );
         },
       ),
@@ -92,19 +94,15 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDark = themeProvider.isDarkMode;
-
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: isDark ? const Color(0xFF1E1E1E) : AppColors.surface,
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: isDark
-                  ? Colors.black.withValues(alpha: 0.3)
-                  : AppColors.shadowColorDark,
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 20,
               offset: const Offset(0, -5),
             ),
@@ -117,35 +115,56 @@ class _MainScreenState extends State<MainScreen> {
               _currentIndex = index;
             });
           },
-          backgroundColor: isDark ? const Color(0xFF1E1E1E) : AppColors.surface,
-          indicatorColor: AppColors.secondary.withValues(alpha: 0.18),
+          backgroundColor: Colors.white,
+          indicatorColor: AppColors.primary.withValues(alpha: 0.08),
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-          height: 70,
+          height: 80,
+          elevation: 0,
           destinations: [
             NavigationDestination(
-              icon: const Icon(Icons.home_outlined),
-              selectedIcon: const Icon(Icons.home_rounded),
+              icon: Icon(Icons.home_outlined, color: AppColors.textSecondary),
+              selectedIcon: Icon(Icons.home_rounded, color: AppColors.primary),
               label: AppLocalizations.of(context)?.home ?? 'Home',
             ),
             NavigationDestination(
-              icon: const Icon(Icons.people_outline),
-              selectedIcon: const Icon(Icons.people_rounded),
+              icon: Icon(Icons.people_outline, color: AppColors.textSecondary),
+              selectedIcon: Icon(
+                Icons.people_rounded,
+                color: AppColors.primary,
+              ),
               label: AppLocalizations.of(context)?.doctors ?? 'Doctors',
             ),
             NavigationDestination(
-              icon: const Icon(Icons.calendar_today_outlined),
-              selectedIcon: const Icon(Icons.calendar_today_rounded),
-              label:
-                  AppLocalizations.of(context)?.appointments ?? 'Appointments',
+              icon: Icon(
+                Icons.calendar_today_outlined,
+                color: AppColors.textSecondary,
+              ),
+              selectedIcon: Icon(
+                Icons.calendar_today_rounded,
+                color: AppColors.primary,
+              ),
+              label: AppLocalizations.of(context)?.appointments ?? 'Schedule',
             ),
             NavigationDestination(
-              icon: const Icon(Icons.medical_services_outlined),
-              selectedIcon: const Icon(Icons.medical_services_rounded),
+              icon: Icon(
+                Icons.medical_services_outlined,
+                color: AppColors.textSecondary,
+              ),
+              selectedIcon: Icon(
+                Icons.medical_services_rounded,
+                color: AppColors.primary,
+              ),
               label: AppLocalizations.of(context)?.records ?? 'Records',
             ),
             NavigationDestination(
-              icon: const Icon(Icons.person_outline_rounded),
-              selectedIcon: const Icon(Icons.person_rounded),
+              icon: Icon(
+                Icons.person_outline_rounded,
+                color: AppColors.textSecondary,
+              ),
+              selectedIcon: Icon(
+                Icons.person_rounded,
+                color: AppColors.primary,
+              ),
               label: AppLocalizations.of(context)?.profile ?? 'Profile',
             ),
           ],

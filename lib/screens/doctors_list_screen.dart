@@ -42,15 +42,10 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
             ) ||
             doctor.specialty.toLowerCase().contains(
               _searchController.text.toLowerCase(),
-            ) ||
-            doctor.hospital.toLowerCase().contains(
-              _searchController.text.toLowerCase(),
             );
-
         final matchesCategory =
             _selectedCategory == 'All' ||
             doctor.specialty.toLowerCase() == _selectedCategory.toLowerCase();
-
         return matchesSearch && matchesCategory;
       }).toList();
     });
@@ -59,72 +54,111 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Find Doctors')),
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Find Specialist',
+          style: TextStyle(
+            fontWeight: FontWeight.w900,
+            fontSize: 24,
+            color: AppColors.textPrimary,
+          ),
+        ),
+      ),
       body: Column(
         children: [
-          // Search Bar
-          Padding(
-            padding: const EdgeInsets.all(16),
+          // Elegant Search
+          Container(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+            color: Colors.white,
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search by name, specialty, or hospital...',
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: _searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          _searchController.clear();
-                        },
-                      )
-                    : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                hintText: 'Search doctors...',
+                prefixIcon: const Icon(
+                  Icons.search_rounded,
+                  color: AppColors.primary,
                 ),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: AppColors.background,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
               ),
             ),
           ),
 
-          SizedBox(
-            height: 50,
+          // Categories Chips
+          Container(
+            height: 60, // Changed from expandedHeight to height
+            color: Colors.white,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
+              physics: const BouncingScrollPhysics(),
               children:
                   [
                     'All',
                     'Cardiologist',
                     'Neurologist',
                     'Pediatrician',
-                    'Orthopedic Surgeon',
-                    'Dermatologist',
                     'Psychiatrist',
-                  ].map((category) {
-                    final isSelected = _selectedCategory == category;
+                    'Dermatologist',
+                  ].map((cat) {
+                    final isSelected = _selectedCategory == cat;
                     return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: FilterChip(
-                        label: Text(category),
-                        selected: isSelected,
-                        onSelected: (selected) {
-                          if (selected) {
-                            setState(() {
-                              _selectedCategory = category;
-                              _filterDoctors();
-                            });
-                          }
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 10,
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _selectedCategory = cat;
+                            _filterDoctors();
+                          });
                         },
-                        selectedColor: AppColors.primary,
-                        checkmarkColor: Colors.white,
-                        labelStyle: TextStyle(
-                          color: isSelected
-                              ? Colors.white
-                              : AppColors.textPrimary,
-                          fontWeight: isSelected
-                              ? FontWeight.bold
-                              : FontWeight.normal,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? AppColors.primary
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : AppColors.divider,
+                            ),
+                            boxShadow: isSelected
+                                ? [
+                                    BoxShadow(
+                                      color: AppColors.primary.withValues(
+                                        alpha: 0.2,
+                                      ),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ]
+                                : null,
+                          ),
+                          child: Text(
+                            cat,
+                            style: TextStyle(
+                              color: isSelected
+                                  ? Colors.white
+                                  : AppColors.textSecondary,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
+                              fontSize: 13,
+                            ),
+                          ),
                         ),
                       ),
                     );
@@ -132,52 +166,61 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
             ),
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
 
-          // Doctors List
+          // Result List
           Expanded(
             child: _filteredDoctors.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search_off,
-                          size: 64,
-                          color: AppColors.textSecondary.withValues(alpha: 0.5),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'No doctors found',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                ? _buildNotFound()
                 : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: _filteredDoctors.length,
                     itemBuilder: (context, index) {
-                      final doctor = _filteredDoctors[index];
-                      return DoctorCard(
-                        doctor: doctor,
-                        onTap: () {
-                          Navigator.push(
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: DoctorCard(
+                          doctor: _filteredDoctors[index],
+                          onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  DoctorDetailScreen(doctor: doctor),
+                              builder: (_) => DoctorDetailScreen(
+                                doctor: _filteredDoctors[index],
+                              ),
                             ),
-                          );
-                        },
+                          ),
+                        ),
                       );
                     },
                   ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildNotFound() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.person_search_rounded,
+          size: 80,
+          color: AppColors.textMuted.withValues(alpha: 0.2),
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          'No doctors match your search',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: AppColors.textSecondary,
+          ),
+        ),
+        const Text(
+          'Try different keywords',
+          style: TextStyle(color: AppColors.textMuted, fontSize: 12),
+        ),
+      ],
     );
   }
 }

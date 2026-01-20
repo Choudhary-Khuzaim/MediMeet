@@ -1,174 +1,129 @@
 <p align="center">
-  <img src="assets/readme/medimeet_banner.png" alt="MediMeet Banner">
+  <img src="https://images.unsplash.com/photo-1576091160550-2173bdd996be?w=1200&h=400&fit=crop" width="100%" alt="Medimeet Banner" />
 </p>
 
-# 🏥 MediMeet - Your Personal Healthcare Companion
+<h1 align="center">🩺 Medimeet App</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Flutter-v3.27.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter Version">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-lightgrey?style=for-the-badge" alt="Platform">
+  <strong>The Future of Digital Healthcare Management</strong>
 </p>
-
----
-
-## 📖 Table of Contents
-- [🌟 Overview](#-overview)
-- [✨ Key Features](#-key-features)
-- [🎨 Design System](#-design-system)
-- [📱 App Screenshots](#-app-screenshots)
-- [🛠️ Tech Stack](#-tech-stack)
-- [📂 Project Structure](#-project-structure)
-- [🚀 Installation](#-installation)
-- [🗺️ Roadmap](#-roadmap)
-- [🤝 Contributing](#-contributing)
-- [📬 Contact](#-contact)
-
----
-
-## 🌟 Overview
-**MediMeet** is a premium, high-fidelity healthcare application built with **Flutter** and **Dart**. It simplifies the healthcare experience by connecting patients with top-rated doctors, managing medical records, and streamlining the appointment booking process. 
-
-Designed with a focus on **User Experience (UX)** and **Visual Excellence**, MediMeet provides a seamless, state-of-the-art interface for all your medical needs. Whether you're booking a specialist or tracking your medical history, MediMeet makes it effortless.
-
----
-
-## ✨ Key Features
-
-### 👨‍⚕️ Doctor Discovery
-- **Smart Search**: Find doctors by name, specialty, or clinic location.
-- **Detailed Profiles**: Comprehensive doctor information including experience, ratings, and availability.
-- **Functional Category Filters**: Filter doctors instantly by specialties like Cardiology, Neurology, and more.
-
-### 📅 Appointment Management
-- **Instant Booking**: Secure your slot with a few taps using an interactive calendar.
-- **Smart Validation**: Prevents booking appointments in the past or on days the doctor is unavailable.
-- **Status Updates**: Track "Upcoming", "Completed", and "Cancelled" appointments.
-
-### 📋 Digital Medical Records
-- **Secure Records**: Keep your diagnoses, prescriptions, and lab notes in one safe place.
-- **Searchable History**: Access your medical timeline with ease.
-- **Detail View**: Full breakdown of each medical visit.
-
-### 🎨 Premium UI/UX & Localization
-- **Theme Awareness**: Full support for **Dark Mode** and **Light Mode** with persistent navigation.
-- **Localization**: Supports **English** and **Urdu (اردو)** out of the box.
-- **Material 3**: Clean, modern aesthetics following the latest design patterns.
-
----
-
-## 🎨 Design System
-
-We believe in visual excellence. MediMeet follows a curated color palette:
-
-| Color | Hex | Role |
-| :--- | :--- | :--- |
-| **Deep Navy** | `#1D3557` | Primary Brand Color |
-| **Teal** | `#00A0AB` | Secondary / Success |
-| **Warm Amber** | `#FFB703` | Call to Action / Accents |
-| **Soft Background**| `#F5F7FA` | Primary Surface / Background |
-
----
-
-## 📱 App Showcase
 
 <p align="center">
-  <img src="assets/readme/medimeet_mockup.png" width="800" title="MediMeet App Overview">
+  <img src="https://img.shields.io/badge/Flutter-v3.27-blue?logo=flutter&style=for-the-badge" alt="Flutter" />
+  <img src="https://img.shields.io/badge/Dart-v3.0-blue?logo=dart&style=for-the-badge" alt="Dart" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
+  <img src="https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge" alt="Version" />
 </p>
 
-### Key Screens
-| Dashboard | Booking | Records |
+---
+
+## 📖 Overview
+
+**Medimeet** is a state-of-the-art healthcare ecosystem meticulously crafted using **Flutter**. It empowers users with a unified platform to manage their entire health journey—from discovering expert medical advice and ordering medications to tracking mental well-being and managing emergency services.
+
+Our mission is to provide **accessible, rapid, and premium** healthcare services to everyone, everywhere.
+
+---
+
+## ✨ Immersive Features
+
+### 🏥 Clinical Mastery
+*   **Smart Doctor Discovery:** Filter by specialty, rating, or proximity to find your perfect match.
+*   **One-Tap Booking:** Experience the most frictionless appointment scheduling flow.
+*   **Digital Prescriptions:** Receive and store prescriptions directly in your secure vault.
+
+### 🧪 Diagnostic & Pharmacy Hub
+*   **Virtual MediShop:** Browse thousands of verified healthcare products with AI-driven suggestions.
+*   **At-Home Lab Tests:** Schedule sample collections and receive encrypted digital reports.
+*   **Fast Pharmacy:** Track your medicine delivery in real-time with our express logistics integration.
+
+### 🚑 Critical Care & Mental Wellness
+*   **Emergency Dispatch:** One-button activation for specialized ambulance services.
+*   **Mindset Tracker:** Daily mood journaling and AI-powered mental health tips.
+*   **Therapy Access:** Connect with certified counselors for private video consultations.
+
+---
+
+## 🎨 Design Language
+
+| **Onboarding Journey** | **Smart Pharmacy** | **Health Insights** |
 | :---: | :---: | :---: |
-| ![Home](assets/readme/medimeet_mockup.png) | *Coming Soon* | *Coming Soon* |
+| <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=700&fit=crop" width="220" /> | <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=400&h=700&fit=crop" width="220" /> | <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=700&fit=crop" width="220" /> |
+| *Immersive Welcome* | *Inventory Management* | *Personalized Vitals* |
 
 ---
 
-## 🛠️ Tech Stack
+## � Technical Architecture
 
-- **Framework**: [Flutter](https://flutter.dev) (v3.35.0+)
-- **Language**: [Dart](https://dart.dev) (v3.9.0+)
-- **State Management**: [Provider](https://pub.dev/packages/provider)
-- **Localization**: `flutter_localizations` (English & Urdu)
-- **Utilities**: 
-  - `Geolocator` & `Geocoding` (for location tracking)
-  - `Intl` (for date/time formatting)
-  - `Table Calendar` (for booking)
+Medimeet is built on a "Mobile-First" philosophy, ensuring high performance even on low-tier devices.
+
+- **Frontend:** Flutter SDK (Declarative UI)
+- **State Engine:** Provider pattern for reactive data flow
+- **Design System:** Custom `AppColors` tokens, premium glassmorphism, and responsive layouts
+- **Localization:** Multi-language support (English & Urdu)
 
 ---
 
-## 📂 Project Structure
+## � Changelog
 
-```text
-lib/
-├── models/         # Data blueprints for Doctors, Appointments & Records
-├── providers/      # Global state management logic
-├── screens/        # High-fidelity UI screens and layouts
-├── services/       # Business logic and mock/real API services
-├── utils/          # App constants, themes, and design tokens
-└── widgets/        # Modular, reusable UI components
-```
+### **💎 v2.1.0 (Current Update)**
+> *Focus: Premium Aesthetic & Professionalism*
+*   **Revamped UX:** Fully animated Splash and Onboarding screens with custom path clipping.
+*   **Auth Overhaul:** Professional Login/Signup screens with fade-in animations and modern layout hierarchy.
+*   **Health Vitals:** Redesigned Profile stats (Blood, Height, Weight) for better spacing and visibility.
+*   **Branding:** Cleaned up project-wide branding, removing legacy tags for a unified corporate look.
+
+### **✨ v2.0.0**
+*   Added comprehensive Mental Health module with mood tracking.
+*   Integrated Ambulance service caller with emergency protocols.
+*   Implemented Urdu language localization.
 
 ---
 
-## 🚀 Installation
+## 🛣 Future Roadmap
+
+- [ ] AI Symptom Checker integration
+- [ ] Direct Video Call for Telemedicine
+- [ ] Smart Watch (WearOS/WatchOS) data syncing
+- [ ] Pharmacy Order History with automated refills
+
+---
+
+## 🛠 Getting Started
 
 ### Prerequisites
-1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
-2. Setup your favorite IDE (VS Code or Android Studio)
-3. Connect an emulator or physical device
+- Flutter SDK (latest stable)
+- Android Studio / VS Code
+- A passion for healthcare tech!
 
-### Steps to Run
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Choudhary-Khuzaim/MediMeet.git
-   ```
-2. **Navigate to project directory**
-   ```bash
-   cd medimeet
-   ```
-3. **Download packages**
-   ```bash
-   flutter pub get
-   ```
-4. **Generate localization (if needed)**
-   ```bash
-   flutter gen-l10n
-   ```
-5. **Launch the app**
-   ```bash
-   flutter run
-   ```
+### Installation
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/Choudhary-Khuzaim/medimeet.git
+    ```
+2.  **Install Dependencies**
+    ```bash
+    flutter pub get
+    ```
+3.  **Launch Primary Target**
+    ```bash
+    flutter run
+    ```
 
 ---
 
-## 🗺️ Roadmap
-- [ ] **Real-time Chat**: Connect directly with doctors for quick queries.
-- [ ] **Push Notifications**: Real-time alerts for appointments.
-- [ ] **AI Symptoms Checker**: Basic AI-driven health suggestions.
-- [ ] **Payment Gateway**: Seamless checkout for consultation fees.
-- [ ] **Video Consultation**: Online doctor meetings via WebRTC.
+## 🤝 Contribution & Feedback
 
----
-
-## 🤝 Contributing
-Contributions make the community better! 
-
-1. **Fork** the project
-2. Create your **Feature Branch** (`git checkout -b feature/AmazingFeature`)
-3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** to the branch (`git push origin feature/AmazingFeature`)
-5. Open a **Pull Request**
-
----
-
-## � Contact
-**Khuzaim Sajjad** - [@Choudhary-Khuzaim](https://github.com/Choudhary-Khuzaim)
-
-Project Link: [https://github.com/Choudhary-Khuzaim/MediMeet](https://github.com/Choudhary-Khuzaim/MediMeet)
+We welcome contributions! If you have ideas for improving Medimeet:
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
 ---
 
 <p align="center">
-  <b>Built for a healthier tomorrow.</b><br>
-  Developed with ❤️ by Khuzaim Sajjad
+  <strong>Developed with ❤️ by <a href="https://github.com/Choudhary-Khuzaim">Khuzaim Sajjad</a></strong><br/>
+  <em>Building the Next Generation of Digital Wellness.</em>
 </p>
