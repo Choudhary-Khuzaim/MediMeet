@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1576091160550-2173bdd996be?w=1200&h=400&fit=crop" width="100%" alt="Medimeet Banner" />
+  <img src="assets/readme/banner.png" width="100%" alt="Medimeet Banner" />
 </p>
 
 <h1 align="center">🩺 Medimeet App</h1>
@@ -48,12 +48,12 @@ Our mission is to provide **accessible, rapid, and premium** healthcare services
 
 | **Onboarding Journey** | **Smart Pharmacy** | **Health Insights** |
 | :---: | :---: | :---: |
-| <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=700&fit=crop" width="220" /> | <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=400&h=700&fit=crop" width="220" /> | <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=700&fit=crop" width="220" /> |
+| <img src="assets/readme/onboarding.png" width="220" /> | <img src="assets/readme/pharmacy.png" width="220" /> | <img src="assets/readme/profile.png" width="220" /> |
 | *Immersive Welcome* | *Inventory Management* | *Personalized Vitals* |
 
 ---
 
-## � Technical Architecture
+## 🚀 Technical Architecture
 
 Medimeet is built on a "Mobile-First" philosophy, ensuring high performance even on low-tier devices.
 
@@ -64,7 +64,7 @@ Medimeet is built on a "Mobile-First" philosophy, ensuring high performance even
 
 ---
 
-## � Changelog
+## 📑 Changelog
 
 ### **💎 v2.1.0 (Current Update)**
 > *Focus: Premium Aesthetic & Professionalism*
