@@ -6,7 +6,8 @@ import '../utils/app_colors.dart';
 import 'doctor_detail_screen.dart';
 
 class DoctorsListScreen extends StatefulWidget {
-  const DoctorsListScreen({super.key});
+  final String initialCategory;
+  const DoctorsListScreen({super.key, this.initialCategory = 'All'});
 
   @override
   State<DoctorsListScreen> createState() => _DoctorsListScreenState();
@@ -21,8 +22,9 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
   @override
   void initState() {
     super.initState();
+    _selectedCategory = widget.initialCategory;
     _doctors = DoctorService.getDoctors();
-    _filteredDoctors = _doctors;
+    _filterDoctors();
     _searchController.addListener(_filterDoctors);
   }
 
@@ -34,7 +36,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
 
   void _filterDoctors() {
     setState(() {
-      _filteredDoctors = DoctorService.getDoctors().where((doctor) {
+      _filteredDoctors = _doctors.where((doctor) {
         final matchesSearch =
             _searchController.text.isEmpty ||
             doctor.name.toLowerCase().contains(

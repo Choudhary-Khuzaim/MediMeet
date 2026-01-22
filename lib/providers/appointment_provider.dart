@@ -7,10 +7,12 @@ class AppointmentProvider with ChangeNotifier {
   List<Appointment> get appointments => _appointments;
 
   List<Appointment> get upcomingAppointments {
+    final now = DateTime.now();
     return _appointments
         .where(
           (apt) =>
-              apt.status == 'upcoming' && apt.dateTime.isAfter(DateTime.now()),
+              apt.status == 'upcoming' &&
+              (apt.dateTime.isAfter(now) || apt.dateTime.isAtSameMomentAs(now)),
         )
         .toList()
       ..sort((a, b) => a.dateTime.compareTo(b.dateTime));

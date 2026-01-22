@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/Flutter-v3.27-blue?logo=flutter&style=for-the-badge" alt="Flutter" />
   <img src="https://img.shields.io/badge/Dart-v3.0-blue?logo=dart&style=for-the-badge" alt="Dart" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
-  <img src="https://img.shields.io/badge/Version-2.1.0-orange?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-2.2.0-orange?style=for-the-badge" alt="Version" />
 </p>
 
 ---
@@ -28,9 +28,10 @@ Our mission is to provide **accessible, rapid, and premium** healthcare services
 ## ✨ Immersive Features
 
 ### 🏥 Clinical Mastery
-*   **Smart Doctor Discovery:** Filter by specialty, rating, or proximity to find your perfect match.
-*   **One-Tap Booking:** Experience the most frictionless appointment scheduling flow.
+*   **Smart Doctor Discovery:** Optimized filtering engine to find specialists instantly by category or name.
+*   **One-Tap Booking:** Experience the most frictionless appointment scheduling flow with premium visual feedback.
 *   **Digital Prescriptions:** Receive and store prescriptions directly in your secure vault.
+*   **Dynamic UX:** Personalized greetings and real-time user data integration across the ecosystem.
 
 ### 🧪 Diagnostic & Pharmacy Hub
 *   **Virtual MediShop:** Browse thousands of verified healthcare products with AI-driven suggestions.
@@ -66,7 +67,15 @@ Medimeet is built on a "Mobile-First" philosophy, ensuring high performance even
 
 ## 📑 Changelog
 
-### **💎 v2.1.0 (Current Update)**
+### **� v2.2.0 (Latest Update)**
+> *Focus: AI-Driven UX & Intelligent Redesign*
+*   **Premium Home Redesign:** Complete overhaul of the Home Screen with a sleek gradient header, user profile integration, and interactive service dashboards.
+*   **Intelligent Navigation:** Added direct "Contextual Links" between modules (e.g., Mental Health to relevant Psychiatry specialists).
+*   **Dynamic Data Flow:** Implemented global `AuthProvider` integration for real-time personalization of user greetings and profile management.
+*   **Visual Polish:** Redesigned interactive Specialty and Appointment cards with unique glassmorphism elements.
+*   **Performance Optimization:** Resolved critical layout overflows and optimized doctor search filtering for instant response.
+
+### **💎 v2.1.0**
 > *Focus: Premium Aesthetic & Professionalism*
 *   **Revamped UX:** Fully animated Splash and Onboarding screens with custom path clipping.
 *   **Auth Overhaul:** Professional Login/Signup screens with fade-in animations and modern layout hierarchy.

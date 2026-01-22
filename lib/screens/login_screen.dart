@@ -15,8 +15,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'admin');
-  final _passwordController = TextEditingController(text: 'admin');
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _obscurePassword = true;
   bool _isLoading = false;
   late AnimationController _animationController;
@@ -122,26 +122,26 @@ class _LoginScreenState extends State<LoginScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 40),
-                      // Back Button / Exit
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: AppColors.divider,
-                              width: 1.5,
+                      if (Navigator.of(context).canPop())
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: AppColors.divider,
+                                width: 1.5,
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.close_rounded,
+                              size: 20,
+                              color: AppColors.textPrimary,
                             ),
                           ),
-                          child: const Icon(
-                            Icons.close_rounded,
-                            size: 20,
-                            color: AppColors.textPrimary,
-                          ),
                         ),
-                      ),
                       const SizedBox(height: 40),
 
                       // Title Section
@@ -262,9 +262,17 @@ class _LoginScreenState extends State<LoginScreen>
                       const SizedBox(height: 24),
                       Row(
                         children: [
-                          _modernSocialBtn(asset: 'G', label: 'Google'),
+                          _modernSocialBtn(
+                            icon: Icons.g_mobiledata_rounded,
+                            label: 'Google',
+                            color: Colors.red,
+                          ),
                           const SizedBox(width: 16),
-                          _modernSocialBtn(asset: 'f', label: 'Facebook'),
+                          _modernSocialBtn(
+                            icon: Icons.facebook_rounded,
+                            label: 'Facebook',
+                            color: Colors.blue[900]!,
+                          ),
                         ],
                       ),
 
@@ -383,7 +391,11 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  Widget _modernSocialBtn({required String asset, required String label}) {
+  Widget _modernSocialBtn({
+    required IconData icon,
+    required String label,
+    required Color color,
+  }) {
     return Expanded(
       child: Container(
         height: 60,
@@ -394,14 +406,7 @@ class _LoginScreenState extends State<LoginScreen>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              asset,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w900,
-                color: asset == 'G' ? Colors.red : Colors.blue[900],
-              ),
-            ),
+            Icon(icon, color: color, size: 28),
             const SizedBox(width: 12),
             Text(
               label,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import 'doctors_list_screen.dart';
 
 class MentalHealthScreen extends StatelessWidget {
   const MentalHealthScreen({super.key});
@@ -98,32 +99,43 @@ class MentalHealthScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: const Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.psychology_rounded,
-                                    color: Colors.white,
-                                    size: 20,
+                            InkWell(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DoctorsListScreen(
+                                    initialCategory: 'Psychiatrist',
                                   ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    'Talk to a Specialist',
-                                    style: TextStyle(
+                                ),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.2),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.psychology_rounded,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                                      size: 20,
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: 8),
+                                    Text(
+                                      'Talk to a Specialist',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

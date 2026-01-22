@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../utils/app_colors.dart';
 import '../providers/auth_provider.dart';
+import 'settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,6 +14,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+    final String userName = authProvider.userName ?? 'Khuzaim Sajjad';
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
@@ -71,9 +74,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Khuzaim Sajjad',
-                      style: TextStyle(
+                    Text(
+                      userName,
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -191,11 +194,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Icons.translate_rounded,
                         'Language',
                         'Default: English',
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsScreen(),
+                          ),
+                        ),
                       ),
                       _menuTile(
                         Icons.dark_mode_outlined,
                         'Appearance',
                         'Custom themes and modes',
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsScreen(),
+                          ),
+                        ),
                       ),
                     ]),
                     _buildMenuSection('About App', [
@@ -296,7 +311,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _menuTile(IconData icon, String title, String subtitle) {
+  Widget _menuTile(
+    IconData icon,
+    String title,
+    String subtitle, {
+    VoidCallback? onTap,
+  }) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
       leading: Container(
@@ -324,7 +344,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         color: AppColors.textMuted,
         size: 20,
       ),
-      onTap: () {},
+      onTap: onTap ?? () {},
     );
   }
 
