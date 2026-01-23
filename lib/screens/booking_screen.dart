@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../models/doctor.dart';
 import '../models/appointment.dart';
 import '../providers/appointment_provider.dart';
@@ -56,8 +57,9 @@ class _BookingScreenState extends State<BookingScreen> {
     if (_selectedTime.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please select a time slot'),
+          content: Text('Please select a preferred time slot'),
           backgroundColor: AppColors.warning,
+          behavior: SnackBarBehavior.floating,
         ),
       );
       return;
@@ -66,8 +68,9 @@ class _BookingScreenState extends State<BookingScreen> {
     if (_reasonController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please enter a reason for the appointment'),
+          content: Text('Please specify the reason for your visit'),
           backgroundColor: AppColors.warning,
+          behavior: SnackBarBehavior.floating,
         ),
       );
       return;
@@ -89,16 +92,6 @@ class _BookingScreenState extends State<BookingScreen> {
       finalHour,
       minute,
     );
-
-    if (appointmentDateTime.isBefore(DateTime.now())) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Cannot book an appointment in the past'),
-          backgroundColor: AppColors.error,
-        ),
-      );
-      return;
-    }
 
     final appointment = Appointment(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -122,16 +115,11 @@ class _BookingScreenState extends State<BookingScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Row(
-          children: [
-            Icon(Icons.check_circle, color: Colors.white),
-            SizedBox(width: 12),
-            Text('Appointment booked successfully!'),
-          ],
-        ),
+        content: const Text('Your appointment has been confirmed!'),
         backgroundColor: AppColors.success,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(20),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     );
   }
@@ -139,47 +127,53 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Book Appointment')),
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          'Book Appointment',
+          style: TextStyle(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: AppColors.textPrimary,
+            size: 20,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Enhanced Doctor Info Card
+            // Doctor Summary Card
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.25),
-                    blurRadius: 15,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
+                boxShadow: AppColors.softShadow,
               ),
               child: Row(
                 children: [
                   Container(
-                    width: 70,
-                    height: 70,
+                    width: 60,
+                    height: 60,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.all(3),
-                    child: CircleAvatar(
-                      radius: 32,
-                      backgroundColor: Colors.white,
-                      backgroundImage: NetworkImage(widget.doctor.imageUrl),
+                      borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: NetworkImage(widget.doctor.imageUrl),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -190,28 +184,17 @@ class _BookingScreenState extends State<BookingScreen> {
                         Text(
                           widget.doctor.name,
                           style: const TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: AppColors.textPrimary,
                           ),
                         ),
-                        const SizedBox(height: 6),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            widget.doctor.specialty,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        Text(
+                          widget.doctor.specialty,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -219,284 +202,178 @@ class _BookingScreenState extends State<BookingScreen> {
                   ),
                 ],
               ),
-            ),
+            ).animate().fadeIn().slideY(begin: 0.2),
 
             const SizedBox(height: 32),
-
-            // Calendar Section
-            const Text(
-              'Select Date',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
-                letterSpacing: -0.5,
-              ),
-            ),
+            _sectionHeader('Select Date'),
             const SizedBox(height: 16),
             Container(
-              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: AppColors.surface,
                 borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.shadowColor,
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
+                boxShadow: AppColors.softShadow,
               ),
               child: TableCalendar(
                 firstDay: DateTime.now(),
-                lastDay: DateTime.now().add(const Duration(days: 365)),
+                lastDay: DateTime.now().add(const Duration(days: 90)),
                 focusedDay: _focusedDay,
                 selectedDayPredicate: (day) => _isSameDay(_selectedDay, day),
+                enabledDayPredicate: _canSelectDay,
                 onDaySelected: (selectedDay, focusedDay) {
-                  if (_canSelectDay(selectedDay)) {
-                    setState(() {
-                      _selectedDay = selectedDay;
-                      _focusedDay = focusedDay;
-                      _selectedTime = '';
-                    });
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Doctor is not available on ${DateFormat('EEEE').format(selectedDay)}',
-                        ),
-                        backgroundColor: AppColors.warning,
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    );
-                  }
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                    _selectedTime = '';
+                  });
                 },
-                onPageChanged: (focusedDay) {
-                  _focusedDay = focusedDay;
-                },
+                headerStyle: HeaderStyle(
+                  formatButtonVisible: false,
+                  titleCentered: true,
+                  titleTextStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                  leftChevronIcon: const Icon(
+                    Icons.chevron_left_rounded,
+                    color: AppColors.primary,
+                  ),
+                  rightChevronIcon: const Icon(
+                    Icons.chevron_right_rounded,
+                    color: AppColors.primary,
+                  ),
+                ),
                 calendarStyle: CalendarStyle(
-                  outsideDaysVisible: false,
-                  selectedDecoration: BoxDecoration(
+                  selectedDecoration: const BoxDecoration(
                     color: AppColors.primary,
                     shape: BoxShape.circle,
                   ),
                   todayDecoration: BoxDecoration(
-                    color: AppColors.secondary.withValues(alpha: 0.2),
+                    color: AppColors.primaryLight.withValues(alpha: 0.5),
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.secondary, width: 1.5),
                   ),
-                  disabledDecoration: BoxDecoration(
-                    color: AppColors.divider.withValues(alpha: 0.3),
-                    shape: BoxShape.circle,
+                  todayTextStyle: const TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  disabledTextStyle: const TextStyle(
+                    color: AppColors.textMuted,
                   ),
                   defaultTextStyle: const TextStyle(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w600,
                   ),
-                  selectedTextStyle: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  todayTextStyle: const TextStyle(
-                    color: AppColors.secondary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                enabledDayPredicate: (day) => _canSelectDay(day),
-                headerStyle: HeaderStyle(
-                  formatButtonVisible: false,
-                  titleCentered: true,
-                  titleTextStyle: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
+                  weekendTextStyle: const TextStyle(
                     color: AppColors.textPrimary,
-                  ),
-                  leftChevronIcon: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
-                      color: AppColors.surfaceMuted,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.chevron_left,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  rightChevronIcon: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
-                      color: AppColors.surfaceMuted,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.chevron_right,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ),
-                daysOfWeekStyle: const DaysOfWeekStyle(
-                  weekdayStyle: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  weekendStyle: TextStyle(
-                    color: AppColors.textSecondary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-            ),
+            ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2),
 
             const SizedBox(height: 32),
-
-            // Time Slots Section
-            const Text(
-              'Select Time',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
-                letterSpacing: -0.5,
-              ),
-            ),
+            _sectionHeader('Select Time Slot'),
             const SizedBox(height: 16),
             Wrap(
               spacing: 12,
               runSpacing: 12,
               children: _availableTimes.map((time) {
                 final isSelected = _selectedTime == time;
-                return Container(
-                  decoration: BoxDecoration(
-                    color: isSelected ? AppColors.primary : AppColors.surface,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: isSelected ? AppColors.primary : AppColors.border,
-                      width: 1.5,
+                return GestureDetector(
+                  onTap: () => setState(() => _selectedTime = time),
+                  child: AnimatedContainer(
+                    duration: 200.ms,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
                     ),
-                    boxShadow: isSelected
-                        ? [
-                            BoxShadow(
-                              color: AppColors.primary.withValues(alpha: 0.2),
-                              blurRadius: 8,
-                              offset: const Offset(0, 4),
-                            ),
-                          ]
-                        : null,
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _selectedTime = isSelected ? '' : time;
-                        });
-                      },
+                    decoration: BoxDecoration(
+                      color: isSelected ? AppColors.primary : AppColors.surface,
                       borderRadius: BorderRadius.circular(16),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 14,
-                        ),
-                        child: Text(
-                          time,
-                          style: TextStyle(
-                            color: isSelected
-                                ? Colors.white
-                                : AppColors.textPrimary,
-                            fontWeight: isSelected
-                                ? FontWeight.w700
-                                : FontWeight.w600,
-                            fontSize: 15,
-                          ),
-                        ),
+                      border: Border.all(
+                        color: isSelected
+                            ? AppColors.primary
+                            : AppColors.border,
+                        width: 2,
+                      ),
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: AppColors.primary.withValues(alpha: 0.2),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: Text(
+                      time,
+                      style: TextStyle(
+                        color: isSelected
+                            ? Colors.white
+                            : AppColors.textPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
                       ),
                     ),
                   ),
                 );
               }).toList(),
-            ),
+            ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
 
             const SizedBox(height: 32),
-
-            // Reason Section
-            const Text(
-              'Reason for Visit',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
-                letterSpacing: -0.5,
-              ),
-            ),
-            const SizedBox(height: 12),
+            _sectionHeader('Reason & Notes'),
+            const SizedBox(height: 16),
             TextField(
               controller: _reasonController,
               decoration: const InputDecoration(
-                hintText: 'e.g., Regular checkup, Consultation...',
-                prefixIcon: Icon(Icons.info_outline_rounded),
+                hintText: 'Reason for visit (e.g. Health checkup)',
+                prefixIcon: Icon(Icons.info_outline_rounded, size: 20),
               ),
-              maxLines: 2,
-            ),
-
-            const SizedBox(height: 24),
-
-            // Notes Section
-            const Text(
-              'Additional Notes (Optional)',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
-                letterSpacing: -0.5,
-              ),
-            ),
-            const SizedBox(height: 12),
+            ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
+            const SizedBox(height: 16),
             TextField(
               controller: _notesController,
-              decoration: const InputDecoration(
-                hintText: 'Any additional information...',
-                prefixIcon: Icon(Icons.note_outlined),
-              ),
               maxLines: 3,
-            ),
+              decoration: const InputDecoration(
+                hintText: 'Additional notes (Optional)',
+                prefixIcon: Icon(Icons.note_outlined, size: 20),
+              ),
+            ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
             const SizedBox(height: 40),
-
-            // Book Button
             SizedBox(
               width: double.infinity,
+              height: 60,
               child: ElevatedButton(
                 onPressed: _bookAppointment,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  padding: const EdgeInsets.symmetric(vertical: 18),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(20),
                   ),
+                  elevation: 8,
+                  shadowColor: AppColors.primary.withValues(alpha: 0.3),
                 ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.calendar_today_rounded, size: 22),
-                    SizedBox(width: 12),
-                    Text(
-                      'Book Appointment',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                child: const Text(
+                  'Confirm Appointment',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-
-            const SizedBox(height: 24),
+            ).animate().fadeIn(delay: 800.ms).scale(),
+            const SizedBox(height: 32),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _sectionHeader(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: AppColors.textPrimary,
+        letterSpacing: -0.5,
       ),
     );
   }

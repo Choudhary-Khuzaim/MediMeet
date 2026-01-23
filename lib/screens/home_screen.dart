@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import '../providers/auth_provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+
 import '../providers/appointment_provider.dart';
 import '../services/doctor_service.dart';
 import '../utils/app_colors.dart';
@@ -18,29 +19,28 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appointmentProvider = Provider.of<AppointmentProvider>(context);
-    final authProvider = Provider.of<AuthProvider>(context);
+
     final upcomingAppointments = appointmentProvider.upcomingAppointments;
     final doctors = DoctorService.getDoctors().take(3).toList();
-    final String userName = authProvider.userName ?? 'Khuzaim Sajjad';
 
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
-          // Premium Header with Gradient
+          // Premium Header with Modern Design
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.fromLTRB(24, 60, 24, 32),
               decoration: BoxDecoration(
-                gradient: AppColors.primaryGradient,
+                color: AppColors.surface,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.2),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -51,62 +51,69 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: const CircleAvatar(
-                              radius: 24,
-                              backgroundImage: NetworkImage(
-                                'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
-                              ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Medi',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.primary,
+                                    letterSpacing: -1,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'Meet',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.textPrimary,
+                                    letterSpacing: -1,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Good ${_getGreeting()},',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white.withValues(alpha: 0.8),
-                                  fontWeight: FontWeight.w500,
-                                ),
+                          const SizedBox(height: 2),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              'HEALTHCARE COMPANION',
+                              style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.primary,
+                                letterSpacing: 1.2,
                               ),
-                              Text(
-                                userName,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: -0.5,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
-                      ),
+                      ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2),
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        height: 48,
+                        width: 48,
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(15),
+                          color: AppColors.surface,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: AppColors.border),
                         ),
-                        child: const Badge(
-                          label: Text('2'),
-                          backgroundColor: AppColors.accent,
-                          child: Icon(
-                            Icons.notifications_none_rounded,
-                            color: Colors.white,
-                            size: 24,
-                          ),
+                        child: const Icon(
+                          Icons.grid_view_rounded,
+                          color: AppColors.textPrimary,
+                          size: 20,
                         ),
-                      ),
+                      ).animate().fadeIn(delay: 200.ms).scale(),
                     ],
                   ),
                   const SizedBox(height: 32),
@@ -119,54 +126,57 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     child: Container(
-                      height: 58,
+                      height: 62,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.08),
-                            blurRadius: 15,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
+                        color: AppColors.background,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppColors.border, width: 1.5),
                       ),
                       child: Row(
                         children: [
                           const SizedBox(width: 20),
                           const Icon(
                             Icons.search_rounded,
-                            color: AppColors.primaryLight,
-                            size: 24,
+                            color: AppColors.primary,
+                            size: 26,
                           ),
                           const SizedBox(width: 12),
                           Text(
                             'Search doctors, clinics...',
                             style: TextStyle(
                               color: AppColors.textMuted,
-                              fontSize: 15,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           const Spacer(),
                           Container(
-                            height: 42,
-                            width: 42,
+                            height: 46,
+                            width: 46,
                             margin: const EdgeInsets.only(right: 8),
                             decoration: BoxDecoration(
-                              color: AppColors.background,
-                              borderRadius: BorderRadius.circular(12),
+                              gradient: AppColors.primaryGradient,
+                              borderRadius: BorderRadius.circular(14),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
                             ),
                             child: const Icon(
                               Icons.tune_rounded,
-                              color: AppColors.primary,
-                              size: 20,
+                              color: Colors.white,
+                              size: 22,
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
+                  ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3),
                 ],
               ),
             ),
@@ -174,9 +184,9 @@ class HomeScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 32, 24, 8),
-              child: _SectionHeader(title: 'Our Services', onSeeAll: () {}),
-            ),
+              padding: const EdgeInsets.fromLTRB(26, 32, 26, 12),
+              child: _SectionHeader(title: 'Quick Actions', onSeeAll: () {}),
+            ).animate().fadeIn(delay: 500.ms),
           ),
 
           SliverPadding(
@@ -186,67 +196,79 @@ class HomeScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
-                childAspectRatio: 1.3,
+                childAspectRatio: 1.25,
               ),
               delegate: SliverChildListDelegate([
                 _ServiceCard(
-                  icon: Icons.people_rounded,
-                  label: 'Find Doctors',
-                  subtitle: '500+ Specialists',
-                  color: AppColors.primary,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DoctorsListScreen(),
-                    ),
-                  ),
-                ),
+                      icon: Icons.person_search_rounded,
+                      label: 'Find Doctors',
+                      subtitle: '500+ Experts',
+                      color: AppColors.primary,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DoctorsListScreen(),
+                        ),
+                      ),
+                    )
+                    .animate(delay: 600.ms)
+                    .fadeIn()
+                    .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
-                  icon: Icons.calendar_today_rounded,
-                  label: 'Appointments',
-                  subtitle: 'Easy Booking',
-                  color: AppColors.secondary,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AppointmentsScreen(),
-                    ),
-                  ),
-                ),
+                      icon: Icons.event_available_rounded,
+                      label: 'My Bookings',
+                      subtitle: 'Easy Schedule',
+                      color: AppColors.secondary,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AppointmentsScreen(),
+                        ),
+                      ),
+                    )
+                    .animate(delay: 700.ms)
+                    .fadeIn()
+                    .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
-                  icon: Icons.medical_services_rounded,
-                  label: 'Health Records',
-                  subtitle: 'Secure Access',
-                  color: AppColors.accent,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MedicalRecordsScreen(),
-                    ),
-                  ),
-                ),
+                      icon: Icons.history_edu_rounded,
+                      label: 'Health Records',
+                      subtitle: 'Access Digitally',
+                      color: AppColors.accent,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MedicalRecordsScreen(),
+                        ),
+                      ),
+                    )
+                    .animate(delay: 800.ms)
+                    .fadeIn()
+                    .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
-                  icon: Icons.local_pharmacy_rounded,
-                  label: 'Pharmacy',
-                  subtitle: 'Home Delivery',
-                  color: AppColors.success,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PharmacyScreen(),
-                    ),
-                  ),
-                ),
+                      icon: Icons.storefront_rounded,
+                      label: 'Pharmacy',
+                      subtitle: 'Fast Delivery',
+                      color: AppColors.success,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PharmacyScreen(),
+                        ),
+                      ),
+                    )
+                    .animate(delay: 900.ms)
+                    .fadeIn()
+                    .scale(begin: const Offset(0.8, 0.8)),
               ]),
             ),
           ),
 
           // Featured Banner
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(24, 32, 24, 0),
-              child: _FeaturedBanner(),
-            ),
+              padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
+              child: const _FeaturedBanner(),
+            ).animate().fadeIn(delay: 1.seconds).slideY(begin: 0.2),
           ),
 
           // Specialties Section
@@ -256,44 +278,44 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: _SectionHeader(title: 'Specialties'),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 18),
                   SizedBox(
-                    height: 120,
+                    height: 125,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       physics: const BouncingScrollPhysics(),
-                      children: const [
-                        _SpecialtyCard(
+                      children: [
+                        const _SpecialtyCard(
                           icon: Icons.favorite_rounded,
                           label: 'Cardiology',
                           color: Color(0xFFEF4444),
                         ),
-                        _SpecialtyCard(
+                        const _SpecialtyCard(
                           icon: Icons.psychology_rounded,
                           label: 'Neurology',
                           color: Color(0xFF8B5CF6),
                         ),
-                        _SpecialtyCard(
+                        const _SpecialtyCard(
                           icon: Icons.child_care_rounded,
                           label: 'Pediatrics',
                           color: Color(0xFFF59E0B),
                         ),
-                        _SpecialtyCard(
+                        const _SpecialtyCard(
                           icon: Icons.visibility_rounded,
                           label: 'Eye Care',
                           color: Color(0xFF3B82F6),
                         ),
-                        _SpecialtyCard(
+                        const _SpecialtyCard(
                           icon: Icons.coronavirus_rounded,
                           label: 'Infection',
                           color: Color(0xFF10B981),
                         ),
-                      ],
+                      ].animate(interval: 50.ms).fadeIn().slideX(begin: 0.2),
                     ),
                   ),
                 ],
@@ -327,8 +349,11 @@ class HomeScreen extends StatelessWidget {
                   itemCount: upcomingAppointments.take(3).length,
                   itemBuilder: (context, index) {
                     return _AppointmentPreviewCard(
-                      appointment: upcomingAppointments[index],
-                    );
+                          appointment: upcomingAppointments[index],
+                        )
+                        .animate(delay: (index * 100).ms)
+                        .fadeIn()
+                        .slideX(begin: 0.2);
                   },
                 ),
               ),
@@ -355,17 +380,21 @@ class HomeScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
               final doctor = doctors[index];
               return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: DoctorCard(
-                  doctor: doctor,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DoctorDetailScreen(doctor: doctor),
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: DoctorCard(
+                      doctor: doctor,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DoctorDetailScreen(doctor: doctor),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
+                  )
+                  .animate()
+                  .fadeIn(delay: (index * 100).ms)
+                  .slideY(begin: 0.2, curve: Curves.easeOut);
             }, childCount: doctors.length),
           ),
 
@@ -373,29 +402,30 @@ class HomeScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-              child: _SectionHeader(title: 'Health Tips for You'),
+              child: _SectionHeader(title: 'Daily Health Insights'),
             ),
           ),
 
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 210,
+              height: 220,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 physics: const BouncingScrollPhysics(),
                 children: const [
                   _HealthTipCard(
-                    title: 'Hydration is Key',
+                    title: 'Hydration Strategy',
                     desc:
-                        'Drink at least 8 glasses of water daily to stay fresh.',
+                        'Drinking water before meals can improve digestion and hydration levels.',
                     image:
                         'https://images.unsplash.com/photo-1548919973-5cfe5d4fc474?w=400&h=300&fit=crop',
                     tag: 'Lifestyle',
                   ),
                   _HealthTipCard(
-                    title: 'Mental Wellness',
-                    desc: 'Take 10 minutes for meditation every morning.',
+                    title: 'Mindfulness Practice',
+                    desc:
+                        'A simple 5-minute breathing exercise can significantly reduce daily stress.',
                     image:
                         'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
                     tag: 'Mental Health',
@@ -405,17 +435,10 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
-  }
-
-  String _getGreeting() {
-    final hour = DateTime.now().hour;
-    if (hour < 12) return 'Morning';
-    if (hour < 17) return 'Afternoon';
-    return 'Evening';
   }
 }
 

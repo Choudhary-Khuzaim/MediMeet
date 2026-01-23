@@ -11,17 +11,11 @@ class DoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowColor,
-            blurRadius: 15,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        boxShadow: AppColors.softShadow,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
@@ -33,38 +27,20 @@ class DoctorCard extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  // Doctor Avatar with Badge
-                  Stack(
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.surfaceMuted,
-                          image: DecorationImage(
-                            image: NetworkImage(doctor.imageUrl),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                  Container(
+                    width: 88,
+                    height: 88,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                        image: NetworkImage(doctor.imageUrl),
+                        fit: BoxFit.cover,
                       ),
-                      Positioned(
-                        top: 4,
-                        right: 4,
-                        child: Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: const BoxDecoration(
-                            color: AppColors.success,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.check,
-                            color: Colors.white,
-                            size: 10,
-                          ),
-                        ),
+                      border: Border.all(
+                        color: AppColors.primaryLight.withValues(alpha: 0.5),
+                        width: 2,
                       ),
-                    ],
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -109,7 +85,6 @@ class DoctorCard extends StatelessWidget {
                                     style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
-                                      color: AppColors.textPrimary,
                                     ),
                                   ),
                                 ],
@@ -122,8 +97,8 @@ class DoctorCard extends StatelessWidget {
                           doctor.specialty,
                           style: const TextStyle(
                             fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.secondary,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.primary,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -141,6 +116,7 @@ class DoctorCard extends StatelessWidget {
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: AppColors.textSecondary,
+                                  fontWeight: FontWeight.w500,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -148,24 +124,24 @@ class DoctorCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               doctor.experience,
                               style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.textSecondary,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textMuted,
                               ),
                             ),
                             Text(
                               doctor.consultationFee,
                               style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.textPrimary,
                               ),
                             ),
                           ],

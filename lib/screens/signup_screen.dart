@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../utils/app_colors.dart';
 import '../providers/auth_provider.dart';
 
@@ -25,8 +26,9 @@ class _SignupScreenState extends State<SignupScreen> {
       if (!_agreeToTerms) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Please accept terms'),
+            content: Text('Please accept terms & conditions'),
             backgroundColor: AppColors.warning,
+            behavior: SnackBarBehavior.floating,
           ),
         );
         return;
@@ -45,8 +47,9 @@ class _SignupScreenState extends State<SignupScreen> {
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Welcome aboard!'),
+              content: Text('Account created successfully!'),
               backgroundColor: AppColors.success,
+              behavior: SnackBarBehavior.floating,
             ),
           );
         }
@@ -57,104 +60,129 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       body: Stack(
         children: [
-          // Background Gradient Orbs
+          // Background Decor
           Positioned(
-            top: -50,
-            left: -50,
-            child: _orb(200, AppColors.primary.withValues(alpha: 0.05)),
-          ),
-          Positioned(
-            bottom: -50,
-            right: -50,
-            child: _orb(250, AppColors.secondary.withValues(alpha: 0.05)),
-          ),
+            bottom: -100,
+            left: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    AppColors.secondary.withValues(alpha: 0.1),
+                    AppColors.background,
+                  ],
+                ),
+              ),
+            ),
+          ).animate().fadeIn(duration: 1.seconds).scale(),
 
           SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 20),
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        size: 20,
-                        color: AppColors.primary,
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: AppColors.softShadow,
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          size: 20,
+                        ),
                       ),
-                    ),
+                    ).animate().fadeIn().slideX(begin: -0.5),
+
                     const SizedBox(height: 30),
-                    const Text(
-                      'Join Medimeet',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w900,
+                    Text(
+                      'Create Your\nAccount',
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        fontSize: 34,
                         color: AppColors.textPrimary,
-                        letterSpacing: -1,
+                        height: 1.1,
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Enter your details to create an account.',
+                    ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.3),
+
+                    const SizedBox(height: 12),
+                    Text(
+                      'Join thousands of users who trust Medimeet for their healthcare needs.',
                       style: TextStyle(
-                        fontSize: 15,
                         color: AppColors.textSecondary,
+                        fontSize: 15,
                       ),
-                    ),
+                    ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3),
+
                     const SizedBox(height: 40),
 
-                    _buildField(
+                    // Input Fields
+                    _buildInputField(
                       controller: _nameController,
                       label: 'Full Name',
+                      hint: 'John Doe',
                       icon: Icons.person_outline_rounded,
-                    ),
+                    ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2),
+
                     const SizedBox(height: 20),
-                    _buildField(
+                    _buildInputField(
                       controller: _emailController,
                       label: 'Email Address',
+                      hint: 'name@example.com',
                       icon: Icons.alternate_email_rounded,
                       type: TextInputType.emailAddress,
-                    ),
+                    ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
+
                     const SizedBox(height: 20),
-                    _buildField(
+                    _buildInputField(
                       controller: _phoneController,
                       label: 'Phone Number',
+                      hint: '+1 234 567 890',
                       icon: Icons.phone_android_rounded,
                       type: TextInputType.phone,
-                    ),
+                    ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
+
                     const SizedBox(height: 20),
-                    _buildField(
+                    _buildInputField(
                       controller: _passwordController,
-                      label: 'Password',
+                      label: 'Security Password',
+                      hint: '••••••••',
                       icon: Icons.lock_outline_rounded,
                       isPass: true,
                       obscure: _obscurePassword,
                       onToggle: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
-                    ),
+                    ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 24),
-                    _buildTermsCheck(),
+                    _buildTermsCheck().animate().fadeIn(delay: 900.ms),
 
                     const SizedBox(height: 40),
+
+                    // Signup Button
                     SizedBox(
                       width: double.infinity,
-                      height: 58,
+                      height: 64,
                       child: ElevatedButton(
                         onPressed: _isLoading ? null : _handleSignup,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          elevation: 4,
+                          elevation: 8,
+                          shadowColor: AppColors.primary.withValues(alpha: 0.3),
                         ),
                         child: _isLoading
                             ? const CircularProgressIndicator(
@@ -168,31 +196,34 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                       ),
-                    ),
-                    const SizedBox(height: 40),
+                    ).animate().fadeIn(delay: 1.seconds).scale(),
+
+                    const SizedBox(height: 32),
+
                     Center(
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: RichText(
-                          text: const TextSpan(
-                            style: TextStyle(
+                          text: TextSpan(
+                            text: 'Already have an account? ',
+                            style: const TextStyle(
                               color: AppColors.textSecondary,
-                              fontSize: 15,
                             ),
                             children: [
-                              TextSpan(text: 'Already have an account? '),
                               TextSpan(
                                 text: 'Sign In',
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontWeight: FontWeight.bold,
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                    ),
+                    ).animate().fadeIn(delay: 1.1.seconds),
+
                     const SizedBox(height: 40),
                   ],
                 ),
@@ -204,81 +235,101 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _orb(double size, Color color) => Container(
-    width: size,
-    height: size,
-    decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-  );
-
-  Widget _buildField({
+  Widget _buildInputField({
     required TextEditingController controller,
     required String label,
+    required String hint,
     required IconData icon,
     bool isPass = false,
     bool obscure = false,
     VoidCallback? onToggle,
     TextInputType type = TextInputType.text,
   }) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscure,
-      keyboardType: type,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, color: AppColors.primary, size: 22),
-        suffixIcon: isPass
-            ? IconButton(
-                icon: Icon(
-                  obscure ? Icons.visibility_off : Icons.visibility,
-                  size: 20,
-                ),
-                onPressed: onToggle,
-              )
-            : null,
-        filled: true,
-        fillColor: AppColors.background,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: AppColors.textPrimary,
+          ),
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 18),
-      ),
-      validator: (v) => v!.isEmpty ? 'Required field' : null,
+        const SizedBox(height: 12),
+        TextFormField(
+          controller: controller,
+          obscureText: obscure,
+          keyboardType: type,
+          decoration: InputDecoration(
+            hintText: hint,
+            prefixIcon: Icon(icon, color: AppColors.primary, size: 22),
+            suffixIcon: isPass
+                ? IconButton(
+                    icon: Icon(
+                      obscure
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      size: 20,
+                    ),
+                    onPressed: onToggle,
+                  )
+                : null,
+            fillColor: Colors.white,
+            filled: true,
+          ),
+          validator: (v) => v!.isEmpty ? 'This field is required' : null,
+        ),
+      ],
     );
   }
 
   Widget _buildTermsCheck() {
     return InkWell(
       onTap: () => setState(() => _agreeToTerms = !_agreeToTerms),
-      child: Row(
-        children: [
-          Container(
-            width: 24,
-            height: 24,
-            decoration: BoxDecoration(
-              color: _agreeToTerms ? AppColors.primary : Colors.transparent,
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: _agreeToTerms ? AppColors.primary : AppColors.divider,
-                width: 2,
+      borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          children: [
+            AnimatedContainer(
+              duration: 200.ms,
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: _agreeToTerms ? AppColors.primary : Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: _agreeToTerms ? AppColors.primary : AppColors.border,
+                  width: 2,
+                ),
+                boxShadow: _agreeToTerms
+                    ? [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.2),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                    : null,
+              ),
+              child: _agreeToTerms
+                  ? const Icon(Icons.check, color: Colors.white, size: 16)
+                  : null,
+            ),
+            const SizedBox(width: 12),
+            const Expanded(
+              child: Text(
+                'I agree to the Terms of Service and Privacy Policy',
+                style: TextStyle(
+                  color: AppColors.textSecondary,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
-            child: _agreeToTerms
-                ? const Icon(Icons.check, color: Colors.white, size: 16)
-                : null,
-          ),
-          const SizedBox(width: 12),
-          const Expanded(
-            child: Text(
-              'I agree to the Terms & Privacy Policy',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
