@@ -41,6 +41,9 @@ class MedimeetApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: themeProvider.theme,
             locale: languageProvider.locale,
+            scrollBehavior: const ScrollBehavior().copyWith(
+              physics: const ClampingScrollPhysics(),
+            ),
             navigatorObservers: [routeObserver],
             localizationsDelegates: const [
               AppLocalizations.delegate,

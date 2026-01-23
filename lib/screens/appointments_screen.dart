@@ -71,7 +71,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
         builder: (context, provider, child) {
           return TabBarView(
             controller: _tabController,
-            physics: const BouncingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             children: [
               _buildList(provider.upcomingAppointments, provider, true),
               _buildList(provider.completedAppointments, provider, false),
@@ -96,7 +96,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
     }
     return ListView.builder(
       padding: const EdgeInsets.all(20),
-      physics: const BouncingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       itemCount: list.length,
       itemBuilder: (context, index) {
         final item = list[index];

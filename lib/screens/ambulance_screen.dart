@@ -9,7 +9,7 @@ class AmbulanceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         slivers: [
           // Emergency Header
           SliverAppBar(

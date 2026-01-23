@@ -101,7 +101,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              physics: const BouncingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               children:
                   [
                     'All',
@@ -176,7 +176,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                 ? _buildNotFound()
                 : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    physics: const BouncingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     itemCount: _filteredDoctors.length,
                     itemBuilder: (context, index) {
                       return Padding(

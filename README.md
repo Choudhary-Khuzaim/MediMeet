@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/Flutter-v3.27-blue?logo=flutter&style=for-the-badge" alt="Flutter" />
   <img src="https://img.shields.io/badge/Dart-v3.0-blue?logo=dart&style=for-the-badge" alt="Dart" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
-  <img src="https://img.shields.io/badge/Version-2.2.0-orange?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-2.3.0-blue?style=for-the-badge" alt="Version" />
 </p>
 
 ---
@@ -31,7 +31,7 @@ Our mission is to provide **accessible, rapid, and premium** healthcare services
 *   **Smart Doctor Discovery:** Optimized filtering engine to find specialists instantly by category or name.
 *   **One-Tap Booking:** Experience the most frictionless appointment scheduling flow with premium visual feedback.
 *   **Digital Prescriptions:** Receive and store prescriptions directly in your secure vault.
-*   **Dynamic UX:** Personalized greetings and real-time user data integration across the ecosystem.
+*   **Dynamic UX:** Personalized navigation with real-time user data integration across the ecosystem.
 
 ### 🧪 Diagnostic & Pharmacy Hub
 *   **Virtual MediShop:** Browse thousands of verified healthcare products with AI-driven suggestions.
@@ -60,14 +60,23 @@ Medimeet is built on a "Mobile-First" philosophy, ensuring high performance even
 
 - **Frontend:** Flutter SDK (Declarative UI)
 - **State Engine:** Provider pattern for reactive data flow
-- **Design System:** Custom `AppColors` tokens, premium glassmorphism, and responsive layouts
+- **Design System:** Custom `AppColors` tokens, professional minimalism, and high-fidelity animations
 - **Localization:** Multi-language support (English & Urdu)
 
 ---
 
 ## 📑 Changelog
 
-### **� v2.2.0 (Latest Update)**
+### **💎 v2.3.0 (Latest Update)**
+> *Focus: Elite Branding & Professional UX Refinement*
+*   **Professional Minimalist Redesign:** Migrated the entire app to a high-end minimalist aesthetic, focusing on clean white spaces and sophisticated slate-indigo tones.
+*   **Branded Identity Integration:** Unified corporate branding with a new "MediMeet" logo architecture across the Home Screen and Side Menu.
+*   **Intelligent Side Navigation:** Implemented a premium, animated **Main Drawer** featuring integrated profile stats, personalized avatars, and staggered entry animations.
+*   **Global Scroll Optimization:** Standardized the scrolling experience by implementing `ClampingScrollPhysics` globally, removing elastic distractions for a "solid" feel.
+*   **Header Remastering:** Replaced personalized greeting headers with a sleek, functional corporate app bar providing instant access to the global menu.
+*   **UX Stability Ops:** Fixed critical animation key collisions and standardized component scaling for better cross-device compatibility.
+
+### **✨ v2.2.0**
 > *Focus: AI-Driven UX & Intelligent Redesign*
 *   **Premium Home Redesign:** Complete overhaul of the Home Screen with a sleek gradient header, user profile integration, and interactive service dashboards.
 *   **Intelligent Navigation:** Added direct "Contextual Links" between modules (e.g., Mental Health to relevant Psychiatry specialists).

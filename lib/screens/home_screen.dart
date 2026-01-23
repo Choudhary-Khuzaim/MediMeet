@@ -7,6 +7,7 @@ import '../providers/appointment_provider.dart';
 import '../services/doctor_service.dart';
 import '../utils/app_colors.dart';
 import '../widgets/doctor_card.dart';
+import '../widgets/main_drawer.dart';
 import 'doctors_list_screen.dart';
 import 'doctor_detail_screen.dart';
 import 'appointments_screen.dart';
@@ -25,8 +26,9 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+      drawer: const MainDrawer(),
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         slivers: [
           // Premium Header with Modern Design
           SliverToBoxAdapter(
@@ -100,18 +102,23 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2),
-                      Container(
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          color: AppColors.surface,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: AppColors.border),
-                        ),
-                        child: const Icon(
-                          Icons.grid_view_rounded,
-                          color: AppColors.textPrimary,
-                          size: 20,
+                      Builder(
+                        builder: (context) => GestureDetector(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Container(
+                            height: 48,
+                            width: 48,
+                            decoration: BoxDecoration(
+                              color: AppColors.surface,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: AppColors.border),
+                            ),
+                            child: const Icon(
+                              Icons.grid_view_rounded,
+                              color: AppColors.textPrimary,
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ).animate().fadeIn(delay: 200.ms).scale(),
                     ],
@@ -288,7 +295,7 @@ class HomeScreen extends StatelessWidget {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      physics: const BouncingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                       children: [
                         const _SpecialtyCard(
                           icon: Icons.favorite_rounded,
@@ -345,7 +352,7 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  physics: const BouncingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   itemCount: upcomingAppointments.take(3).length,
                   itemBuilder: (context, index) {
                     return _AppointmentPreviewCard(
@@ -412,7 +419,7 @@ class HomeScreen extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                physics: const BouncingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 children: const [
                   _HealthTipCard(
                     title: 'Hydration Strategy',

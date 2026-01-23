@@ -33,7 +33,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         slivers: [
           SliverAppBar(
             expandedHeight: 120,
