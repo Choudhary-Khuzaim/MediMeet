@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
     final doctors = DoctorService.getDoctors().take(3).toList();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       drawer: const MainDrawer(),
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
@@ -35,14 +35,20 @@ class HomeScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.fromLTRB(24, 60, 24, 32),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.03),
+                    color: Colors.black.withValues(
+                      alpha:
+                          MediaQuery.of(context).platformBrightness ==
+                              Brightness.dark
+                          ? 0.2
+                          : 0.03,
+                    ),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -73,7 +79,9 @@ class HomeScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.w900,
-                                    color: AppColors.textPrimary,
+                                    color: Theme.of(
+                                      context,
+                                    ).textTheme.displayLarge?.color,
                                     letterSpacing: -1,
                                   ),
                                 ),
@@ -109,13 +117,15 @@ class HomeScreen extends StatelessWidget {
                             height: 48,
                             width: 48,
                             decoration: BoxDecoration(
-                              color: AppColors.surface,
+                              color: Theme.of(context).colorScheme.surface,
                               borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: AppColors.border),
+                              border: Border.all(
+                                color: Theme.of(context).dividerColor,
+                              ),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.grid_view_rounded,
-                              color: AppColors.textPrimary,
+                              color: Theme.of(context).colorScheme.onSurface,
                               size: 20,
                             ),
                           ),
@@ -135,9 +145,12 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       height: 62,
                       decoration: BoxDecoration(
-                        color: AppColors.background,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: AppColors.border, width: 1.5),
+                        border: Border.all(
+                          color: Theme.of(context).dividerColor,
+                          width: 1.5,
+                        ),
                       ),
                       child: Row(
                         children: [
@@ -151,7 +164,9 @@ class HomeScreen extends StatelessWidget {
                           Text(
                             'Search doctors, clinics...',
                             style: TextStyle(
-                              color: AppColors.textMuted,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodySmall?.color,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -473,10 +488,10 @@ class _SectionHeader extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
                 letterSpacing: -0.5,
               ),
             ),
@@ -520,7 +535,7 @@ class _ServiceCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
@@ -529,7 +544,10 @@ class _ServiceCard extends StatelessWidget {
               offset: const Offset(0, 8),
             ),
           ],
-          border: Border.all(color: color.withValues(alpha: 0.05), width: 1.5),
+          border: Border.all(
+            color: Theme.of(context).dividerColor.withValues(alpha: 0.05),
+            width: 1.5,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -546,10 +564,10 @@ class _ServiceCard extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleMedium?.color,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -676,7 +694,7 @@ class _SpecialtyCard extends StatelessWidget {
       width: 100,
       margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
@@ -685,7 +703,9 @@ class _SpecialtyCard extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(color: AppColors.border.withValues(alpha: 0.3)),
+        border: Border.all(
+          color: Theme.of(context).dividerColor.withValues(alpha: 0.3),
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -701,10 +721,10 @@ class _SpecialtyCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: Theme.of(context).textTheme.titleSmall?.color,
             ),
           ),
         ],
@@ -732,11 +752,11 @@ class _HealthTipCard extends StatelessWidget {
       width: 280,
       margin: const EdgeInsets.only(right: 16, bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadowColor,
+            color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),

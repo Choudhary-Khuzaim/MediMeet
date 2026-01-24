@@ -141,46 +141,77 @@ class AppTheme {
   }
 
   static ThemeData get darkTheme {
+    const darkBg = Color(0xFF0F172A);
+    const darkSurface = Color(0xFF1E293B);
+    const darkBorder = Color(0xFF334155);
+
     return ThemeData(
       useMaterial3: true,
+      brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
         primary: AppColors.primary,
+        onPrimary: Colors.white,
         secondary: AppColors.secondary,
-        surface: const Color(0xFF0F172A),
+        onSecondary: Colors.white,
+        surface: darkSurface,
+        onSurface: Colors.white,
         error: AppColors.error,
         brightness: Brightness.dark,
       ),
-      scaffoldBackgroundColor: const Color(0xFF020617),
-      textTheme: GoogleFonts.outfitTextTheme().copyWith(
-        displayLarge: GoogleFonts.outfit(
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          letterSpacing: -0.5,
-        ),
-        headlineLarge: GoogleFonts.outfit(
-          fontSize: 24,
-          fontWeight: FontWeight.w700,
-          color: Colors.white,
-          letterSpacing: -0.5,
-        ),
-        titleLarge: GoogleFonts.outfit(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
-        ),
-        bodyLarge: GoogleFonts.outfit(
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-          color: Colors.white.withValues(alpha: 0.9),
-        ),
-        bodyMedium: GoogleFonts.outfit(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-          color: Colors.white.withValues(alpha: 0.7),
-        ),
-      ),
+      scaffoldBackgroundColor: darkBg,
+      textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme)
+          .copyWith(
+            displayLarge: GoogleFonts.outfit(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: -0.5,
+            ),
+            displayMedium: GoogleFonts.outfit(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: -0.5,
+            ),
+            headlineLarge: GoogleFonts.outfit(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+              letterSpacing: -0.5,
+            ),
+            headlineMedium: GoogleFonts.outfit(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+              letterSpacing: -0.5,
+            ),
+            titleLarge: GoogleFonts.outfit(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+            titleMedium: GoogleFonts.outfit(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+            bodyLarge: GoogleFonts.outfit(
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+              color: Colors.white.withValues(alpha: 0.9),
+            ),
+            bodyMedium: GoogleFonts.outfit(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              color: Colors.white.withValues(alpha: 0.7),
+            ),
+            bodySmall: GoogleFonts.outfit(
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
+              color: Colors.white.withValues(alpha: 0.5),
+            ),
+          ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.white,
@@ -190,16 +221,18 @@ class AppTheme {
           fontSize: 18,
           fontWeight: FontWeight.w700,
           color: Colors.white,
+          letterSpacing: -0.2,
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: const Color(0xFF1E293B),
-        shadowColor: Colors.black.withValues(alpha: 0.5),
+        color: darkSurface,
+        shadowColor: Colors.black.withValues(alpha: 0.3),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
+      dividerTheme: const DividerThemeData(color: darkBorder, thickness: 1),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
@@ -212,30 +245,53 @@ class AppTheme {
           textStyle: GoogleFonts.outfit(
             fontSize: 16,
             fontWeight: FontWeight.w600,
+            letterSpacing: 0.2,
           ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFF1E293B),
+        fillColor: darkSurface,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 18,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+          borderSide: const BorderSide(color: darkBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+          borderSide: const BorderSide(color: darkBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: AppColors.error),
+        ),
         labelStyle: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
         hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.5)),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: darkSurface,
+        indicatorColor: AppColors.primary.withValues(alpha: 0.15),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return GoogleFonts.outfit(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primary,
+            );
+          }
+          return GoogleFonts.outfit(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Colors.white.withValues(alpha: 0.6),
+          );
+        }),
       ),
     );
   }

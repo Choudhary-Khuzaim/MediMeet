@@ -191,6 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Icons.water_drop_rounded,
                         Colors.red,
                         0,
+                        context,
                       ),
                       const SizedBox(width: 12),
                       _healthCard(
@@ -199,6 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Icons.height_rounded,
                         Colors.blue,
                         1,
+                        context,
                       ),
                       const SizedBox(width: 12),
                       _healthCard(
@@ -207,6 +209,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Icons.monitor_weight_rounded,
                         Colors.green,
                         2,
+                        context,
                       ),
                     ],
                   ),
@@ -215,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 32),
 
                 // Account Menu
-                _buildSectionHeader('ACCOUNT SETTINGS'),
+                _buildSectionHeader('ACCOUNT SETTINGS', context),
                 _buildMenuContainer([
                   _menuItem(
                     icon: Icons.person_outline_rounded,
@@ -223,6 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     subtitle: 'Name, Email, Phone Number',
                     color: Colors.blue,
                     index: 0,
+                    context: context,
                   ),
                   _menuItem(
                     icon: Icons.notifications_none_rounded,
@@ -230,6 +234,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     subtitle: 'Alerts & Reminders',
                     color: Colors.orange,
                     index: 1,
+                    context: context,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -243,6 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     subtitle: 'Diagnoses & Past Visits',
                     color: Colors.teal,
                     index: 2,
+                    context: context,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -250,12 +256,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                ]),
+                ], context),
 
                 const SizedBox(height: 24),
 
                 // Preferences Menu
-                _buildSectionHeader('PREFERENCES'),
+                _buildSectionHeader('PREFERENCES', context),
                 _buildMenuContainer([
                   _menuItem(
                     icon: Icons.palette_outlined,
@@ -263,6 +269,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     subtitle: 'Theme, Dark Mode',
                     color: Colors.purple,
                     index: 0,
+                    context: context,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -276,6 +283,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     subtitle: 'English (US)',
                     color: Colors.indigo,
                     index: 1,
+                    context: context,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -283,12 +291,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                ]),
+                ], context),
 
                 const SizedBox(height: 24),
 
                 // Support & More
-                _buildSectionHeader('SUPPORT & MORE'),
+                _buildSectionHeader('SUPPORT & MORE', context),
                 _buildMenuContainer([
                   _menuItem(
                     icon: Icons.help_outline_rounded,
@@ -296,6 +304,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     subtitle: 'FAQ & Contact Support',
                     color: Colors.amber,
                     index: 0,
+                    context: context,
                   ),
                   _menuItem(
                     icon: Icons.policy_outlined,
@@ -303,8 +312,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     subtitle: 'How we handle your data',
                     color: Colors.green,
                     index: 1,
+                    context: context,
                   ),
-                ]),
+                ], context),
 
                 const SizedBox(height: 40),
 
@@ -361,12 +371,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     IconData icon,
     Color color,
     int index,
+    BuildContext context,
   ) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
@@ -389,18 +400,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 12),
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w900,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: AppColors.textSecondary,
+                color: Theme.of(context).textTheme.bodySmall?.color,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -410,17 +421,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildSectionHeader(String title) {
+  Widget _buildSectionHeader(String title, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 28, bottom: 12),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w800,
-            color: AppColors.textMuted,
+            color: Theme.of(context).textTheme.bodySmall?.color,
             letterSpacing: 1.5,
           ),
         ),
@@ -428,12 +439,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ).animate().fadeIn(delay: 500.ms);
   }
 
-  Widget _buildMenuContainer(List<Widget> children) {
+  Widget _buildMenuContainer(List<Widget> children, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
@@ -454,6 +465,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     required String subtitle,
     required Color color,
     required int index,
+    required BuildContext context,
     VoidCallback? onTap,
   }) {
     return Material(
@@ -471,20 +483,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         title: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+          style: TextStyle(
+            fontSize: 13,
+            color: Theme.of(context).textTheme.bodyMedium?.color,
+          ),
         ),
-        trailing: const Icon(
+        trailing: Icon(
           Icons.arrow_forward_ios_rounded,
           size: 14,
-          color: AppColors.textMuted,
+          color: Theme.of(context).textTheme.bodySmall?.color,
         ),
       ),
     ).animate(delay: (index * 100).ms).fadeIn(delay: 600.ms);
