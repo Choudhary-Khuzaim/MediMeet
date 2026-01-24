@@ -9,6 +9,7 @@ import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
 import 'help_center_screen.dart';
 import 'send_feedback_screen.dart';
+import 'about_app_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -205,7 +206,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: 'About',
                     subtitle: 'App version 1.0.0',
                     onTap: () {
-                      _showAboutDialog();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AboutAppScreen(),
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -316,41 +322,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(height: 10),
           ],
         ),
-      ),
-    );
-  }
-
-  void _showAboutDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('About MEDIMEET'),
-        content: const Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Version 1.0.0',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            SizedBox(height: 12),
-            Text(
-              'MEDIMEET is a comprehensive healthcare app that helps you manage your appointments, medical records, and connect with doctors.',
-              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
-          ),
-        ],
       ),
     );
   }

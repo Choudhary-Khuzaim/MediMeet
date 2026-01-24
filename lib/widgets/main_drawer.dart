@@ -3,6 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../providers/auth_provider.dart';
 import '../utils/app_colors.dart';
+import '../screens/profile_screen.dart';
+import '../screens/notifications_screen.dart';
+import '../screens/appointments_screen.dart';
+import '../screens/medical_records_screen.dart';
+import '../screens/settings_screen.dart';
+import '../screens/help_center_screen.dart';
+import '../screens/about_app_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -154,26 +161,61 @@ class MainDrawer extends StatelessWidget {
                         _drawerItem(
                           icon: Icons.person_outline_rounded,
                           label: 'Account Profile',
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ProfileScreen(),
+                              ),
+                            );
+                          },
                           index: 0,
                         ),
                         _drawerItem(
                           icon: Icons.notifications_none_rounded,
                           label: 'Notifications',
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const NotificationsScreen(),
+                              ),
+                            );
+                          },
                           index: 1,
                           badge: '2',
                         ),
                         _drawerItem(
                           icon: Icons.calendar_today_rounded,
                           label: 'My Appointments',
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AppointmentsScreen(),
+                              ),
+                            );
+                          },
                           index: 2,
                         ),
                         _drawerItem(
                           icon: Icons.history_edu_rounded,
                           label: 'Medical Records',
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const MedicalRecordsScreen(),
+                              ),
+                            );
+                          },
                           index: 3,
                         ),
                         const Padding(
@@ -189,19 +231,43 @@ class MainDrawer extends StatelessWidget {
                         _drawerItem(
                           icon: Icons.settings_outlined,
                           label: 'Settings',
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SettingsScreen(),
+                              ),
+                            );
+                          },
                           index: 4,
                         ),
                         _drawerItem(
                           icon: Icons.help_outline_rounded,
                           label: 'Help & Support',
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HelpCenterScreen(),
+                              ),
+                            );
+                          },
                           index: 5,
                         ),
                         _drawerItem(
                           icon: Icons.info_outline_rounded,
                           label: 'About MediMeet',
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AboutAppScreen(),
+                              ),
+                            );
+                          },
                           index: 6,
                         ),
                       ],

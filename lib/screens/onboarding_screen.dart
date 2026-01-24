@@ -20,8 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       subtitle: 'Connect with specialists instantly',
       description:
           'Access a network of verified doctors across all specialties from the comfort of your home.',
-      image:
-          'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=1200&fit=crop',
+      image: 'assets/onboarding/doctor.png',
       color: AppColors.primary,
     ),
     OnboardingData(
@@ -29,8 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       subtitle: 'Genuine medicines delivered fast',
       description:
           'Order prescriptions and healthcare essentials with doorstep delivery in under 60 minutes.',
-      image:
-          'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=800&h=1200&fit=crop',
+      image: 'assets/onboarding/pharmacy.png',
       color: AppColors.secondary,
     ),
     OnboardingData(
@@ -38,8 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       subtitle: 'Your history in one place',
       description:
           'Keep track of your lab results, prescriptions, and medical history with secure cloud storage.',
-      image:
-          'https://images.unsplash.com/photo-1576091160550-2173bdd996be?w=800&h=1200&fit=crop',
+      image: 'assets/onboarding/records.png',
       color: AppColors.accent,
     ),
   ];
@@ -213,7 +210,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(data.image),
+                    image: AssetImage(data.image),
                     fit: BoxFit.cover,
                   ),
                 ),
