@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../utils/app_colors.dart';
 import '../providers/auth_provider.dart';
 import 'settings_screen.dart';
+import 'notifications_screen.dart';
+import 'medical_records_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -16,240 +19,335 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     final String userName = authProvider.userName ?? 'Khuzaim Sajjad';
+    final String userEmail = authProvider.userEmail ?? 'khuzaim@medimeet.pk';
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
-          // Premium Header
+          // Premium Header with FlexibleSpace
           SliverAppBar(
-            expandedHeight: 300,
+            expandedHeight: 280,
             pinned: true,
-            elevation: 0,
+            stretch: true,
             backgroundColor: AppColors.primary,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF1D3557), Color(0xFF457B9D)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+              onPressed: () => Navigator.maybePop(context),
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.settings_outlined, color: Colors.white),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 60),
-                    Stack(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const CircleAvatar(
-                            radius: 50,
-                            backgroundImage: NetworkImage(
-                              'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop',
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: const BoxDecoration(
-                              color: AppColors.secondary,
+              ),
+              const SizedBox(width: 8),
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              stretchModes: const [
+                StretchMode.zoomBackground,
+                StretchMode.fadeTitle,
+              ],
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  // Gradient Background
+                  Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [AppColors.primary, Color(0xFF1A3BB5)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                  ),
+                  // Abstract decorative shapes
+                  Positioned(
+                    top: -50,
+                    right: -50,
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.05),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    left: -30,
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.03),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                  // Profile Content
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 40),
+                      Stack(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.2),
                               shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
                             ),
-                            child: const Icon(
-                              Icons.edit_rounded,
-                              color: Colors.white,
-                              size: 16,
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: AppColors.primaryLight,
+                              child: Text(
+                                userName[0].toUpperCase(),
+                                style: const TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w900,
+                                  color: AppColors.primary,
+                                ),
+                              ),
                             ),
+                          ).animate().scale(
+                            duration: 600.ms,
+                            curve: Curves.easeOutBack,
                           ),
+                          Positioned(
+                            bottom: 0,
+                            right: 4,
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: const BoxDecoration(
+                                color: AppColors.secondary,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.camera_alt_rounded,
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                            ),
+                          ).animate(delay: 400.ms).scale(),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        userName,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                          letterSpacing: -0.5,
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      userName,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: -0.5,
-                      ),
-                    ),
-                    const Text(
-                      'Premium Member',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white70,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
+                      ).animate(delay: 200.ms).fadeIn().slideY(begin: 0.2),
+                      Text(
+                        userEmail,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white.withValues(alpha: 0.8),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ).animate(delay: 300.ms).fadeIn(),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
 
-          // Content
+          // Main Content
           SliverToBoxAdapter(
-            child: Transform.translate(
-              offset: const Offset(0, 0),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    // Quick Stats
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 24),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
+            child: Column(
+              children: [
+                // Quick Health Stats Cards
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+                  child: Row(
+                    children: [
+                      _healthCard(
+                        'Blood',
+                        'O+',
+                        Icons.water_drop_rounded,
+                        Colors.red,
+                        0,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _quickStat(
-                            'Blood',
-                            'O+',
-                            Icons.favorite_rounded,
-                            Colors.red,
-                          ),
-                          _quickStat(
-                            'Height',
-                            '178 cm',
-                            Icons.height_rounded,
-                            Colors.blue,
-                          ),
-                          _quickStat(
-                            'Weight',
-                            '72 kg',
-                            Icons.monitor_weight_rounded,
-                            Colors.green,
-                          ),
-                        ],
+                      const SizedBox(width: 12),
+                      _healthCard(
+                        'Height',
+                        '178 cm',
+                        Icons.height_rounded,
+                        Colors.blue,
+                        1,
                       ),
-                    ),
-                    const SizedBox(height: 32),
-
-                    // Menu Sections
-                    _buildMenuSection('Account Settings', [
-                      _menuTile(
-                        Icons.person_outline_rounded,
-                        'Personal Information',
-                        'Name, Email, Phone',
+                      const SizedBox(width: 12),
+                      _healthCard(
+                        'Weight',
+                        '72 kg',
+                        Icons.monitor_weight_rounded,
+                        Colors.green,
+                        2,
                       ),
-                      _menuTile(
-                        Icons.security_rounded,
-                        'Security',
-                        'Password, 2FA, Biometrics',
-                      ),
-                      _menuTile(
-                        Icons.payment_rounded,
-                        'Payment Methods',
-                        'Cards, Digital Wallets',
-                      ),
-                    ]),
-                    const SizedBox(height: 24),
-
-                    _buildMenuSection('Health Management', [
-                      _menuTile(
-                        Icons.history_edu_rounded,
-                        'Medical History',
-                        'Past diagnoses and records',
-                      ),
-                      _menuTile(
-                        Icons.medication_liquid_rounded,
-                        'My Medications',
-                        'Current prescriptions',
-                      ),
-                      _menuTile(
-                        Icons.family_restroom_rounded,
-                        'Family Members',
-                        'Manage dependent accounts',
-                      ),
-                    ]),
-                    const SizedBox(height: 24),
-
-                    _buildMenuSection('Preferences', [
-                      _menuTile(
-                        Icons.notifications_none_rounded,
-                        'Notifications',
-                        'App alerts and remainders',
-                      ),
-                      _menuTile(
-                        Icons.translate_rounded,
-                        'Language',
-                        'Default: English',
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SettingsScreen(),
-                          ),
-                        ),
-                      ),
-                      _menuTile(
-                        Icons.dark_mode_outlined,
-                        'Appearance',
-                        'Custom themes and modes',
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SettingsScreen(),
-                          ),
-                        ),
-                      ),
-                    ]),
-                    _buildMenuSection('About App', [
-                      _menuTile(Icons.info_outline_rounded, 'Version', '2.1.0'),
-                    ]),
-                    const SizedBox(height: 32),
-
-                    // Logout
-                    SizedBox(
-                      width: double.infinity,
-                      child: TextButton.icon(
-                        onPressed: () => _showLogoutDialog(context),
-                        icon: const Icon(
-                          Icons.logout_rounded,
-                          color: AppColors.error,
-                        ),
-                        label: const Text(
-                          'Sign Out',
-                          style: TextStyle(
-                            color: AppColors.error,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: AppColors.error.withValues(
-                            alpha: 0.05,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+
+                const SizedBox(height: 32),
+
+                // Account Menu
+                _buildSectionHeader('ACCOUNT SETTINGS'),
+                _buildMenuContainer([
+                  _menuItem(
+                    icon: Icons.person_outline_rounded,
+                    title: 'Personal Information',
+                    subtitle: 'Name, Email, Phone Number',
+                    color: Colors.blue,
+                    index: 0,
+                  ),
+                  _menuItem(
+                    icon: Icons.notifications_none_rounded,
+                    title: 'Notifications',
+                    subtitle: 'Alerts & Reminders',
+                    color: Colors.orange,
+                    index: 1,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NotificationsScreen(),
+                      ),
+                    ),
+                  ),
+                  _menuItem(
+                    icon: Icons.history_edu_rounded,
+                    title: 'Medical Records',
+                    subtitle: 'Diagnoses & Past Visits',
+                    color: Colors.teal,
+                    index: 2,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MedicalRecordsScreen(),
+                      ),
+                    ),
+                  ),
+                ]),
+
+                const SizedBox(height: 24),
+
+                // Preferences Menu
+                _buildSectionHeader('PREFERENCES'),
+                _buildMenuContainer([
+                  _menuItem(
+                    icon: Icons.palette_outlined,
+                    title: 'Appearance',
+                    subtitle: 'Theme, Dark Mode',
+                    color: Colors.purple,
+                    index: 0,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsScreen(),
+                      ),
+                    ),
+                  ),
+                  _menuItem(
+                    icon: Icons.translate_rounded,
+                    title: 'Language',
+                    subtitle: 'English (US)',
+                    color: Colors.indigo,
+                    index: 1,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsScreen(),
+                      ),
+                    ),
+                  ),
+                ]),
+
+                const SizedBox(height: 24),
+
+                // Support & More
+                _buildSectionHeader('SUPPORT & MORE'),
+                _buildMenuContainer([
+                  _menuItem(
+                    icon: Icons.help_outline_rounded,
+                    title: 'Help Center',
+                    subtitle: 'FAQ & Contact Support',
+                    color: Colors.amber,
+                    index: 0,
+                  ),
+                  _menuItem(
+                    icon: Icons.policy_outlined,
+                    title: 'Privacy Policy',
+                    subtitle: 'How we handle your data',
+                    color: Colors.green,
+                    index: 1,
+                  ),
+                ]),
+
+                const SizedBox(height: 40),
+
+                // Logout Button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: InkWell(
+                    onTap: () => _showLogoutDialog(context),
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      decoration: BoxDecoration(
+                        color: AppColors.error.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: AppColors.error.withValues(alpha: 0.1),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.logout_rounded,
+                            color: AppColors.error,
+                            size: 22,
+                          ),
+                          SizedBox(width: 12),
+                          Text(
+                            'Log Out Session',
+                            style: TextStyle(
+                              color: AppColors.error,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ).animate(delay: 800.ms).fadeIn().slideY(begin: 0.2),
+
+                const SizedBox(height: 60),
+              ],
             ),
           ),
         ],
@@ -257,122 +355,189 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _quickStat(String label, String value, IconData icon, Color color) {
-    return Column(
-      children: [
-        Icon(icon, color: color, size: 24),
-        const SizedBox(height: 8),
-        Text(
-          value,
+  Widget _healthCard(
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+    int index,
+  ) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: color.withValues(alpha: 0.1),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: color, size: 20),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                color: AppColors.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textSecondary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ).animate(delay: (index * 150).ms).fadeIn().slideY(begin: 0.2),
+    );
+  }
+
+  Widget _buildSectionHeader(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 28, bottom: 12),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          title,
           style: const TextStyle(
-            fontWeight: FontWeight.bold,
+            fontSize: 12,
+            fontWeight: FontWeight.w800,
+            color: AppColors.textMuted,
+            letterSpacing: 1.5,
+          ),
+        ),
+      ),
+    ).animate().fadeIn(delay: 500.ms);
+  }
+
+  Widget _buildMenuContainer(List<Widget> children) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(28),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.03),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Column(children: children),
+      ),
+    ).animate().fadeIn(delay: 600.ms);
+  }
+
+  Widget _menuItem({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required Color color,
+    required int index,
+    VoidCallback? onTap,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        onTap: onTap ?? () {},
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        leading: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Icon(icon, color: color, size: 22),
+        ),
+        title: Text(
+          title,
+          style: const TextStyle(
             fontSize: 16,
+            fontWeight: FontWeight.w700,
             color: AppColors.textPrimary,
           ),
         ),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+        subtitle: Text(
+          subtitle,
+          style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
         ),
-      ],
-    );
-  }
-
-  Widget _buildMenuSection(String title, List<Widget> items) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8, bottom: 12),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textMuted,
-              letterSpacing: 0.5,
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.02),
-                blurRadius: 10,
-              ),
-            ],
-          ),
-          child: Column(children: items),
-        ),
-      ],
-    );
-  }
-
-  Widget _menuTile(
-    IconData icon,
-    String title,
-    String subtitle, {
-    VoidCallback? onTap,
-  }) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-      leading: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(icon, color: AppColors.primary, size: 22),
-      ),
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-          color: AppColors.textPrimary,
+        trailing: const Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 14,
+          color: AppColors.textMuted,
         ),
       ),
-      subtitle: Text(
-        subtitle,
-        style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
-      ),
-      trailing: const Icon(
-        Icons.chevron_right_rounded,
-        color: AppColors.textMuted,
-        size: 20,
-      ),
-      onTap: onTap ?? () {},
-    );
+    ).animate(delay: (index * 100).ms).fadeIn(delay: 600.ms);
   }
 
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        title: const Text('Sign Out'),
-        content: const Text('Are you sure you want to exit your session?'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        title: const Text(
+          'Sign Out',
+          style: TextStyle(fontWeight: FontWeight.w900),
+        ),
+        content: const Text(
+          'Are you sure you want to end your medical session? You will need to login again to access your records.',
+          style: TextStyle(color: AppColors.textSecondary, height: 1.5),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Provider.of<AuthProvider>(context, listen: false).logout();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.error,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            child: const Text('Sign Out'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Provider.of<AuthProvider>(context, listen: false).logout();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.error,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: const Text(
+                'Sign Out',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ],
       ),
