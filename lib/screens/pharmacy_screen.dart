@@ -75,7 +75,7 @@ class PharmacyScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
@@ -224,14 +224,14 @@ class PharmacyScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
                     'Categories',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
                 ),
@@ -270,10 +270,12 @@ class PharmacyScreen extends StatelessWidget {
                             Text(
                               cat['label'],
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.textPrimary,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.bodyLarge?.color,
                               ),
                             ),
                           ],
@@ -288,19 +290,18 @@ class PharmacyScreen extends StatelessWidget {
 
           const SliverToBoxAdapter(child: SizedBox(height: 32)),
 
-          // Product List Section
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Best Sellers',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
                   TextButton(onPressed: () {}, child: const Text('View All')),
@@ -322,7 +323,7 @@ class PharmacyScreen extends StatelessWidget {
                 final med = medicines[index];
                 return Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -385,10 +386,12 @@ class PharmacyScreen extends StatelessWidget {
                             const SizedBox(height: 2),
                             Text(
                               med['name']!,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.titleMedium?.color,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,

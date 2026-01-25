@@ -22,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final String userEmail = authProvider.userEmail ?? 'khuzaim@medimeet.pk';
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
@@ -448,7 +448,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.03),
+              color: Colors.black.withValues(
+                alpha: Theme.of(context).brightness == Brightness.dark
+                    ? 0.2
+                    : 0.03,
+              ),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
@@ -514,17 +518,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'Sign Out',
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
-        content: const Text(
+        content: Text(
           'Are you sure you want to end your medical session? You will need to login again to access your records.',
-          style: TextStyle(color: AppColors.textSecondary, height: 1.5),
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyMedium?.color,
+            height: 1.5,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(
+            child: Text(
               'Cancel',
               style: TextStyle(
-                color: AppColors.textSecondary,
+                color: Theme.of(context).textTheme.bodySmall?.color,
                 fontWeight: FontWeight.bold,
               ),
             ),

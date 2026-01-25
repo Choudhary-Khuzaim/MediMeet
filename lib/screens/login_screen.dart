@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
           // Premium Abstract Background
@@ -95,13 +95,26 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(16),
-                            boxShadow: AppColors.softShadow,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(
+                                  alpha:
+                                      Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? 0.2
+                                      : 0.03,
+                                ),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.arrow_back_ios_new_rounded,
                             size: 20,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       ).animate().fadeIn().slideX(begin: -0.5),
@@ -113,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Welcome Back to\nMedimeet',
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         fontSize: 34,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.displayLarge?.color,
                         height: 1.1,
                       ),
                     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.3),
@@ -123,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       'Your premium health companion is ready. Log in to access your dashboard.',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         fontSize: 15,
                       ),
                     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3),
@@ -210,6 +223,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ?.copyWith(
                                   letterSpacing: 2,
                                   fontWeight: FontWeight.bold,
+                                  color: Theme.of(
+                                    context,
+                                  ).textTheme.bodySmall?.color,
                                 ),
                           ),
                         ),
@@ -250,8 +266,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: RichText(
                           text: TextSpan(
                             text: "Don't have an account? ",
-                            style: const TextStyle(
-                              color: AppColors.textSecondary,
+                            style: TextStyle(
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color,
                             ),
                             children: [
                               TextSpan(
@@ -294,10 +312,10 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleSmall?.color,
           ),
         ),
         const SizedBox(height: 12),
@@ -319,7 +337,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: onToggle,
                   )
                 : null,
-            fillColor: Colors.white,
+            fillColor: Theme.of(context).colorScheme.surface,
             filled: true,
           ),
         ),
@@ -336,10 +354,20 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Container(
         height: 60,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.border),
-          boxShadow: AppColors.softShadow,
+          border: Border.all(color: Theme.of(context).dividerColor),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(
+                alpha: Theme.of(context).brightness == Brightness.dark
+                    ? 0.2
+                    : 0.03,
+              ),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -348,9 +376,9 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(width: 8),
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
           ],

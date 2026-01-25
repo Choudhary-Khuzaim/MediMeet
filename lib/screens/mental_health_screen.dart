@@ -41,7 +41,7 @@ class MentalHealthScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
@@ -157,11 +157,15 @@ class MentalHealthScreen extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.05),
+                        color: Colors.black.withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
+                              ? 0.2
+                              : 0.05,
+                        ),
                         blurRadius: 15,
                         offset: const Offset(0, 8),
                       ),
@@ -169,12 +173,12 @@ class MentalHealthScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      const Text(
+                      Text(
                         'How are you feeling today?',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                          color: Theme.of(context).textTheme.titleLarge?.color,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -202,9 +206,15 @@ class MentalHealthScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF0F7FF),
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? AppColors.primary.withValues(alpha: 0.1)
+                      : const Color(0xFFF0F7FF),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFD0E6FF)),
+                  border: Border.all(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.primary.withValues(alpha: 0.2)
+                        : const Color(0xFFD0E6FF),
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -244,7 +254,7 @@ class MentalHealthScreen extends StatelessWidget {
           ),
 
           // Categories Grid
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Text(
@@ -252,7 +262,7 @@ class MentalHealthScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).textTheme.titleLarge?.color,
                 ),
               ),
             ),
@@ -271,11 +281,15 @@ class MentalHealthScreen extends StatelessWidget {
                 final cat = categories[index];
                 return Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.02),
+                        color: Colors.black.withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
+                              ? 0.1
+                              : 0.02,
+                        ),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -296,10 +310,10 @@ class MentalHealthScreen extends StatelessWidget {
                       Text(
                         cat['title'],
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                          color: Theme.of(context).textTheme.titleMedium?.color,
                         ),
                       ),
                     ],
@@ -310,7 +324,7 @@ class MentalHealthScreen extends StatelessWidget {
           ),
 
           // Top Therapists Section
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.fromLTRB(24, 8, 24, 16),
               child: Row(
@@ -321,7 +335,7 @@ class MentalHealthScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
                   Text(
@@ -379,9 +393,9 @@ class _MoodIcon extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 10,
-            color: AppColors.textMuted,
+            color: Theme.of(context).textTheme.bodySmall?.color,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -411,11 +425,15 @@ class _TherapistCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
+            color: Colors.black.withValues(
+              alpha: Theme.of(context).brightness == Brightness.dark
+                  ? 0.2
+                  : 0.03,
+            ),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -427,6 +445,9 @@ class _TherapistCard extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? AppColors.darkSurfaceMedium
+                  : AppColors.surfaceMuted,
               borderRadius: BorderRadius.circular(16),
               image: DecorationImage(
                 image: NetworkImage(image),
@@ -441,15 +462,16 @@ class _TherapistCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
+                    color: Theme.of(context).textTheme.titleLarge?.color,
                   ),
                 ),
                 Text(
                   expertise,
-                  style: const TextStyle(
-                    color: AppColors.textSecondary,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
                     fontSize: 13,
                   ),
                 ),
@@ -464,16 +486,19 @@ class _TherapistCard extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       rating,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
+                        color: Theme.of(
+                          context,
+                        ).textTheme.bodySmall?.color?.withValues(alpha: 0.9),
                       ),
                     ),
                     const SizedBox(width: 4),
                     Text(
                       '($reviews reviews)',
-                      style: const TextStyle(
-                        color: AppColors.textMuted,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodySmall?.color,
                         fontSize: 11,
                       ),
                     ),

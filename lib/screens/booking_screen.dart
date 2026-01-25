@@ -127,23 +127,23 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Book Appointment',
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleLarge?.color,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleLarge?.color,
             size: 20,
           ),
           onPressed: () => Navigator.pop(context),
@@ -159,9 +159,17 @@ class _BookingScreenState extends State<BookingScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(24),
-                boxShadow: AppColors.softShadow,
+                boxShadow: Theme.of(context).brightness == Brightness.dark
+                    ? [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.2),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                    : AppColors.softShadow,
               ),
               child: Row(
                 children: [
@@ -183,10 +191,12 @@ class _BookingScreenState extends State<BookingScreen> {
                       children: [
                         Text(
                           widget.doctor.name,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
+                            color: Theme.of(
+                              context,
+                            ).textTheme.titleLarge?.color,
                           ),
                         ),
                         Text(
@@ -209,9 +219,17 @@ class _BookingScreenState extends State<BookingScreen> {
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(24),
-                boxShadow: AppColors.softShadow,
+                boxShadow: Theme.of(context).brightness == Brightness.dark
+                    ? [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.2),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                    : AppColors.softShadow,
               ),
               child: TableCalendar(
                 firstDay: DateTime.now(),
@@ -229,9 +247,10 @@ class _BookingScreenState extends State<BookingScreen> {
                 headerStyle: HeaderStyle(
                   formatButtonVisible: false,
                   titleCentered: true,
-                  titleTextStyle: const TextStyle(
+                  titleTextStyle: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
+                    color: Theme.of(context).textTheme.titleMedium?.color,
                   ),
                   leftChevronIcon: const Icon(
                     Icons.chevron_left_rounded,
@@ -258,12 +277,12 @@ class _BookingScreenState extends State<BookingScreen> {
                   disabledTextStyle: const TextStyle(
                     color: AppColors.textMuted,
                   ),
-                  defaultTextStyle: const TextStyle(
-                    color: AppColors.textPrimary,
+                  defaultTextStyle: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
                     fontWeight: FontWeight.w600,
                   ),
-                  weekendTextStyle: const TextStyle(
-                    color: AppColors.textPrimary,
+                  weekendTextStyle: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -287,7 +306,9 @@ class _BookingScreenState extends State<BookingScreen> {
                       vertical: 12,
                     ),
                     decoration: BoxDecoration(
-                      color: isSelected ? AppColors.primary : AppColors.surface,
+                      color: isSelected
+                          ? AppColors.primary
+                          : Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: isSelected
@@ -310,7 +331,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       style: TextStyle(
                         color: isSelected
                             ? Colors.white
-                            : AppColors.textPrimary,
+                            : Theme.of(context).textTheme.bodyLarge?.color,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
@@ -369,10 +390,10 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget _sectionHeader(String title) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
+        color: Theme.of(context).textTheme.titleLarge?.color,
         letterSpacing: -0.5,
       ),
     );

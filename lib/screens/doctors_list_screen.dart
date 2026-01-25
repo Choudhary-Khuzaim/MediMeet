@@ -56,16 +56,16 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        title: const Text(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        title: Text(
           'Find Specialist',
           style: TextStyle(
             fontWeight: FontWeight.w900,
             fontSize: 24,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleLarge?.color,
           ),
         ),
       ),
@@ -74,7 +74,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
           // Elegant Search
           Container(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -84,7 +84,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                   color: AppColors.primary,
                 ),
                 filled: true,
-                fillColor: AppColors.background,
+                fillColor: Theme.of(context).scaffoldBackgroundColor,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: BorderSide.none,
@@ -97,7 +97,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
           // Categories Chips
           Container(
             height: 60, // Changed from expandedHeight to height
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -130,7 +130,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? AppColors.primary
-                                : Colors.white,
+                                : Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color: isSelected
@@ -154,7 +154,9 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                             style: TextStyle(
                               color: isSelected
                                   ? Colors.white
-                                  : AppColors.textSecondary,
+                                  : Theme.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.color,
                               fontWeight: isSelected
                                   ? FontWeight.bold
                                   : FontWeight.w500,

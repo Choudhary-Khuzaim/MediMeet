@@ -46,7 +46,7 @@ class NotificationsScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Notifications'),
         actions: [
@@ -68,12 +68,12 @@ class NotificationsScreen extends StatelessWidget {
                     color: AppColors.textMuted.withValues(alpha: 0.3),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'No notifications yet',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -98,7 +98,7 @@ class NotificationsScreen extends StatelessWidget {
                   child:
                       Container(
                             decoration: BoxDecoration(
-                              color: AppColors.surface,
+                              color: Theme.of(context).colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
@@ -143,15 +143,19 @@ class NotificationsScreen extends StatelessWidget {
                                         fontWeight: notification['isUnread']
                                             ? FontWeight.bold
                                             : FontWeight.w600,
-                                        color: AppColors.textPrimary,
+                                        color: Theme.of(
+                                          context,
+                                        ).textTheme.titleMedium?.color,
                                       ),
                                     ),
                                   ),
                                   Text(
                                     notification['time'],
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 12,
-                                      color: AppColors.textSecondary,
+                                      color: Theme.of(
+                                        context,
+                                      ).textTheme.bodySmall?.color,
                                     ),
                                   ),
                                 ],
@@ -160,9 +164,11 @@ class NotificationsScreen extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 6),
                                 child: Text(
                                   notification['subtitle'],
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 14,
-                                    color: AppColors.textSecondary,
+                                    color: Theme.of(
+                                      context,
+                                    ).textTheme.bodyMedium?.color,
                                     height: 1.4,
                                   ),
                                 ),

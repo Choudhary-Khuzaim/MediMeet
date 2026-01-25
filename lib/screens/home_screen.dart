@@ -457,7 +457,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          const SliverToBoxAdapter(child: SizedBox(height: 100)),
+          SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
@@ -574,7 +574,10 @@ class _ServiceCard extends StatelessWidget {
             ),
             Text(
               subtitle,
-              style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+              style: TextStyle(
+                fontSize: 11,
+                color: Theme.of(context).textTheme.bodySmall?.color,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

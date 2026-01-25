@@ -8,7 +8,7 @@ class AboutAppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(title: const Text('About MediMeet')),
       body: SingleChildScrollView(
         child: Column(
@@ -44,20 +44,20 @@ class AboutAppScreen extends StatelessWidget {
                     curve: Curves.easeOutBack,
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'MediMeet',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w900,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.displaySmall?.color,
                       letterSpacing: -1,
                     ),
                   ).animate().fadeIn(delay: 200.ms),
-                  const Text(
+                  Text(
                     'Version 1.0.0',
                     style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                       fontWeight: FontWeight.w500,
                     ),
                   ).animate().fadeIn(delay: 300.ms),
@@ -72,7 +72,7 @@ class AboutAppScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: AppColors.surface,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
@@ -82,23 +82,23 @@ class AboutAppScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Text(
                       'Your Global Healthcare Partner',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'MediMeet is a state-of-the-art healthcare platform designed to bridge the gap between patients and medical professionals. Our mission is to provide accessible, affordable, and high-quality healthcare services to everyone, everywhere.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15,
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         height: 1.6,
                       ),
                     ),
@@ -115,35 +115,35 @@ class AboutAppScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'What we offer',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ).animate().fadeIn(delay: 500.ms),
                   const SizedBox(height: 16),
                   _buildFeatureTile(
-                    icon: Icons.video_call_rounded,
-                    title: 'Online Consultations',
-                    description:
-                        'Connect with top specialists via secure video calls.',
-                    delay: 600,
+                    context,
+                    Icons.video_call_rounded,
+                    'Online Consultations',
+                    'Connect with top specialists via secure video calls.',
+                    600,
                   ),
                   _buildFeatureTile(
-                    icon: Icons.local_pharmacy_rounded,
-                    title: 'Digital Pharmacy',
-                    description:
-                        'Order genuine medicines with fast home delivery.',
-                    delay: 700,
+                    context,
+                    Icons.local_pharmacy_rounded,
+                    'Digital Pharmacy',
+                    'Order genuine medicines with fast home delivery.',
+                    700,
                   ),
                   _buildFeatureTile(
-                    icon: Icons.folder_shared_rounded,
-                    title: 'Secure Health Records',
-                    description:
-                        'Keep your medical history safe and accessible.',
-                    delay: 800,
+                    context,
+                    Icons.folder_shared_rounded,
+                    'Secure Health Records',
+                    'Keep your medical history safe and accessible.',
+                    800,
                   ),
                 ],
               ),
@@ -152,11 +152,14 @@ class AboutAppScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Footer Info
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
                 '© 2026 MediMeet. All rights reserved.',
-                style: TextStyle(fontSize: 14, color: AppColors.textMuted),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).textTheme.bodySmall?.color,
+                ),
               ),
             ).animate().fadeIn(delay: 1000.ms),
           ],
@@ -165,19 +168,22 @@ class AboutAppScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFeatureTile({
-    required IconData icon,
-    required String title,
-    required String description,
-    required int delay,
-  }) {
+  Widget _buildFeatureTile(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String description,
+    int delay,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
+        border: Border.all(
+          color: Theme.of(context).dividerColor.withValues(alpha: 0.5),
+        ),
       ),
       child: Row(
         children: [
@@ -196,17 +202,17 @@ class AboutAppScreen extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
+                    color: Theme.of(context).textTheme.titleMedium?.color,
                   ),
                 ),
                 Text(
                   description,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
-                    color: AppColors.textSecondary,
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
                   ),
                 ),
               ],

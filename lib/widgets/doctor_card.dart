@@ -13,9 +13,17 @@ class DoctorCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: AppColors.softShadow,
+        boxShadow: Theme.of(context).brightness == Brightness.dark
+            ? [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ]
+            : AppColors.softShadow,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
@@ -37,7 +45,7 @@ class DoctorCard extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       border: Border.all(
-                        color: AppColors.primaryLight.withValues(alpha: 0.5),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         width: 2,
                       ),
                     ),
@@ -53,10 +61,12 @@ class DoctorCard extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 doctor.name,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.textPrimary,
+                                  color: Theme.of(
+                                    context,
+                                  ).textTheme.titleLarge?.color,
                                   letterSpacing: -0.5,
                                 ),
                                 maxLines: 1,
@@ -82,9 +92,12 @@ class DoctorCard extends StatelessWidget {
                                   const SizedBox(width: 4),
                                   Text(
                                     '${doctor.rating}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
+                                      color: Theme.of(
+                                        context,
+                                      ).textTheme.titleMedium?.color,
                                     ),
                                   ),
                                 ],
@@ -104,18 +117,22 @@ class DoctorCard extends StatelessWidget {
                         const SizedBox(height: 12),
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_on_rounded,
                               size: 14,
-                              color: AppColors.textMuted,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodySmall?.color,
                             ),
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
                                 doctor.hospital.split(',').first,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12,
-                                  color: AppColors.textSecondary,
+                                  color: Theme.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.color,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 maxLines: 1,
@@ -130,18 +147,20 @@ class DoctorCard extends StatelessWidget {
                           children: [
                             Text(
                               doctor.experience,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.textMuted,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.bodySmall?.color,
                               ),
                             ),
                             Text(
                               doctor.consultationFee,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.textPrimary,
+                                color: AppColors.primary,
                               ),
                             ),
                           ],

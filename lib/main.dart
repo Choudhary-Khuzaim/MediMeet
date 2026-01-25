@@ -97,15 +97,17 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
               blurRadius: 20,
               offset: const Offset(0, -5),
             ),
@@ -118,20 +120,33 @@ class _MainScreenState extends State<MainScreen> {
               _currentIndex = index;
             });
           },
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           indicatorColor: AppColors.primary.withValues(alpha: 0.08),
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           height: 80,
           elevation: 0,
           destinations: [
             NavigationDestination(
-              icon: Icon(Icons.home_outlined, color: AppColors.textSecondary),
-              selectedIcon: Icon(Icons.home_rounded, color: AppColors.primary),
+              icon: Icon(
+                Icons.home_outlined,
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.textSecondary,
+              ),
+              selectedIcon: const Icon(
+                Icons.home_rounded,
+                color: AppColors.primary,
+              ),
               label: AppLocalizations.of(context)?.home ?? 'Home',
             ),
             NavigationDestination(
-              icon: Icon(Icons.people_outline, color: AppColors.textSecondary),
-              selectedIcon: Icon(
+              icon: Icon(
+                Icons.people_outline,
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.textSecondary,
+              ),
+              selectedIcon: const Icon(
                 Icons.people_rounded,
                 color: AppColors.primary,
               ),
@@ -140,9 +155,11 @@ class _MainScreenState extends State<MainScreen> {
             NavigationDestination(
               icon: Icon(
                 Icons.calendar_today_outlined,
-                color: AppColors.textSecondary,
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.textSecondary,
               ),
-              selectedIcon: Icon(
+              selectedIcon: const Icon(
                 Icons.calendar_today_rounded,
                 color: AppColors.primary,
               ),
@@ -151,9 +168,11 @@ class _MainScreenState extends State<MainScreen> {
             NavigationDestination(
               icon: Icon(
                 Icons.medical_services_outlined,
-                color: AppColors.textSecondary,
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.textSecondary,
               ),
-              selectedIcon: Icon(
+              selectedIcon: const Icon(
                 Icons.medical_services_rounded,
                 color: AppColors.primary,
               ),
@@ -162,9 +181,11 @@ class _MainScreenState extends State<MainScreen> {
             NavigationDestination(
               icon: Icon(
                 Icons.person_outline_rounded,
-                color: AppColors.textSecondary,
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.textSecondary,
               ),
-              selectedIcon: Icon(
+              selectedIcon: const Icon(
                 Icons.person_rounded,
                 color: AppColors.primary,
               ),

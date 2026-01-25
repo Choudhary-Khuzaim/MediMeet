@@ -13,9 +13,17 @@ class MedicalRecordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: AppColors.softShadow,
+        boxShadow: Theme.of(context).brightness == Brightness.dark
+            ? [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ]
+            : AppColors.softShadow,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
@@ -49,10 +57,12 @@ class MedicalRecordCard extends StatelessWidget {
                           children: [
                             Text(
                               record.diagnosis,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.titleLarge?.color,
                                 letterSpacing: -0.5,
                               ),
                               maxLines: 1,
@@ -60,9 +70,11 @@ class MedicalRecordCard extends StatelessWidget {
                             ),
                             Text(
                               'Prescribed by ${record.doctorName}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 13,
-                                color: AppColors.textSecondary,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium?.color,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),

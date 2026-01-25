@@ -21,7 +21,7 @@ class MainDrawer extends StatelessWidget {
     final String userEmail = authProvider.userEmail ?? 'user@example.com';
 
     return Drawer(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       elevation: 0,
       width: MediaQuery.of(context).size.width * 0.82,
       child:
@@ -30,7 +30,7 @@ class MainDrawer extends StatelessWidget {
                   // Professional Branding & Profile Section
                   Container(
                     padding: const EdgeInsets.fromLTRB(28, 70, 24, 32),
-                    color: AppColors.surface,
+                    color: Theme.of(context).colorScheme.surface,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -54,7 +54,9 @@ class MainDrawer extends StatelessWidget {
                                         style: TextStyle(
                                           fontSize: 26,
                                           fontWeight: FontWeight.w900,
-                                          color: AppColors.textPrimary,
+                                          color: Theme.of(
+                                            context,
+                                          ).textTheme.titleLarge?.color,
                                           letterSpacing: -1,
                                         ),
                                       ),
@@ -116,10 +118,12 @@ class MainDrawer extends StatelessWidget {
                                         children: [
                                           Text(
                                             userName,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
-                                              color: AppColors.textPrimary,
+                                              color: Theme.of(
+                                                context,
+                                              ).textTheme.titleLarge?.color,
                                               letterSpacing: -0.4,
                                             ),
                                             maxLines: 1,
@@ -127,9 +131,11 @@ class MainDrawer extends StatelessWidget {
                                           ),
                                           Text(
                                             userEmail,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontSize: 12,
-                                              color: AppColors.textSecondary,
+                                              color: Theme.of(
+                                                context,
+                                              ).textTheme.bodyMedium?.color,
                                               fontWeight: FontWeight.w500,
                                             ),
                                             maxLines: 1,
@@ -159,6 +165,7 @@ class MainDrawer extends StatelessWidget {
                       physics: const ClampingScrollPhysics(),
                       children: [
                         _drawerItem(
+                          context,
                           icon: Icons.person_outline_rounded,
                           label: 'Account Profile',
                           onTap: () {
@@ -173,6 +180,7 @@ class MainDrawer extends StatelessWidget {
                           index: 0,
                         ),
                         _drawerItem(
+                          context,
                           icon: Icons.notifications_none_rounded,
                           label: 'Notifications',
                           onTap: () {
@@ -189,6 +197,7 @@ class MainDrawer extends StatelessWidget {
                           badge: '2',
                         ),
                         _drawerItem(
+                          context,
                           icon: Icons.calendar_today_rounded,
                           label: 'My Appointments',
                           onTap: () {
@@ -204,6 +213,7 @@ class MainDrawer extends StatelessWidget {
                           index: 2,
                         ),
                         _drawerItem(
+                          context,
                           icon: Icons.history_edu_rounded,
                           label: 'Medical Records',
                           onTap: () {
@@ -218,17 +228,18 @@ class MainDrawer extends StatelessWidget {
                           },
                           index: 3,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
                             vertical: 12,
                             horizontal: 12,
                           ),
                           child: Divider(
-                            color: AppColors.border,
+                            color: Theme.of(context).dividerColor,
                             thickness: 0.8,
                           ),
                         ),
                         _drawerItem(
+                          context,
                           icon: Icons.settings_outlined,
                           label: 'Settings',
                           onTap: () {
@@ -243,6 +254,7 @@ class MainDrawer extends StatelessWidget {
                           index: 4,
                         ),
                         _drawerItem(
+                          context,
                           icon: Icons.help_outline_rounded,
                           label: 'Help & Support',
                           onTap: () {
@@ -257,6 +269,7 @@ class MainDrawer extends StatelessWidget {
                           index: 5,
                         ),
                         _drawerItem(
+                          context,
                           icon: Icons.info_outline_rounded,
                           label: 'About MediMeet',
                           onTap: () {
@@ -324,7 +337,8 @@ class MainDrawer extends StatelessWidget {
     );
   }
 
-  Widget _drawerItem({
+  Widget _drawerItem(
+    BuildContext context, {
     required IconData icon,
     required String label,
     required VoidCallback onTap,
@@ -336,13 +350,17 @@ class MainDrawer extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         dense: true,
-        leading: Icon(icon, color: AppColors.textSecondary, size: 22),
+        leading: Icon(
+          icon,
+          color: Theme.of(context).textTheme.bodyMedium?.color,
+          size: 22,
+        ),
         title: Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleSmall?.color,
           ),
         ),
         trailing: badge != null

@@ -236,6 +236,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Container(
+        color: Theme.of(context).colorScheme.surface,
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -243,10 +244,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Text(
               localizations.selectLanguage,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
             const SizedBox(height: 20),
@@ -285,6 +286,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Container(
+        color: Theme.of(context).colorScheme.surface,
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -292,10 +294,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Text(
               localizations.selectTheme,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
             const SizedBox(height: 20),
@@ -337,11 +339,15 @@ class _SettingsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadowColor,
+            color: Colors.black.withValues(
+              alpha: Theme.of(context).brightness == Brightness.dark
+                  ? 0.2
+                  : 0.05,
+            ),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -354,10 +360,10 @@ class _SettingsSection extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
             child: Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleMedium?.color,
                 letterSpacing: -0.5,
               ),
             ),
@@ -397,15 +403,18 @@ class _SwitchTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: Theme.of(context).textTheme.bodyLarge?.color,
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+        style: TextStyle(
+          fontSize: 13,
+          color: Theme.of(context).textTheme.bodyMedium?.color,
+        ),
       ),
       trailing: Switch(
         value: value,
@@ -442,15 +451,18 @@ class _ListTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: Theme.of(context).textTheme.bodyLarge?.color,
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+        style: TextStyle(
+          fontSize: 13,
+          color: Theme.of(context).textTheme.bodyMedium?.color,
+        ),
       ),
       trailing: const Icon(
         Icons.chevron_right_rounded,
@@ -480,12 +492,17 @@ class _LanguageOption extends StatelessWidget {
         style: TextStyle(
           fontSize: 16,
           fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: isSelected
+              ? AppColors.primary
+              : Theme.of(context).textTheme.bodyLarge?.color,
         ),
       ),
       trailing: isSelected
           ? const Icon(Icons.check_circle, color: AppColors.primary)
-          : const Icon(Icons.circle_outlined, color: AppColors.textSecondary),
+          : Icon(
+              Icons.circle_outlined,
+              color: Theme.of(context).textTheme.bodySmall?.color,
+            ),
       onTap: onTap,
     );
   }
@@ -510,12 +527,17 @@ class _ThemeOption extends StatelessWidget {
         style: TextStyle(
           fontSize: 16,
           fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: isSelected
+              ? AppColors.primary
+              : Theme.of(context).textTheme.bodyLarge?.color,
         ),
       ),
       trailing: isSelected
           ? const Icon(Icons.check_circle, color: AppColors.primary)
-          : const Icon(Icons.circle_outlined, color: AppColors.textSecondary),
+          : Icon(
+              Icons.circle_outlined,
+              color: Theme.of(context).textTheme.bodySmall?.color,
+            ),
       onTap: onTap,
     );
   }

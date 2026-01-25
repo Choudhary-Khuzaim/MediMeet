@@ -7,7 +7,7 @@ class HomeCareScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
@@ -85,11 +85,15 @@ class HomeCareScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   height: 55,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.05),
+                        color: Colors.black.withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
+                              ? 0.2
+                              : 0.05,
+                        ),
                         blurRadius: 15,
                         offset: const Offset(0, 5),
                       ),
@@ -135,8 +139,8 @@ class HomeCareScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(12),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -146,7 +150,7 @@ class HomeCareScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 16),
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -155,14 +159,18 @@ class HomeCareScreen extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
-                              color: AppColors.textPrimary,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.titleSmall?.color,
                             ),
                           ),
                           Text(
                             'All our caregivers are background checked and certified.',
                             style: TextStyle(
                               fontSize: 12,
-                              color: AppColors.textSecondary,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color,
                             ),
                           ),
                         ],
@@ -175,15 +183,15 @@ class HomeCareScreen extends StatelessWidget {
           ),
 
           // Service List
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               child: Text(
                 'Available Services',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).textTheme.titleLarge?.color,
                 ),
               ),
             ),
@@ -252,11 +260,15 @@ class _ModernHomeCareCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
+            color: Colors.black.withValues(
+              alpha: Theme.of(context).brightness == Brightness.dark
+                  ? 0.2
+                  : 0.03,
+            ),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -284,17 +296,17 @@ class _ModernHomeCareCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
-                          color: AppColors.textPrimary,
+                          color: Theme.of(context).textTheme.titleMedium?.color,
                         ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         desc,
-                        style: const TextStyle(
-                          color: AppColors.textSecondary,
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                           fontSize: 13,
                           height: 1.4,
                         ),
@@ -318,7 +330,9 @@ class _ModernHomeCareCard extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.surfaceMuted.withValues(alpha: 0.5),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Theme.of(context).dividerColor.withValues(alpha: 0.05)
+                  : AppColors.surfaceMuted.withValues(alpha: 0.5),
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(24),
               ),

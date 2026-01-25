@@ -34,9 +34,17 @@ class AppointmentCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: AppColors.softShadow,
+        boxShadow: Theme.of(context).brightness == Brightness.dark
+            ? [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ]
+            : AppColors.softShadow,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
@@ -75,10 +83,12 @@ class AppointmentCard extends StatelessWidget {
                           children: [
                             Text(
                               appointment.doctorName,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.titleLarge?.color,
                                 letterSpacing: -0.5,
                               ),
                             ),
@@ -120,11 +130,13 @@ class AppointmentCard extends StatelessWidget {
                   Row(
                     children: [
                       _infoItem(
+                        context,
                         Icons.calendar_today_rounded,
                         DateFormat('MMM dd, yyyy').format(appointment.dateTime),
                       ),
                       const SizedBox(width: 20),
                       _infoItem(
+                        context,
                         Icons.access_time_rounded,
                         DateFormat('hh:mm a').format(appointment.dateTime),
                       ),
@@ -165,17 +177,21 @@ class AppointmentCard extends StatelessWidget {
     );
   }
 
-  Widget _infoItem(IconData icon, String text) {
+  Widget _infoItem(BuildContext context, IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: AppColors.textMuted),
+        Icon(
+          icon,
+          size: 16,
+          color: Theme.of(context).textTheme.bodySmall?.color,
+        ),
         const SizedBox(width: 8),
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleMedium?.color,
           ),
         ),
       ],

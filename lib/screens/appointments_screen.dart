@@ -31,17 +31,17 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.surface,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         centerTitle: false,
-        title: const Text(
+        title: Text(
           'My Schedule',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleLarge?.color,
             letterSpacing: -0.5,
           ),
         ).animate().fadeIn(delay: 200.ms).slideX(begin: -0.2),
@@ -121,25 +121,28 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surface,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
         title: const Text(
           'Cancel Visit',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        content: const Text(
+        content: Text(
           'Are you sure you want to cancel this appointment? This action cannot be undone.',
-          style: TextStyle(color: AppColors.textSecondary, height: 1.5),
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyMedium?.color,
+            height: 1.5,
+          ),
         ),
         actionsPadding: const EdgeInsets.all(20),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(
+            child: Text(
               'Go Back',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: AppColors.textMuted,
+                color: Theme.of(context).textTheme.bodySmall?.color,
               ),
             ),
           ),
@@ -190,9 +193,17 @@ class _EmptyState extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: Theme.of(context).colorScheme.surface,
               shape: BoxShape.circle,
-              boxShadow: AppColors.softShadow,
+              boxShadow: Theme.of(context).brightness == Brightness.dark
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.2),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : AppColors.softShadow,
             ),
             child: Icon(
               icon,
@@ -203,19 +214,19 @@ class _EmptyState extends StatelessWidget {
           const SizedBox(height: 32),
           Text(
             message,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: Theme.of(context).textTheme.titleLarge?.color,
               letterSpacing: -0.5,
             ),
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             'Keep regular checkups to stay healthy.\nBook your next visit anytime.',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.textSecondary,
+              color: Theme.of(context).textTheme.bodyMedium?.color,
               fontSize: 15,
               height: 1.5,
             ),

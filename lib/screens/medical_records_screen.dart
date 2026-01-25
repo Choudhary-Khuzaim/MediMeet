@@ -31,7 +31,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
@@ -40,14 +40,14 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
             floating: true,
             pinned: true,
             elevation: 0,
-            backgroundColor: AppColors.surface,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 'Health Records',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).textTheme.titleLarge?.color,
                   letterSpacing: -0.5,
                 ),
               ).animate().fadeIn(delay: 200.ms),
@@ -109,9 +109,17 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           Container(
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: Theme.of(context).colorScheme.surface,
               shape: BoxShape.circle,
-              boxShadow: AppColors.softShadow,
+              boxShadow: Theme.of(context).brightness == Brightness.dark
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.2),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : AppColors.softShadow,
             ),
             child: Icon(
               Icons.description_outlined,
@@ -120,21 +128,21 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
             ),
           ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
           const SizedBox(height: 32),
-          const Text(
+          Text(
             'Keep your health in order',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: Theme.of(context).textTheme.titleLarge?.color,
               letterSpacing: -0.5,
             ),
           ).animate(delay: 200.ms).fadeIn(),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             'Upload your lab results or prescriptions\nto access them anywhere, anytime.',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.textSecondary,
+              color: Theme.of(context).textTheme.bodyMedium?.color,
               fontSize: 15,
               height: 1.5,
             ),
@@ -152,8 +160,8 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
       builder: (context) =>
           Container(
             height: MediaQuery.of(context).size.height * 0.85,
-            decoration: const BoxDecoration(
-              color: AppColors.surface,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
             ),
             child: Column(
@@ -195,10 +203,12 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                                 children: [
                                   Text(
                                     record.doctorName,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
-                                      color: AppColors.textPrimary,
+                                      color: Theme.of(
+                                        context,
+                                      ).textTheme.titleLarge?.color,
                                       letterSpacing: -0.5,
                                     ),
                                   ),
@@ -281,9 +291,9 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
       ),
       child: Text(
         content,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
-          color: AppColors.textPrimary,
+          color: Theme.of(context).textTheme.bodyLarge?.color,
           height: 1.5,
           fontWeight: FontWeight.w500,
         ),
@@ -297,7 +307,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColors.background,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(14),
           ),
           child: Icon(icon, color: AppColors.textMuted, size: 22),
@@ -316,10 +326,10 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
             ),
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
                 letterSpacing: -0.3,
               ),
             ),
