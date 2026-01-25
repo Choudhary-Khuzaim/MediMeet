@@ -54,7 +54,7 @@ class AboutAppScreen extends StatelessWidget {
                     ),
                   ).animate().fadeIn(delay: 200.ms),
                   Text(
-                    'Version 1.0.0',
+                    'Version 2.3.0',
                     style: TextStyle(
                       fontSize: 16,
                       color: Theme.of(context).textTheme.bodyMedium?.color,

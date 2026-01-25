@@ -43,9 +43,7 @@ class HomeScreen extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(
-                      alpha:
-                          MediaQuery.of(context).platformBrightness ==
-                              Brightness.dark
+                      alpha: Theme.of(context).brightness == Brightness.dark
                           ? 0.2
                           : 0.03,
                     ),

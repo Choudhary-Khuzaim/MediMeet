@@ -204,7 +204,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _ListTile(
                     icon: Icons.info_outline_rounded,
                     title: 'About',
-                    subtitle: 'App version 1.0.0',
+                    subtitle: 'App version 2.3.0',
                     onTap: () {
                       Navigator.push(
                         context,

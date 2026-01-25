@@ -69,6 +69,7 @@ Medimeet is built on a "Mobile-First" philosophy, ensuring high performance even
 
 ### **💎 v2.3.0 (Latest Update)**
 > *Focus: Elite Branding & Professional UX Refinement*
+*   **Comprehensive Dark Mode & Theme Support:** Implemented global theme support, ensuring a premium experience in both Light and Dark modes across all modules (Pharmacy, Doctors, Lab Tests, Home Care, etc.).
 *   **Professional Minimalist Redesign:** Migrated the entire app to a high-end minimalist aesthetic, focusing on clean white spaces and sophisticated slate-indigo tones.
 *   **Branded Identity Integration:** Unified corporate branding with a new "MediMeet" logo architecture across the Home Screen and Side Menu.
 *   **Intelligent Side Navigation:** Implemented a premium, animated **Main Drawer** featuring integrated profile stats, personalized avatars, and staggered entry animations.

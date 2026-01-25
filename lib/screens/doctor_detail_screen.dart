@@ -12,7 +12,7 @@ class DoctorDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
@@ -136,9 +136,11 @@ class DoctorDetailScreen extends StatelessWidget {
           // Content
           SliverToBoxAdapter(
             child: Container(
-              decoration: const BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(36)),
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(36),
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(24),
@@ -150,18 +152,21 @@ class DoctorDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _infoStat(
+                          context,
                           Icons.star_rounded,
                           'Rating',
                           '${doctor.rating}',
                           Colors.amber,
                         ),
                         _infoStat(
+                          context,
                           Icons.people_alt_rounded,
                           'Patients',
                           '1.2K+',
                           AppColors.primary,
                         ),
                         _infoStat(
+                          context,
                           Icons.history_rounded,
                           'Experience',
                           doctor.experience,
@@ -171,32 +176,32 @@ class DoctorDetailScreen extends StatelessWidget {
                     ).animate().fadeIn(delay: 500.ms).scale(),
 
                     const SizedBox(height: 32),
-                    const Text(
+                    Text(
                       'About Doctor',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         letterSpacing: -0.5,
                       ),
                     ).animate().fadeIn(delay: 600.ms),
                     const SizedBox(height: 12),
                     Text(
                       doctor.description,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 15,
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         height: 1.6,
                       ),
                     ).animate().fadeIn(delay: 700.ms),
 
                     const SizedBox(height: 32),
-                    const Text(
+                    Text(
                       'Specializations',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         letterSpacing: -0.5,
                       ),
                     ).animate().fadeIn(delay: 800.ms),
@@ -218,16 +223,24 @@ class DoctorDetailScreen extends StatelessWidget {
                                     vertical: 8,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: AppColors.surface,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.surface,
                                     borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: AppColors.border),
+                                    border: Border.all(
+                                      color: Theme.of(
+                                        context,
+                                      ).dividerColor.withValues(alpha: 0.5),
+                                    ),
                                   ),
                                   child: Text(
                                     spec,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600,
-                                      color: AppColors.textPrimary,
+                                      color: Theme.of(
+                                        context,
+                                      ).textTheme.titleSmall?.color,
                                     ),
                                   ),
                                 ),
@@ -236,12 +249,12 @@ class DoctorDetailScreen extends StatelessWidget {
                     ).animate().fadeIn(delay: 900.ms),
 
                     const SizedBox(height: 32),
-                    const Text(
+                    Text(
                       'Working Hours',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         letterSpacing: -0.5,
                       ),
                     ).animate().fadeIn(delay: 1.seconds),
@@ -249,7 +262,7 @@ class DoctorDetailScreen extends StatelessWidget {
                     Text(
                       'Mon - Fri (09:00 AM - 08:00 PM)',
                       style: TextStyle(
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         fontSize: 15,
                       ),
                     ).animate().fadeIn(delay: 1.1.seconds),
@@ -266,10 +279,14 @@ class DoctorDetailScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: Theme.of(context).colorScheme.surface,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.textPrimary.withValues(alpha: 0.05),
+                  color: Colors.black.withValues(
+                    alpha: Theme.of(context).brightness == Brightness.dark
+                        ? 0.3
+                        : 0.05,
+                  ),
                   blurRadius: 20,
                   offset: const Offset(0, -10),
                 ),
@@ -291,8 +308,8 @@ class DoctorDetailScreen extends StatelessWidget {
                     ),
                     Text(
                       doctor.consultationFee,
-                      style: const TextStyle(
-                        color: AppColors.textPrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -337,14 +354,22 @@ class DoctorDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _infoStat(IconData icon, String label, String value, Color color) {
+  Widget _infoStat(
+    BuildContext context,
+    IconData icon,
+    String label,
+    String value,
+    Color color,
+  ) {
     return Container(
       width: 100,
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(
+          color: Theme.of(context).dividerColor.withValues(alpha: 0.5),
+        ),
       ),
       child: Column(
         children: [
@@ -359,10 +384,10 @@ class DoctorDetailScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: AppColors.textPrimary,
+              color: Theme.of(context).textTheme.titleMedium?.color,
             ),
           ),
           Text(
