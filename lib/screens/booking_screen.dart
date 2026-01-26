@@ -76,25 +76,31 @@ class _BookingScreenState extends State<BookingScreen> {
       return;
     }
 
-    final timeParts = _selectedTime.split(' ');
-    final time = timeParts[0].split(':');
-    final hour = int.parse(time[0]);
-    final minute = int.parse(time[1]);
-    final isPM = timeParts[1] == 'PM' && hour != 12;
-    final finalHour = isPM
-        ? hour + 12
-        : (hour == 12 && timeParts[1] == 'AM' ? 0 : hour);
+    DateTime? appointmentDateTime;
+    try {
+      final timeFormat = DateFormat('hh:mm a');
+      final parsedTime = timeFormat.parse(_selectedTime);
 
-    final appointmentDateTime = DateTime(
-      _selectedDay.year,
-      _selectedDay.month,
-      _selectedDay.day,
-      finalHour,
-      minute,
-    );
+      appointmentDateTime = DateTime(
+        _selectedDay.year,
+        _selectedDay.month,
+        _selectedDay.day,
+        parsedTime.hour,
+        parsedTime.minute,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error parsing selected time'),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
 
     final appointment = Appointment(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      id: 'APT-${DateTime.now().millisecondsSinceEpoch}',
       doctorId: widget.doctor.id,
       doctorName: widget.doctor.name,
       doctorSpecialty: widget.doctor.specialty,
@@ -110,16 +116,37 @@ class _BookingScreenState extends State<BookingScreen> {
       listen: false,
     ).addAppointment(appointment);
 
-    Navigator.pop(context);
-    Navigator.pop(context);
+    // Show success snackbar on the previous screen (Doctor Detail or Home)
+    Navigator.pop(context); // Close Booking Screen
+    Navigator.pop(context); // Close Detail Screen
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Your appointment has been confirmed!'),
+        content: Row(
+          children: [
+            const Icon(Icons.check_circle_rounded, color: Colors.white),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'Appointment with ${widget.doctor.name} confirmed!',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
         backgroundColor: AppColors.success,
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.all(20),
+        duration: const Duration(seconds: 4),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        action: SnackBarAction(
+          label: 'VIEW',
+          textColor: Colors.white,
+          onPressed: () {
+            // Logic to navigate to appointments tab could go here
+            // For now, it just closes
+          },
+        ),
       ),
     );
   }

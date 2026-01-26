@@ -23,6 +23,13 @@ class AppointmentProvider with ChangeNotifier {
       ..sort((a, b) => b.dateTime.compareTo(a.dateTime));
   }
 
+  List<Appointment> get historyAppointments {
+    return _appointments
+        .where((apt) => apt.status == 'completed' || apt.status == 'cancelled')
+        .toList()
+      ..sort((a, b) => b.dateTime.compareTo(a.dateTime));
+  }
+
   void addAppointment(Appointment appointment) {
     _appointments.add(appointment);
     notifyListeners();

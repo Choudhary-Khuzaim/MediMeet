@@ -75,7 +75,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
             children: [
               _buildList(provider.upcomingAppointments, provider, true),
               _buildList(provider.completedAppointments, provider, false),
-              _buildList(provider.appointments, provider, false),
+              _buildList(provider.historyAppointments, provider, false),
             ],
           );
         },

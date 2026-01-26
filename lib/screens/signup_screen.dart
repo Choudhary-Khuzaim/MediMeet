@@ -143,6 +143,16 @@ class _SignupScreenState extends State<SignupScreen> {
                       hint: 'name@example.com',
                       icon: Icons.alternate_email_rounded,
                       type: TextInputType.emailAddress,
+                      validator: (v) {
+                        if (v == null || v.isEmpty) return 'Enter your email';
+                        final emailRegex = RegExp(
+                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                        );
+                        if (!emailRegex.hasMatch(v)) {
+                          return 'Enter a valid email address';
+                        }
+                        return null;
+                      },
                     ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 20),
@@ -244,6 +254,7 @@ class _SignupScreenState extends State<SignupScreen> {
     bool obscure = false,
     VoidCallback? onToggle,
     TextInputType type = TextInputType.text,
+    String? Function(String?)? validator,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,7 +289,8 @@ class _SignupScreenState extends State<SignupScreen> {
             fillColor: Colors.white,
             filled: true,
           ),
-          validator: (v) => v!.isEmpty ? 'This field is required' : null,
+          validator:
+              validator ?? (v) => v!.isEmpty ? 'This field is required' : null,
         ),
       ],
     );

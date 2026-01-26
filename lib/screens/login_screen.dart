@@ -149,7 +149,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       label: 'Email Address',
                       hint: 'name@example.com',
                       icon: Icons.alternate_email_rounded,
-                      validator: (v) => v!.isEmpty ? 'Enter your email' : null,
+                      validator: (v) {
+                        if (v == null || v.isEmpty) return 'Enter your email';
+                        final emailRegex = RegExp(
+                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                        );
+                        if (!emailRegex.hasMatch(v) && v != 'admin') {
+                          return 'Enter a valid email address';
+                        }
+                        return null;
+                      },
                     ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 24),
@@ -242,12 +251,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icons.g_mobiledata_rounded,
                           label: 'Google',
                           color: const Color(0xFFEA4335),
+                          onTap: () => _showSocialSnackbar(context, 'Google'),
                         ),
                         const SizedBox(width: 16),
                         _socialButton(
                           icon: Icons.facebook_rounded,
                           label: 'Facebook',
                           color: const Color(0xFF1877F2),
+                          onTap: () => _showSocialSnackbar(context, 'Facebook'),
                         ),
                       ],
                     ).animate().fadeIn(delay: 1.1.seconds).slideY(begin: 0.5),
@@ -293,6 +304,17 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showSocialSnackbar(BuildContext context, String platform) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$platform Sign In coming soon'),
+        backgroundColor: AppColors.primary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     );
   }
@@ -349,39 +371,43 @@ class _LoginScreenState extends State<LoginScreen> {
     required IconData icon,
     required String label,
     required Color color,
+    required VoidCallback onTap,
   }) {
     return Expanded(
-      child: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Theme.of(context).dividerColor),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(
-                alpha: Theme.of(context).brightness == Brightness.dark
-                    ? 0.2
-                    : 0.03,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 60,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Theme.of(context).dividerColor),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(
+                  alpha: Theme.of(context).brightness == Brightness.dark
+                      ? 0.2
+                      : 0.03,
+                ),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color, size: 28),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).textTheme.titleLarge?.color,
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: color, size: 28),
+              const SizedBox(width: 8),
+              Text(
+                label,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.titleLarge?.color,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
