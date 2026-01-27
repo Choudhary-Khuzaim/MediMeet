@@ -52,6 +52,14 @@ class NotificationsScreen extends StatelessWidget {
       },
     ];
 
+    final List<Map<String, dynamic>> allNotifications = [
+      ...todayNotifications,
+      ...earlierNotifications,
+    ];
+    final int unreadCount = allNotifications
+        .where((n) => n['isUnread'] == true)
+        .length;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -86,7 +94,7 @@ class NotificationsScreen extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               slivers: [
                 if (todayNotifications.isNotEmpty)
-                  _buildSectionHeader(context, 'Today'),
+                  _buildSectionHeader(context, 'Today', unreadCount),
                 if (todayNotifications.isNotEmpty)
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
@@ -99,7 +107,7 @@ class NotificationsScreen extends StatelessWidget {
                     ),
                   ),
                 if (earlierNotifications.isNotEmpty)
-                  _buildSectionHeader(context, 'Earlier'),
+                  _buildSectionHeader(context, 'Earlier', 0),
                 if (earlierNotifications.isNotEmpty)
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
@@ -117,7 +125,11 @@ class NotificationsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(BuildContext context, String title) {
+  Widget _buildSectionHeader(
+    BuildContext context,
+    String title,
+    int unreadCount,
+  ) {
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
       sliver: SliverToBoxAdapter(
@@ -132,7 +144,7 @@ class NotificationsScreen extends StatelessWidget {
                 color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
-            if (title == 'Today')
+            if (title == 'Today' && unreadCount > 0)
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -142,9 +154,9 @@ class NotificationsScreen extends StatelessWidget {
                   color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Text(
-                  '2 New',
-                  style: TextStyle(
+                child: Text(
+                  '$unreadCount New',
+                  style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 11,
                     fontWeight: FontWeight.bold,

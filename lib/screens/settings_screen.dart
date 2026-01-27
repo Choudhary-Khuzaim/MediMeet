@@ -36,6 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(localizations.settings)),
       body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             // Notifications Section

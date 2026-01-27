@@ -6,6 +6,8 @@ import '../providers/auth_provider.dart';
 import 'settings_screen.dart';
 import 'notifications_screen.dart';
 import 'medical_records_screen.dart';
+import 'help_center_screen.dart';
+import 'privacy_policy_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -227,6 +229,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.blue,
                     index: 0,
                     context: context,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsScreen(),
+                      ),
+                    ),
                   ),
                   _menuItem(
                     icon: Icons.notifications_none_rounded,
@@ -305,6 +313,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.amber,
                     index: 0,
                     context: context,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HelpCenterScreen(),
+                      ),
+                    ),
                   ),
                   _menuItem(
                     icon: Icons.policy_outlined,
@@ -313,6 +327,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.green,
                     index: 1,
                     context: context,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PrivacyPolicyScreen(),
+                      ),
+                    ),
                   ),
                 ], context),
 

@@ -126,6 +126,13 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
   }
 
   Widget _buildSummaryCard(BuildContext context) {
+    final lastDoctor = _allRecords.isNotEmpty
+        ? _allRecords.first.doctorName
+        : null;
+    final int daysAgo = _allRecords.isNotEmpty
+        ? DateTime.now().difference(_allRecords.first.date).inDays
+        : 0;
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -190,10 +197,12 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                 size: 16,
               ),
               const SizedBox(width: 8),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Your last checkup was 12 days ago with Dr. Sarah Khan.',
-                  style: TextStyle(color: Colors.white70, fontSize: 12),
+                  _allRecords.isNotEmpty
+                      ? 'Your last checkup was $daysAgo days ago with Dr. $lastDoctor.'
+                      : 'No recent checkup records found.',
+                  style: const TextStyle(color: Colors.white70, fontSize: 12),
                 ),
               ),
             ],
@@ -214,6 +223,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
         ),
         child: TextField(
           controller: _searchController,
+          onChanged: (_) => setState(() {}), // Refresh to show/hide clear icon
           decoration: InputDecoration(
             hintText: 'Search by diagnosis or doctor...',
             hintStyle: const TextStyle(
@@ -224,6 +234,15 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
               Icons.search_rounded,
               color: AppColors.primary,
             ),
+            suffixIcon: _searchController.text.isNotEmpty
+                ? IconButton(
+                    icon: const Icon(Icons.clear_rounded, size: 20),
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() {});
+                    },
+                  )
+                : null,
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 20,
