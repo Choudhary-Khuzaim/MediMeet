@@ -20,7 +20,8 @@ class AuthProvider with ChangeNotifier {
     const String validPassword = 'admin';
 
     // Check credentials
-    if (email.toLowerCase().trim() == validEmail && password.trim() == validPassword) {
+    if (email.toLowerCase().trim() == validEmail &&
+        password.trim() == validPassword) {
       _isAuthenticated = true;
       _userId = 'user_${DateTime.now().millisecondsSinceEpoch}';
       _userEmail = email;

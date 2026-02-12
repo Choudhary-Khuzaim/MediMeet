@@ -157,14 +157,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       gradient: LinearGradient(
                         colors: [
                           _pages[_currentPage].color,
-                          _pages[_currentPage].color.withOpacity(0.8),
+                          _pages[_currentPage].color.withValues(alpha: 0.8),
                         ],
                       ),
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: _pages[_currentPage].color.withOpacity(0.3,
-                          ),
+                          color: _pages[_currentPage].color.withValues(alpha: 0.3),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -217,8 +216,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        data.color.withOpacity(0.4),
-                        Colors.black.withOpacity(0.4),
+                        data.color.withValues(alpha: 0.4),
+                        Colors.black.withValues(alpha: 0.4),
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,

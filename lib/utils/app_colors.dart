@@ -66,12 +66,12 @@ class AppColors {
   // High-fidelity Shadows
   static List<BoxShadow> softShadow = [
     BoxShadow(
-      color: const Color(0xFF000000).withOpacity(0.03),
+      color: const Color(0xFF000000).withValues(alpha: 0.03),
       blurRadius: 10,
       offset: const Offset(0, 4),
     ),
     BoxShadow(
-      color: const Color(0xFF000000).withOpacity(0.02),
+      color: const Color(0xFF000000).withValues(alpha: 0.02),
       blurRadius: 2,
       offset: const Offset(0, 1),
     ),
@@ -79,11 +79,11 @@ class AppColors {
 
   static List<BoxShadow> mediumShadow = [
     BoxShadow(
-      color: const Color(0xFF000000).withOpacity(0.08),
+      color: const Color(0xFF000000).withValues(alpha: 0.08),
       blurRadius: 20,
       offset: const Offset(0, 10),
     ),
   ];
 
-  static Color shadowColor = const Color(0xFF000000).withOpacity(0.05);
+  static Color shadowColor = const Color(0xFF000000).withValues(alpha: 0.05);
 }

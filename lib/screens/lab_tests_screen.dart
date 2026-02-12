@@ -118,7 +118,7 @@ class LabTestsScreen extends StatelessWidget {
                           'Certified labs & accurate results',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withValues(alpha: 0.8),
                           ),
                         ),
                       ],
@@ -144,7 +144,7 @@ class LabTestsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF0077B6).withOpacity(0.2),
+                      color: const Color(0xFF0077B6).withValues(alpha: 0.2),
                       blurRadius: 15,
                       offset: const Offset(0, 8),
                     ),
@@ -168,7 +168,7 @@ class LabTestsScreen extends StatelessWidget {
                           Text(
                             'Book now and our team will visit you at your time.',
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                               fontSize: 13,
                             ),
                           ),
@@ -243,7 +243,9 @@ class LabTestsScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(Theme.of(context).brightness ==
+                                    color: Colors.black.withValues(
+                                      alpha:
+                                          Theme.of(context).brightness ==
                                               Brightness.dark
                                           ? 0.2
                                           : 0.03,
@@ -310,7 +312,8 @@ class LabTestsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
                               ? 0.2
                               : 0.03,
                         ),
@@ -362,8 +365,7 @@ class LabTestsScreen extends StatelessWidget {
                                       vertical: 2,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: AppColors.success.withOpacity(0.1,
-                                      ),
+                                      color: AppColors.success.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(

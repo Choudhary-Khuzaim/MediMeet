@@ -98,7 +98,7 @@ class PharmacyScreen extends StatelessWidget {
                       right: -20,
                       child: CircleAvatar(
                         radius: 80,
-                        backgroundColor: Colors.white.withOpacity(0.1),
+                        backgroundColor: Colors.white.withValues(alpha: 0.1),
                       ),
                     ),
                     SafeArea(
@@ -125,7 +125,7 @@ class PharmacyScreen extends StatelessWidget {
                               'Authentic medicines delivered to your doorstep',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: Colors.white.withOpacity(0.8),
+                                color: Colors.white.withValues(alpha: 0.8),
                               ),
                             ),
                           ],
@@ -168,7 +168,7 @@ class PharmacyScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.black.withOpacity(0.7),
+                        Colors.black.withValues(alpha: 0.7),
                         Colors.transparent,
                       ],
                       begin: Alignment.centerLeft,
@@ -253,10 +253,10 @@ class PharmacyScreen extends StatelessWidget {
                               width: 60,
                               height: 60,
                               decoration: BoxDecoration(
-                                color: cat['color'].withOpacity(0.1),
+                                color: cat['color'].withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: cat['color'].withOpacity(0.2),
+                                  color: cat['color'].withValues(alpha: 0.2),
                                   width: 1,
                                 ),
                               ),
@@ -327,7 +327,7 @@ class PharmacyScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
+                        color: Colors.black.withValues(alpha: 0.04),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),

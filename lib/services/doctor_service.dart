@@ -13,7 +13,8 @@ class DoctorService {
         hospital: 'Aga Khan University Hospital, Karachi',
         experience: '14 years',
         education: 'MBBS (AKUH), FCPS Cardiology',
-        description: 'Renowned interventional cardiologist focusing on preventive cardiology, cardiac imaging, and post-operative cardiac care for complex cases.',
+        description:
+            'Renowned interventional cardiologist focusing on preventive cardiology, cardiac imaging, and post-operative cardiac care for complex cases.',
         availableDays: ['Monday', 'Wednesday', 'Friday'],
         consultationFee: 'Rs. 4,500',
       ),
@@ -27,7 +28,8 @@ class DoctorService {
         hospital: 'Shifa International Hospital, Islamabad',
         experience: '11 years',
         education: 'MBBS (KEMU), FCPS Neurology',
-        description: 'Specialist in movement disorders, migraine management, and epilepsy care with an emphasis on lifestyle-centered treatment plans.',
+        description:
+            'Specialist in movement disorders, migraine management, and epilepsy care with an emphasis on lifestyle-centered treatment plans.',
         availableDays: ['Tuesday', 'Thursday', 'Saturday'],
         consultationFee: 'Rs. 4,000',
       ),
@@ -41,7 +43,8 @@ class DoctorService {
         hospital: 'Children\'s Hospital Lahore',
         experience: '9 years',
         education: 'MBBS (Allama Iqbal Medical College), DCH (UK)',
-        description: 'Trusted pediatrician focusing on preventive care, child nutrition, and developmental milestones with a friendly, family-first approach.',
+        description:
+            'Trusted pediatrician focusing on preventive care, child nutrition, and developmental milestones with a friendly, family-first approach.',
         availableDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         consultationFee: 'Rs. 3,000',
       ),
@@ -55,7 +58,8 @@ class DoctorService {
         hospital: 'Liaquat National Hospital, Karachi',
         experience: '17 years',
         education: 'MBBS (Dow), FRCS (UK)',
-        description: 'Expert in sports injuries, joint replacements, and trauma orthopedics helping athletes and patients return to active lifestyles.',
+        description:
+            'Expert in sports injuries, joint replacements, and trauma orthopedics helping athletes and patients return to active lifestyles.',
         availableDays: ['Monday', 'Wednesday', 'Friday'],
         consultationFee: 'Rs. 5,500',
       ),
@@ -69,7 +73,8 @@ class DoctorService {
         hospital: 'Cosmetique Clinic, Lahore',
         experience: '13 years',
         education: 'MBBS (FMH), Diploma in Dermatology (UK)',
-        description: 'Cosmetic and medical dermatology specialist treating acne, pigmentation issues, laser therapies, and advanced skincare procedures.',
+        description:
+            'Cosmetic and medical dermatology specialist treating acne, pigmentation issues, laser therapies, and advanced skincare procedures.',
         availableDays: ['Tuesday', 'Thursday', 'Saturday'],
         consultationFee: 'Rs. 3,800',
       ),
@@ -83,7 +88,8 @@ class DoctorService {
         hospital: 'Indus Hospital, Karachi',
         experience: '15 years',
         education: 'MBBS (DUHS), FCPS Psychiatry',
-        description: 'Compassionate mental health consultant specializing in anxiety, depression, adolescent psychiatry, and holistic therapy plans.',
+        description:
+            'Compassionate mental health consultant specializing in anxiety, depression, adolescent psychiatry, and holistic therapy plans.',
         availableDays: ['Monday', 'Wednesday', 'Friday'],
         consultationFee: 'Rs. 4,200',
       ),
@@ -94,11 +100,12 @@ class DoctorService {
     final doctors = getDoctors();
     if (query.isEmpty) return doctors;
     return doctors
-        .where((doctor) =>
-            doctor.name.toLowerCase().contains(query.toLowerCase()) ||
-            doctor.specialty.toLowerCase().contains(query.toLowerCase()) ||
-            doctor.hospital.toLowerCase().contains(query.toLowerCase()))
+        .where(
+          (doctor) =>
+              doctor.name.toLowerCase().contains(query.toLowerCase()) ||
+              doctor.specialty.toLowerCase().contains(query.toLowerCase()) ||
+              doctor.hospital.toLowerCase().contains(query.toLowerCase()),
+        )
         .toList();
   }
 }
-

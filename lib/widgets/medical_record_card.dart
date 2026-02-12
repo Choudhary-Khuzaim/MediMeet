@@ -22,7 +22,7 @@ class MedicalRecordCard extends StatelessWidget {
         border: Border.all(
           color: isDark
               ? AppColors.darkBorder
-              : AppColors.border.withOpacity(0.5),
+              : AppColors.border.withValues(alpha: 0.5),
           width: 1,
         ),
       ),
@@ -40,7 +40,7 @@ class MedicalRecordCard extends StatelessWidget {
                   child: Icon(
                     _getCategoryIcon(record.doctorSpecialty),
                     size: 100,
-                    color: AppColors.primary.withOpacity(0.03),
+                    color: AppColors.primary.withValues(alpha: 0.03),
                   ),
                 ),
                 Padding(
@@ -53,7 +53,7 @@ class MedicalRecordCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(14),
                             decoration: BoxDecoration(
-                              color: AppColors.primary.withOpacity(0.1),
+                              color: AppColors.primary.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(18),
                             ),
                             child: Icon(
@@ -112,7 +112,7 @@ class MedicalRecordCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Theme.of(
                             context,
-                          ).scaffoldBackgroundColor.withOpacity(0.5),
+                          ).scaffoldBackgroundColor.withValues(alpha: 0.5),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -169,7 +169,7 @@ class MedicalRecordCard extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 color: Theme.of(
                   context,
-                ).textTheme.titleMedium?.color?.withOpacity(0.8),
+                ).textTheme.titleMedium?.color?.withValues(alpha: 0.8),
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

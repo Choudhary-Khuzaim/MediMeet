@@ -30,9 +30,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.privacyPolicy),
-      ),
+      appBar: AppBar(title: Text(localizations.privacyPolicy)),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: ListView(
@@ -40,7 +38,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.08),
+                color: AppColors.primary.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -91,7 +89,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(
-                      color: AppColors.border.withOpacity(0.3),
+                      color: AppColors.border.withValues(alpha: 0.3),
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -141,4 +139,3 @@ class PrivacyPolicyScreen extends StatelessWidget {
     );
   }
 }
-

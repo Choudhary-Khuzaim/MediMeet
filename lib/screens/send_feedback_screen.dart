@@ -52,9 +52,7 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
         content: Text(localizations.feedbackSuccess),
         backgroundColor: AppColors.success,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
     Navigator.pop(context);
@@ -65,9 +63,7 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.sendFeedback),
-      ),
+      appBar: AppBar(title: Text(localizations.sendFeedback)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -76,7 +72,7 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.accent.withOpacity(0.12),
+                color: AppColors.accent.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -130,31 +126,31 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
             Wrap(
               spacing: 12,
               runSpacing: 12,
-              children: _categoryKeys.map(
-                (category) {
-                  final isSelected = _selectedCategory == category;
-                  final label = _categoryLabel(localizations, category);
-                  return ChoiceChip(
-                    label: Text(label),
-                    selected: isSelected,
-                    onSelected: (_) {
-                      setState(() => _selectedCategory = category);
-                    },
-                    selectedColor: AppColors.primary.withOpacity(0.15),
-                    labelStyle: TextStyle(
-                      color: isSelected ? AppColors.primary : AppColors.textSecondary,
-                      fontWeight: FontWeight.w600,
+              children: _categoryKeys.map((category) {
+                final isSelected = _selectedCategory == category;
+                final label = _categoryLabel(localizations, category);
+                return ChoiceChip(
+                  label: Text(label),
+                  selected: isSelected,
+                  onSelected: (_) {
+                    setState(() => _selectedCategory = category);
+                  },
+                  selectedColor: AppColors.primary.withValues(alpha: 0.15),
+                  labelStyle: TextStyle(
+                    color: isSelected
+                        ? AppColors.primary
+                        : AppColors.textSecondary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      color: isSelected ? AppColors.primary : AppColors.border,
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(
-                        color: isSelected ? AppColors.primary : AppColors.border,
-                      ),
-                    ),
-                    backgroundColor: Theme.of(context).colorScheme.surface,
-                  );
-                },
-              ).toList(),
+                  ),
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                );
+              }).toList(),
             ),
             const SizedBox(height: 24),
             Form(
@@ -273,4 +269,3 @@ String _categoryLabel(AppLocalizations localizations, String key) {
       return localizations.feedbackCategoryApp;
   }
 }
-

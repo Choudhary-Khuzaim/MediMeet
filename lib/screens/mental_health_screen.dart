@@ -68,7 +68,7 @@ class MentalHealthScreen extends StatelessWidget {
                       child: Icon(
                         Icons.spa_rounded,
                         size: 200,
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white.withValues(alpha: 0.1),
                       ),
                     ),
                     SafeArea(
@@ -95,7 +95,7 @@ class MentalHealthScreen extends StatelessWidget {
                               'Your mental well-being matters to us',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -115,7 +115,7 @@ class MentalHealthScreen extends StatelessWidget {
                                   vertical: 8,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
+                                  color: Colors.white.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: const Row(
@@ -161,7 +161,8 @@ class MentalHealthScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
                               ? 0.2
                               : 0.05,
                         ),
@@ -206,12 +207,12 @@ class MentalHealthScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? AppColors.primary.withOpacity(0.1)
+                      ? AppColors.primary.withValues(alpha: 0.1)
                       : const Color(0xFFF0F7FF),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     color: Theme.of(context).brightness == Brightness.dark
-                        ? AppColors.primary.withOpacity(0.2)
+                        ? AppColors.primary.withValues(alpha: 0.2)
                         : const Color(0xFFD0E6FF),
                   ),
                 ),
@@ -284,7 +285,8 @@ class MentalHealthScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
                               ? 0.1
                               : 0.02,
                         ),
@@ -299,7 +301,7 @@ class MentalHealthScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: cat['color'].withOpacity(0.1),
+                          color: cat['color'].withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(cat['icon'], color: cat['color'], size: 24),
@@ -427,7 +429,8 @@ class _TherapistCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+            color: Colors.black.withValues(
+              alpha: Theme.of(context).brightness == Brightness.dark
                   ? 0.2
                   : 0.03,
             ),
@@ -488,7 +491,7 @@ class _TherapistCard extends StatelessWidget {
                         fontSize: 12,
                         color: Theme.of(
                           context,
-                        ).textTheme.bodySmall?.color?.withOpacity(0.9),
+                        ).textTheme.bodySmall?.color?.withValues(alpha: 0.9),
                       ),
                     ),
                     const SizedBox(width: 4),
@@ -507,7 +510,7 @@ class _TherapistCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Text(

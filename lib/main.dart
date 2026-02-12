@@ -107,7 +107,7 @@ class _MainScreenState extends State<MainScreen> {
           color: Theme.of(context).colorScheme.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.2 : 0.04),
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
               blurRadius: 20,
               offset: const Offset(0, -5),
             ),
@@ -121,7 +121,7 @@ class _MainScreenState extends State<MainScreen> {
             });
           },
           backgroundColor: Theme.of(context).colorScheme.surface,
-          indicatorColor: AppColors.primary.withOpacity(0.08),
+          indicatorColor: AppColors.primary.withValues(alpha: 0.08),
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           height: 80,
           elevation: 0,

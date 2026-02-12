@@ -44,9 +44,7 @@ class HelpCenterScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.helpCenter),
-      ),
+      appBar: AppBar(title: Text(localizations.helpCenter)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -55,7 +53,7 @@ class HelpCenterScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.secondary.withOpacity(0.1),
+                color: AppColors.secondary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -130,7 +128,7 @@ class HelpCenterScreen extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: AppColors.border.withOpacity(0.4),
+                    color: AppColors.border.withValues(alpha: 0.4),
                   ),
                 ),
                 child: Row(
@@ -138,7 +136,7 @@ class HelpCenterScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.secondary.withOpacity(0.1),
+                        color: AppColors.secondary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
@@ -198,7 +196,7 @@ class HelpCenterScreen extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: AppColors.border.withOpacity(0.4),
+                    color: AppColors.border.withValues(alpha: 0.4),
                   ),
                 ),
                 child: Column(
@@ -231,4 +229,3 @@ class HelpCenterScreen extends StatelessWidget {
     );
   }
 }
-

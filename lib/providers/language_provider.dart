@@ -29,7 +29,7 @@ class LanguageProvider extends ChangeNotifier {
       _isUrdu = false;
     }
     notifyListeners();
-    
+
     // Save to preferences asynchronously
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('language_code', _isUrdu ? 'ur' : 'en');
@@ -39,4 +39,3 @@ class LanguageProvider extends ChangeNotifier {
     return _isUrdu ? 'اردو (Urdu)' : 'English';
   }
 }
-

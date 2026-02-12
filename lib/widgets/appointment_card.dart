@@ -39,7 +39,7 @@ class AppointmentCard extends StatelessWidget {
         boxShadow: Theme.of(context).brightness == Brightness.dark
             ? [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -69,8 +69,7 @@ class AppointmentCard extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                           border: Border.all(
-                            color: AppColors.primaryLight.withOpacity(0.5,
-                            ),
+                            color: AppColors.primaryLight.withValues(alpha: 0.5),
                             width: 2,
                           ),
                         ),
@@ -108,7 +107,7 @@ class AppointmentCard extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: statusColor.withOpacity(0.1),
+                          color: statusColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
@@ -149,8 +148,7 @@ class AppointmentCard extends StatelessWidget {
                         onPressed: onCancel,
                         style: TextButton.styleFrom(
                           foregroundColor: AppColors.error,
-                          backgroundColor: AppColors.error.withOpacity(0.05,
-                          ),
+                          backgroundColor: AppColors.error.withValues(alpha: 0.05),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),

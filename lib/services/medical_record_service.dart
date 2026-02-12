@@ -11,7 +11,8 @@ class MedicalRecordService {
         diagnosis: 'Hypertension (Stage I)',
         prescription: 'Losartan 50mg once daily\nAtorvastatin 20mg at bedtime',
         symptoms: ['Elevated BP', 'Occasional headaches', 'Mild fatigue'],
-        notes: 'Advised DASH diet, morning walk for 30 minutes, and BP monitoring twice a week. Review after 6 weeks.',
+        notes:
+            'Advised DASH diet, morning walk for 30 minutes, and BP monitoring twice a week. Review after 6 weeks.',
         attachments: [],
       ),
       MedicalRecord(
@@ -22,7 +23,8 @@ class MedicalRecordService {
         diagnosis: 'Chronic Migraine',
         prescription: 'Topiramate 25mg twice daily\nParacetamol 1g SOS',
         symptoms: ['Throbbing headache', 'Photophobia', 'Nausea'],
-        notes: 'Discussed migraine triggers, hydration goals, and keeping a headache diary. Next review in 2 months.',
+        notes:
+            'Discussed migraine triggers, hydration goals, and keeping a headache diary. Next review in 2 months.',
         attachments: [],
       ),
       MedicalRecord(
@@ -33,10 +35,10 @@ class MedicalRecordService {
         diagnosis: 'Routine Well-Child Visit',
         prescription: 'Vitamin D3 supplement\nRoutine vaccination schedule',
         symptoms: [],
-        notes: 'Growth parameters within WHO percentile. Encourage outdoor play and balanced diet. Follow-up in 6 months.',
+        notes:
+            'Growth parameters within WHO percentile. Encourage outdoor play and balanced diet. Follow-up in 6 months.',
         attachments: [],
       ),
     ];
   }
 }
-

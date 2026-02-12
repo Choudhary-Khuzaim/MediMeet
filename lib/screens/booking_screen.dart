@@ -191,7 +191,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 boxShadow: Theme.of(context).brightness == Brightness.dark
                     ? [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withValues(alpha: 0.2),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -251,7 +251,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 boxShadow: Theme.of(context).brightness == Brightness.dark
                     ? [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withValues(alpha: 0.2),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -294,7 +294,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     shape: BoxShape.circle,
                   ),
                   todayDecoration: BoxDecoration(
-                    color: AppColors.primaryLight.withOpacity(0.5),
+                    color: AppColors.primaryLight.withValues(alpha: 0.5),
                     shape: BoxShape.circle,
                   ),
                   todayTextStyle: const TextStyle(
@@ -346,7 +346,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: AppColors.primary.withOpacity(0.2),
+                                color: AppColors.primary.withValues(alpha: 0.2),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
                               ),
@@ -399,7 +399,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   elevation: 8,
-                  shadowColor: AppColors.primary.withOpacity(0.3),
+                  shadowColor: AppColors.primary.withValues(alpha: 0.3),
                 ),
                 child: const Text(
                   'Confirm Appointment',

@@ -49,9 +49,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       final localizations = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            localizations.passwordChangedSuccess,
-          ),
+          content: Text(localizations.passwordChangedSuccess),
           backgroundColor: AppColors.success,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -70,9 +68,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.changePassword),
-      ),
+      appBar: AppBar(title: Text(localizations.changePassword)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Form(
@@ -86,7 +82,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 height: 80,
                 margin: const EdgeInsets.only(bottom: 32),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -235,7 +231,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         width: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
                         ),
                       )
                     : Text(
@@ -252,10 +250,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.info.withOpacity(0.1),
+                  color: AppColors.info.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: AppColors.info.withOpacity(0.3),
+                    color: AppColors.info.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Row(
@@ -269,10 +267,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Expanded(
                       child: Text(
                         localizations.passwordRequirements,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppColors.info,
-                        ),
+                        style: TextStyle(fontSize: 14, color: AppColors.info),
                       ),
                     ),
                   ],
@@ -285,4 +280,3 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     );
   }
 }
-
