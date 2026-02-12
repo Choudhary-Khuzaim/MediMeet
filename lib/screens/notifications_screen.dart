@@ -151,7 +151,7 @@ class NotificationsScreen extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
+                  color: AppColors.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -186,7 +186,7 @@ class NotificationsScreen extends StatelessWidget {
                   boxShadow: AppColors.softShadow,
                   border: isUnread
                       ? Border.all(
-                          color: AppColors.primary.withValues(alpha: 0.1),
+                          color: AppColors.primary.withOpacity(0.1),
                           width: 1,
                         )
                       : Border.all(color: Colors.transparent, width: 1),
@@ -215,8 +215,7 @@ class NotificationsScreen extends StatelessWidget {
                             width: 52,
                             height: 52,
                             decoration: BoxDecoration(
-                              color: notification['color'].withValues(
-                                alpha: 0.1,
+                              color: notification['color'].withOpacity(0.1,
                               ),
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -258,7 +257,7 @@ class NotificationsScreen extends StatelessWidget {
                                         .textTheme
                                         .bodyMedium
                                         ?.color
-                                        ?.withValues(alpha: 0.7),
+                                        ?.withOpacity(0.7),
                                     height: 1.4,
                                   ),
                                 ),
@@ -299,13 +298,13 @@ class NotificationsScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(30),
             decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.05),
+              color: AppColors.primary.withOpacity(0.05),
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.notifications_none_rounded,
               size: 80,
-              color: AppColors.primary.withValues(alpha: 0.4),
+              color: AppColors.primary.withOpacity(0.4),
             ),
           ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
           const SizedBox(height: 24),

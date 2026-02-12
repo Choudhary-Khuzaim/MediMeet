@@ -18,7 +18,7 @@ class DoctorCard extends StatelessWidget {
         boxShadow: Theme.of(context).brightness == Brightness.dark
             ? [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
+                  color: Colors.black.withOpacity(0.2),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -45,7 +45,7 @@ class DoctorCard extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       border: Border.all(
-                        color: AppColors.primary.withValues(alpha: 0.1),
+                        color: AppColors.primary.withOpacity(0.1),
                         width: 2,
                       ),
                     ),
@@ -79,7 +79,7 @@ class DoctorCard extends StatelessWidget {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.amber.withValues(alpha: 0.1),
+                                color: Colors.amber.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(

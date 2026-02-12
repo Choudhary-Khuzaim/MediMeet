@@ -140,7 +140,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
         borderRadius: BorderRadius.circular(32),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.3),
+            color: AppColors.primary.withOpacity(0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -177,7 +177,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
+                  color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: const Icon(
@@ -262,13 +262,13 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           Container(
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.05),
+              color: AppColors.primary.withOpacity(0.05),
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.folder_off_rounded,
               size: 80,
-              color: AppColors.primary.withValues(alpha: 0.4),
+              color: AppColors.primary.withOpacity(0.4),
             ),
           ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
           const SizedBox(height: 24),
@@ -328,7 +328,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withValues(alpha: 0.1),
+                            color: AppColors.primary.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Icon(
@@ -363,7 +363,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                       ],
                     ),
                     const SizedBox(height: 32),
-                    Divider(color: AppColors.border.withValues(alpha: 0.5)),
+                    Divider(color: AppColors.border.withOpacity(0.5)),
                     const SizedBox(height: 32),
                     _buildDetailRow(
                       Icons.person_rounded,
@@ -428,7 +428,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           decoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
+            border: Border.all(color: AppColors.border.withOpacity(0.5)),
           ),
           child: Icon(icon, color: AppColors.primary, size: 22),
         ),
@@ -481,9 +481,9 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.05),
+            color: color.withOpacity(0.05),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: color.withValues(alpha: 0.1), width: 1),
+            border: Border.all(color: color.withOpacity(0.1), width: 1),
           ),
           child: Text(
             content,

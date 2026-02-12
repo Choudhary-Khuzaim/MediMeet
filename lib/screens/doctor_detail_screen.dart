@@ -66,7 +66,7 @@ class DoctorDetailScreen extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          AppColors.textPrimary.withValues(alpha: 0.8),
+                          AppColors.textPrimary.withOpacity(0.8),
                         ],
                       ),
                     ),
@@ -230,7 +230,7 @@ class DoctorDetailScreen extends StatelessWidget {
                                     border: Border.all(
                                       color: Theme.of(
                                         context,
-                                      ).dividerColor.withValues(alpha: 0.5),
+                                      ).dividerColor.withOpacity(0.5),
                                     ),
                                   ),
                                   child: Text(
@@ -282,8 +282,7 @@ class DoctorDetailScreen extends StatelessWidget {
               color: Theme.of(context).colorScheme.surface,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(
-                    alpha: Theme.of(context).brightness == Brightness.dark
+                  color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
                         ? 0.3
                         : 0.05,
                   ),
@@ -332,7 +331,7 @@ class DoctorDetailScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         elevation: 12,
-                        shadowColor: AppColors.primary.withValues(alpha: 0.3),
+                        shadowColor: AppColors.primary.withOpacity(0.3),
                       ),
                       child: const Text(
                         'Review & Book',
@@ -368,7 +367,7 @@ class DoctorDetailScreen extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: Theme.of(context).dividerColor.withValues(alpha: 0.5),
+          color: Theme.of(context).dividerColor.withOpacity(0.5),
         ),
       ),
       child: Column(
@@ -376,7 +375,7 @@ class DoctorDetailScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.1),
+              color: color.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: color, size: 20),

@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 200,
                       height: 200,
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.05),
+                        color: Colors.white.withOpacity(0.05),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -93,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 120,
                       height: 120,
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.03),
+                        color: Colors.white.withOpacity(0.03),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.2),
+                              color: Colors.white.withOpacity(0.2),
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.white, width: 2),
                             ),
@@ -167,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         userEmail,
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.white.withValues(alpha: 0.8),
+                          color: Colors.white.withOpacity(0.8),
                           fontWeight: FontWeight.w500,
                         ),
                       ).animate(delay: 300.ms).fadeIn(),
@@ -347,10 +347,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
-                        color: AppColors.error.withValues(alpha: 0.08),
+                        color: AppColors.error.withOpacity(0.08),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: AppColors.error.withValues(alpha: 0.1),
+                          color: AppColors.error.withOpacity(0.1),
                         ),
                       ),
                       child: const Row(
@@ -401,7 +401,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: color.withValues(alpha: 0.1),
+              color: color.withOpacity(0.1),
               blurRadius: 15,
               offset: const Offset(0, 8),
             ),
@@ -412,7 +412,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.1),
+                color: color.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 20),
@@ -468,8 +468,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(
-                alpha: Theme.of(context).brightness == Brightness.dark
+              color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
                     ? 0.2
                     : 0.03,
               ),
@@ -500,7 +499,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.1),
+            color: color.withOpacity(0.1),
             borderRadius: BorderRadius.circular(14),
           ),
           child: Icon(icon, color: color, size: 22),

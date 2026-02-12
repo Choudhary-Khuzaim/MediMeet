@@ -140,8 +140,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
-                                      color: AppColors.primary.withValues(
-                                        alpha: 0.2,
+                                      color: AppColors.primary.withOpacity(0.2,
                                       ),
                                       blurRadius: 8,
                                       offset: const Offset(0, 4),
@@ -210,7 +209,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
         Icon(
           Icons.person_search_rounded,
           size: 80,
-          color: AppColors.textMuted.withValues(alpha: 0.2),
+          color: AppColors.textMuted.withOpacity(0.2),
         ),
         const SizedBox(height: 16),
         const Text(

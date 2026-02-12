@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.primary.withValues(alpha: 0.1),
+                    AppColors.primary.withOpacity(0.1),
                     AppColors.background,
                   ],
                 ),
@@ -99,9 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withValues(
-                                  alpha:
-                                      Theme.of(context).brightness ==
+                                color: Colors.black.withOpacity(Theme.of(context).brightness ==
                                           Brightness.dark
                                       ? 0.2
                                       : 0.03,
@@ -202,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           elevation: 8,
-                          shadowColor: AppColors.primary.withValues(alpha: 0.3),
+                          shadowColor: AppColors.primary.withOpacity(0.3),
                         ),
                         child: _isLoading
                             ? const CircularProgressIndicator(
@@ -384,8 +382,7 @@ class _LoginScreenState extends State<LoginScreen> {
             border: Border.all(color: Theme.of(context).dividerColor),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(
-                  alpha: Theme.of(context).brightness == Brightness.dark
+                color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
                       ? 0.2
                       : 0.03,
                 ),

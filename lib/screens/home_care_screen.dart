@@ -35,7 +35,7 @@ class HomeCareScreen extends StatelessWidget {
                       child: Icon(
                         Icons.home_rounded,
                         size: 200,
-                        color: Colors.white.withValues(alpha: 0.1),
+                        color: Colors.white.withOpacity(0.1),
                       ),
                     ),
                     SafeArea(
@@ -62,7 +62,7 @@ class HomeCareScreen extends StatelessWidget {
                               'Professional medical care where you feel most comfortable.',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.white.withValues(alpha: 0.8),
+                                color: Colors.white.withOpacity(0.8),
                               ),
                             ),
                           ],
@@ -89,8 +89,7 @@ class HomeCareScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(
-                          alpha: Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
                               ? 0.2
                               : 0.05,
                         ),
@@ -129,10 +128,10 @@ class HomeCareScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.03),
+                  color: AppColors.primary.withOpacity(0.03),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: AppColors.primary.withValues(alpha: 0.05),
+                    color: AppColors.primary.withOpacity(0.05),
                   ),
                 ),
                 child: Row(
@@ -264,8 +263,7 @@ class _ModernHomeCareCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(
-              alpha: Theme.of(context).brightness == Brightness.dark
+            color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
                   ? 0.2
                   : 0.03,
             ),
@@ -284,7 +282,7 @@ class _ModernHomeCareCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.1),
+                    color: color.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(icon, color: color, size: 28),
@@ -331,8 +329,8 @@ class _ModernHomeCareCard extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).dividerColor.withValues(alpha: 0.05)
-                  : AppColors.surfaceMuted.withValues(alpha: 0.5),
+                  ? Theme.of(context).dividerColor.withOpacity(0.05)
+                  : AppColors.surfaceMuted.withOpacity(0.5),
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(24),
               ),

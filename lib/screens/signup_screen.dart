@@ -74,7 +74,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.secondary.withValues(alpha: 0.1),
+                    AppColors.secondary.withOpacity(0.1),
                     AppColors.background,
                   ],
                 ),
@@ -192,7 +192,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           elevation: 8,
-                          shadowColor: AppColors.primary.withValues(alpha: 0.3),
+                          shadowColor: AppColors.primary.withOpacity(0.3),
                         ),
                         child: _isLoading
                             ? const CircularProgressIndicator(
@@ -318,7 +318,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 boxShadow: _agreeToTerms
                     ? [
                         BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.2),
+                          color: AppColors.primary.withOpacity(0.2),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
