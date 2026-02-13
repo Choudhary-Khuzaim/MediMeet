@@ -179,7 +179,9 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.primary.withValues(alpha: 0.3),
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.3,
+                                  ),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4),
                                 ),
@@ -308,30 +310,70 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       physics: const ClampingScrollPhysics(),
                       children: [
-                        const _SpecialtyCard(
+                        _SpecialtyCard(
                           icon: Icons.favorite_rounded,
                           label: 'Cardiology',
-                          color: Color(0xFFEF4444),
+                          color: const Color(0xFFEF4444),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const DoctorsListScreen(
+                                initialCategory: 'Cardiologist',
+                              ),
+                            ),
+                          ),
                         ),
-                        const _SpecialtyCard(
+                        _SpecialtyCard(
                           icon: Icons.psychology_rounded,
                           label: 'Neurology',
-                          color: Color(0xFF8B5CF6),
+                          color: const Color(0xFF8B5CF6),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const DoctorsListScreen(
+                                initialCategory: 'Neurologist',
+                              ),
+                            ),
+                          ),
                         ),
-                        const _SpecialtyCard(
+                        _SpecialtyCard(
                           icon: Icons.child_care_rounded,
                           label: 'Pediatrics',
-                          color: Color(0xFFF59E0B),
+                          color: const Color(0xFFF59E0B),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const DoctorsListScreen(
+                                initialCategory: 'Pediatrician',
+                              ),
+                            ),
+                          ),
                         ),
-                        const _SpecialtyCard(
-                          icon: Icons.visibility_rounded,
-                          label: 'Eye Care',
-                          color: Color(0xFF3B82F6),
+                        _SpecialtyCard(
+                          icon: Icons.face_retouching_natural_rounded,
+                          label: 'Dermatology',
+                          color: const Color(0xFFEC4899),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const DoctorsListScreen(
+                                initialCategory: 'Dermatologist',
+                              ),
+                            ),
+                          ),
                         ),
-                        const _SpecialtyCard(
-                          icon: Icons.coronavirus_rounded,
-                          label: 'Infection',
-                          color: Color(0xFF10B981),
+                        _SpecialtyCard(
+                          icon: Icons.mood_rounded,
+                          label: 'Psychiatry',
+                          color: const Color(0xFF10B981),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const DoctorsListScreen(
+                                initialCategory: 'Psychiatrist',
+                              ),
+                            ),
+                          ),
                         ),
                       ].animate(interval: 50.ms).fadeIn().slideX(begin: 0.2),
                     ),
@@ -652,7 +694,12 @@ class _FeaturedBanner extends StatelessWidget {
                 ),
                 const Spacer(),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const DoctorsListScreen(),
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: AppColors.accent,
@@ -680,53 +727,58 @@ class _SpecialtyCard extends StatelessWidget {
   final IconData icon;
   final String label;
   final Color color;
+  final VoidCallback? onTap;
 
   const _SpecialtyCard({
     required this.icon,
     required this.label,
     required this.color,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      margin: const EdgeInsets.only(right: 16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 100,
+        margin: const EdgeInsets.only(right: 16),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.03),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+          border: Border.all(
+            color: Theme.of(context).dividerColor.withValues(alpha: 0.3),
           ),
-        ],
-        border: Border.all(
-          color: Theme.of(context).dividerColor.withValues(alpha: 0.3),
         ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(icon, color: color, size: 24),
             ),
-            child: Icon(icon, color: color, size: 24),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.titleSmall?.color,
+            const SizedBox(height: 12),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.titleSmall?.color,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

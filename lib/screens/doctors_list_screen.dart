@@ -110,6 +110,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                     'Pediatrician',
                     'Psychiatrist',
                     'Dermatologist',
+                    'Orthopedic Surgeon',
                   ].map((cat) {
                     final isSelected = _selectedCategory == cat;
                     return Padding(
@@ -140,7 +141,9 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
-                                      color: AppColors.primary.withValues(alpha: 0.2),
+                                      color: AppColors.primary.withValues(
+                                        alpha: 0.2,
+                                      ),
                                       blurRadius: 8,
                                       offset: const Offset(0, 4),
                                     ),
