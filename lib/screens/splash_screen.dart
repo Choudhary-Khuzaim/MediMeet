@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../main.dart';
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -34,16 +36,28 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    _navigateToOnboarding();
+    _checkNavigation();
   }
 
-  void _navigateToOnboarding() async {
+  void _checkNavigation() async {
     await Future.delayed(const Duration(seconds: 3));
+    if (!mounted) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+
     if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        FadePageRoute(builder: (context) => const OnboardingScreen()),
-      );
+      if (onboardingComplete) {
+        Navigator.pushReplacement(
+          context,
+          FadePageRoute(builder: (context) => const AuthWrapper()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          FadePageRoute(builder: (context) => const OnboardingScreen()),
+        );
+      }
     }
   }
 
