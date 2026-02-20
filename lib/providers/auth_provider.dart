@@ -32,19 +32,28 @@ class AuthProvider with ChangeNotifier {
     // Simulate API call
     await Future.delayed(const Duration(seconds: 1));
 
-    // Fixed credentials
-    const String validEmail = 'admin';
-    const String validPassword = 'admin';
+    final prefs = await SharedPreferences.getInstance();
+    final savedEmail = prefs.getString('savedEmail');
+    final savedPassword = prefs.getString('savedPassword');
 
-    // Check credentials
-    if (email.toLowerCase().trim() == validEmail &&
-        password.trim() == validPassword) {
+    // Check credentials (either admin or previously signed up user)
+    bool isValidLogin =
+        (email.toLowerCase().trim() == 'admin' && password.trim() == 'admin') ||
+        (savedEmail != null &&
+            savedPassword != null &&
+            email.toLowerCase().trim() == savedEmail.toLowerCase().trim() &&
+            password == savedPassword);
+
+    if (isValidLogin) {
       _isAuthenticated = true;
-      _userId = 'user_${DateTime.now().millisecondsSinceEpoch}';
+      _userId =
+          prefs.getString('savedUserId') ??
+          'user_${DateTime.now().millisecondsSinceEpoch}';
       _userEmail = email;
-      _userName = 'Admin';
+      _userName = email.toLowerCase().trim() == 'admin'
+          ? 'Admin'
+          : (prefs.getString('savedUserName') ?? 'User');
 
-      final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isAuthenticated', true);
       await prefs.setString('userId', _userId!);
       await prefs.setString('userEmail', _userEmail!);
@@ -73,6 +82,13 @@ class AuthProvider with ChangeNotifier {
       _userName = name;
 
       final prefs = await SharedPreferences.getInstance();
+
+      // Save credentials for future login simulation
+      await prefs.setString('savedEmail', email);
+      await prefs.setString('savedPassword', password);
+      await prefs.setString('savedUserName', name);
+      await prefs.setString('savedUserId', _userId!);
+
       await prefs.setBool('isAuthenticated', true);
       await prefs.setString('userId', _userId!);
       await prefs.setString('userEmail', _userEmail!);
