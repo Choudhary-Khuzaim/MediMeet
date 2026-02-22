@@ -49,28 +49,60 @@ class AuthProvider with ChangeNotifier {
             password == savedPassword);
 
     if (isValidLogin) {
+      bool isAdmin = email.toLowerCase().trim() == 'admin';
       _isAuthenticated = true;
-      _userId =
-          prefs.getString('savedUserId') ??
-          'user_${DateTime.now().millisecondsSinceEpoch}';
-      _userEmail = email;
-      _userName = email.toLowerCase().trim() == 'admin'
-          ? 'Admin'
-          : (prefs.getString('savedUserName') ?? 'User');
-      _userPhone = savedPhone;
+
+      if (isAdmin) {
+        _userId = 'admin_${DateTime.now().millisecondsSinceEpoch}';
+        _userEmail = email;
+        _userName = 'Admin';
+        _userPhone = '+1 234 567 890'; // Default phone for admin
+      } else {
+        _userId =
+            prefs.getString('savedUserId') ??
+            'user_${DateTime.now().millisecondsSinceEpoch}';
+        _userEmail = savedEmail ?? email;
+        _userName = prefs.getString('savedUserName') ?? 'User';
+        _userPhone = savedPhone;
+      }
 
       await prefs.setBool('isAuthenticated', true);
       await prefs.setString('userId', _userId!);
       await prefs.setString('userEmail', _userEmail!);
       await prefs.setString('userName', _userName!);
+
       if (_userPhone != null) {
         await prefs.setString('userPhone', _userPhone!);
+      } else {
+        await prefs.remove('userPhone');
       }
 
       notifyListeners();
       return true;
     }
     return false;
+  }
+
+  Future<bool> updateProfile(String name, String phone) async {
+    // Simulate API call
+    await Future.delayed(const Duration(seconds: 1));
+
+    _userName = name;
+    _userPhone = phone;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userName', name);
+    await prefs.setString('userPhone', phone);
+
+    // Also update saved credentials so next login has the new data
+    // Only if not admin
+    if (_userEmail?.toLowerCase().trim() != 'admin') {
+      await prefs.setString('savedUserName', name);
+      await prefs.setString('savedPhone', phone);
+    }
+
+    notifyListeners();
+    return true;
   }
 
   Future<bool> signup(
