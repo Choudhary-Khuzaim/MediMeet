@@ -7,12 +7,14 @@ class AuthProvider with ChangeNotifier {
   String? _userId;
   String? _userEmail;
   String? _userName;
+  String? _userPhone;
 
   bool get isAuthenticated => _isAuthenticated;
   bool get isLoading => _isLoading;
   String? get userId => _userId;
   String? get userEmail => _userEmail;
   String? get userName => _userName;
+  String? get userPhone => _userPhone;
 
   AuthProvider() {
     _loadUser();
@@ -24,6 +26,7 @@ class AuthProvider with ChangeNotifier {
     _userId = prefs.getString('userId');
     _userEmail = prefs.getString('userEmail');
     _userName = prefs.getString('userName');
+    _userPhone = prefs.getString('userPhone');
     _isLoading = false;
     notifyListeners();
   }
@@ -35,6 +38,7 @@ class AuthProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final savedEmail = prefs.getString('savedEmail');
     final savedPassword = prefs.getString('savedPassword');
+    final savedPhone = prefs.getString('savedPhone');
 
     // Check credentials (either admin or previously signed up user)
     bool isValidLogin =
@@ -53,11 +57,15 @@ class AuthProvider with ChangeNotifier {
       _userName = email.toLowerCase().trim() == 'admin'
           ? 'Admin'
           : (prefs.getString('savedUserName') ?? 'User');
+      _userPhone = savedPhone;
 
       await prefs.setBool('isAuthenticated', true);
       await prefs.setString('userId', _userId!);
       await prefs.setString('userEmail', _userEmail!);
       await prefs.setString('userName', _userName!);
+      if (_userPhone != null) {
+        await prefs.setString('userPhone', _userPhone!);
+      }
 
       notifyListeners();
       return true;
@@ -80,6 +88,7 @@ class AuthProvider with ChangeNotifier {
       _userId = 'user_${DateTime.now().millisecondsSinceEpoch}';
       _userEmail = email;
       _userName = name;
+      _userPhone = phone;
 
       final prefs = await SharedPreferences.getInstance();
 
@@ -87,12 +96,14 @@ class AuthProvider with ChangeNotifier {
       await prefs.setString('savedEmail', email);
       await prefs.setString('savedPassword', password);
       await prefs.setString('savedUserName', name);
+      await prefs.setString('savedPhone', phone);
       await prefs.setString('savedUserId', _userId!);
 
       await prefs.setBool('isAuthenticated', true);
       await prefs.setString('userId', _userId!);
       await prefs.setString('userEmail', _userEmail!);
       await prefs.setString('userName', _userName!);
+      await prefs.setString('userPhone', _userPhone!);
 
       notifyListeners();
       return true;
@@ -105,12 +116,14 @@ class AuthProvider with ChangeNotifier {
     _userId = null;
     _userEmail = null;
     _userName = null;
+    _userPhone = null;
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('isAuthenticated');
     await prefs.remove('userId');
     await prefs.remove('userEmail');
     await prefs.remove('userName');
+    await prefs.remove('userPhone');
 
     notifyListeners();
   }
