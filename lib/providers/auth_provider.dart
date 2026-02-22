@@ -115,7 +115,10 @@ class AuthProvider with ChangeNotifier {
     await Future.delayed(const Duration(seconds: 1));
 
     // For demo purposes, accept any valid signup
-    if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+    if (name.isNotEmpty &&
+        email.isNotEmpty &&
+        password.isNotEmpty &&
+        phone.isNotEmpty) {
       _isAuthenticated = true;
       _userId = 'user_${DateTime.now().millisecondsSinceEpoch}';
       _userEmail = email;
