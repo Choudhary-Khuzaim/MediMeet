@@ -146,6 +146,33 @@ class AuthProvider with ChangeNotifier {
     return false;
   }
 
+  Future<bool> changePassword(
+    String currentPassword,
+    String newPassword,
+  ) async {
+    // Simulate API call
+    await Future.delayed(const Duration(seconds: 1));
+
+    final prefs = await SharedPreferences.getInstance();
+    final savedPassword = prefs.getString('savedPassword');
+
+    bool isCurrentPasswordValid = false;
+    if (_userEmail?.toLowerCase().trim() == 'admin') {
+      isCurrentPasswordValid = currentPassword.trim() == 'admin';
+    } else {
+      isCurrentPasswordValid = currentPassword == savedPassword;
+    }
+
+    if (isCurrentPasswordValid) {
+      if (_userEmail?.toLowerCase().trim() != 'admin') {
+        await prefs.setString('savedPassword', newPassword);
+      }
+      return true;
+    }
+
+    return false;
+  }
+
   Future<void> logout() async {
     _isAuthenticated = false;
     _userId = null;

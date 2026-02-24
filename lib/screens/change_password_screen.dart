@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_localizations.dart';
+import '../providers/auth_provider.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -37,29 +39,46 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       _isLoading = true;
     });
 
-    // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final success = await authProvider.changePassword(
+      _currentPasswordController.text,
+      _newPasswordController.text,
+    );
 
     if (mounted) {
       setState(() {
         _isLoading = false;
       });
 
-      // Show success message
       final localizations = AppLocalizations.of(context)!;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(localizations.passwordChangedSuccess),
-          backgroundColor: AppColors.success,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      );
 
-      // Navigate back
-      Navigator.pop(context);
+      if (success) {
+        // Show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(localizations.passwordChangedSuccess),
+            backgroundColor: AppColors.success,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        );
+
+        // Navigate back
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(localizations.incorrectCurrentPassword),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        );
+      }
     }
   }
 
@@ -138,9 +157,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return localizations.currentPasswordRequired;
-                  }
-                  if (value != 'admin') {
-                    return localizations.incorrectCurrentPassword;
                   }
                   return null;
                 },
