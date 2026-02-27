@@ -60,7 +60,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
           // Background Decor
@@ -75,7 +75,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 gradient: RadialGradient(
                   colors: [
                     AppColors.secondary.withValues(alpha: 0.1),
-                    AppColors.background,
+                    Theme.of(context).scaffoldBackgroundColor,
                   ],
                 ),
               ),
@@ -96,13 +96,26 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: AppColors.softShadow,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(
+                                alpha:
+                                    Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? 0.2
+                                    : 0.03,
+                              ),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_back_ios_new_rounded,
                           size: 20,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ).animate().fadeIn().slideX(begin: -0.5),
@@ -112,7 +125,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       'Create Your\nAccount',
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         fontSize: 34,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.displayLarge?.color,
                         height: 1.1,
                       ),
                     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.3),
@@ -120,8 +133,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'Join thousands of users who trust Medimeet for their healthcare needs.',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         fontSize: 15,
                       ),
                     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3),
@@ -216,8 +229,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: RichText(
                           text: TextSpan(
                             text: 'Already have an account? ',
-                            style: const TextStyle(
-                              color: AppColors.textSecondary,
+                            style: TextStyle(
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color,
                             ),
                             children: [
                               TextSpan(
@@ -261,10 +276,10 @@ class _SignupScreenState extends State<SignupScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: Theme.of(context).textTheme.titleSmall?.color,
           ),
         ),
         const SizedBox(height: 12),
@@ -286,7 +301,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: onToggle,
                   )
                 : null,
-            fillColor: Colors.white,
+            fillColor: Theme.of(context).colorScheme.surface,
             filled: true,
           ),
           validator:
@@ -309,10 +324,14 @@ class _SignupScreenState extends State<SignupScreen> {
               width: 24,
               height: 24,
               decoration: BoxDecoration(
-                color: _agreeToTerms ? AppColors.primary : Colors.white,
+                color: _agreeToTerms
+                    ? AppColors.primary
+                    : Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: _agreeToTerms ? AppColors.primary : AppColors.border,
+                  color: _agreeToTerms
+                      ? AppColors.primary
+                      : Theme.of(context).dividerColor,
                   width: 2,
                 ),
                 boxShadow: _agreeToTerms
@@ -330,11 +349,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   : null,
             ),
             const SizedBox(width: 12),
-            const Expanded(
+            Expanded(
               child: Text(
                 'I agree to the Terms of Service and Privacy Policy',
                 style: TextStyle(
-                  color: AppColors.textSecondary,
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),
