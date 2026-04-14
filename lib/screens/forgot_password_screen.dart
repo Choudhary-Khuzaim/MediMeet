@@ -55,7 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.accent.withValues(alpha: 0.1),
+                    AppColors.accent.withOpacity(0.1),
                     Theme.of(context).scaffoldBackgroundColor,
                   ],
                 ),
@@ -81,9 +81,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(
-                                alpha:
-                                    Theme.of(context).brightness ==
+                              color: Colors.black.withOpacity(Theme.of(context).brightness ==
                                         Brightness.dark
                                     ? 0.2
                                     : 0.03,
@@ -177,7 +175,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           elevation: 8,
-                          shadowColor: AppColors.primary.withValues(alpha: 0.3),
+                          shadowColor: AppColors.primary.withOpacity(0.3),
                         ),
                         child: _isSubmitting
                             ? const CircularProgressIndicator(
@@ -204,7 +202,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         border: Border.all(
                           color: Theme.of(
                             context,
-                          ).dividerColor.withValues(alpha: 0.5),
+                          ).dividerColor.withOpacity(0.5),
                         ),
                       ),
                       child: Row(
@@ -212,7 +210,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           Icon(
                             Icons.info_outline_rounded,
                             color: Theme.of(context).textTheme.bodyMedium?.color
-                                ?.withValues(alpha: 0.7),
+                                ?.withOpacity(0.7),
                           ),
                           const SizedBox(width: 12),
                           Expanded(

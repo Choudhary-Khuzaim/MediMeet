@@ -72,7 +72,7 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.accent.withValues(alpha: 0.12),
+                color: AppColors.accent.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -135,7 +135,7 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
                   onSelected: (_) {
                     setState(() => _selectedCategory = category);
                   },
-                  selectedColor: AppColors.primary.withValues(alpha: 0.15),
+                  selectedColor: AppColors.primary.withOpacity(0.15),
                   labelStyle: TextStyle(
                     color: isSelected
                         ? AppColors.primary

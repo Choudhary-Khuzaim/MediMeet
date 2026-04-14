@@ -227,7 +227,7 @@ class AppTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: AppColors.darkSurface,
-        shadowColor: Colors.black.withValues(alpha: 0.3),
+        shadowColor: Colors.black.withOpacity(0.3),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       dividerTheme: const DividerThemeData(
@@ -283,10 +283,10 @@ class AppTheme {
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.darkSurface,
-        indicatorColor: AppColors.primary.withValues(alpha: 0.15),
+        indicatorColor: AppColors.primary.withOpacity(0.15),
         elevation: 0,
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        labelTextStyle: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return GoogleFonts.outfit(
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -299,8 +299,8 @@ class AppTheme {
             color: AppColors.darkTextSecondary,
           );
         }),
-        iconTheme: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        iconTheme: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return const IconThemeData(color: AppColors.primary);
           }
           return const IconThemeData(color: AppColors.darkTextSecondary);

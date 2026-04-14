@@ -89,13 +89,13 @@ class MainDrawer extends StatelessWidget {
                                 color: AppColors.primaryLight,
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(
-                                  color: AppColors.primary.withValues(alpha: 0.1),
+                                  color: AppColors.primary.withOpacity(0.1),
                                   width: 2,
                                 ),
                               ),
                               child: Center(
                                 child: Text(
-                                  userName[0].toUpperCase(),
+                                  userName.isNotEmpty ? userName[0].toUpperCase() : 'U',
                                   style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.w900,
@@ -298,7 +298,7 @@ class MainDrawer extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: AppColors.error.withValues(alpha: 0.2),
+                            color: AppColors.error.withOpacity(0.2),
                           ),
                           borderRadius: BorderRadius.circular(16),
                         ),

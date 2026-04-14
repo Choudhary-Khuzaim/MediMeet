@@ -42,8 +42,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(
-                      alpha: Theme.of(context).brightness == Brightness.dark
+                    color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
                           ? 0.2
                           : 0.03,
                     ),
@@ -93,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColors.primary.withValues(alpha: 0.1),
+                              color: AppColors.primary.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
@@ -179,9 +178,7 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.primary.withValues(
-                                    alpha: 0.3,
-                                  ),
+                                  color: AppColors.primary.withOpacity(0.3),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4),
                                 ),
@@ -577,13 +574,13 @@ class _ServiceCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: color.withValues(alpha: 0.1),
+              color: color.withOpacity(0.1),
               blurRadius: 15,
               offset: const Offset(0, 8),
             ),
           ],
           border: Border.all(
-            color: Theme.of(context).dividerColor.withValues(alpha: 0.05),
+            color: Theme.of(context).dividerColor.withOpacity(0.05),
             width: 1.5,
           ),
         ),
@@ -594,7 +591,7 @@ class _ServiceCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.1),
+                color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: color, size: 24),
@@ -639,7 +636,7 @@ class _FeaturedBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: AppColors.accent.withValues(alpha: 0.3),
+            color: AppColors.accent.withOpacity(0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -653,7 +650,7 @@ class _FeaturedBanner extends StatelessWidget {
             child: Icon(
               Icons.health_and_safety_rounded,
               size: 180,
-              color: Colors.white.withValues(alpha: 0.1),
+              color: Colors.white.withOpacity(0.1),
             ),
           ),
           Padding(
@@ -667,7 +664,7 @@ class _FeaturedBanner extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.2),
+                    color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Text(
@@ -748,13 +745,13 @@ class _SpecialtyCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.03),
+              color: Colors.black.withOpacity(0.03),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
           border: Border.all(
-            color: Theme.of(context).dividerColor.withValues(alpha: 0.3),
+            color: Theme.of(context).dividerColor.withOpacity(0.3),
           ),
         ),
         child: Column(
@@ -763,7 +760,7 @@ class _SpecialtyCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.1),
+                color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Icon(icon, color: color, size: 24),
@@ -807,7 +804,7 @@ class _HealthTipCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
+            color: Theme.of(context).shadowColor.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -838,7 +835,7 @@ class _HealthTipCard extends StatelessWidget {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.9),
+                      color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
@@ -896,16 +893,16 @@ class _AppointmentPreviewCard extends StatelessWidget {
       width: 280,
       margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
         ],
-        border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
+        border: Border.all(color: AppColors.border.withOpacity(0.5)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -918,7 +915,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColors.primary.withValues(alpha: 0.1),
+                      color: AppColors.primary.withOpacity(0.1),
                       width: 2,
                     ),
                   ),
@@ -956,7 +953,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.05),
+                    color: AppColors.primary.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(

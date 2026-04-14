@@ -98,7 +98,7 @@ class AmbulanceScreen extends StatelessWidget {
                               BoxShadow(
                                 color: const Color(
                                   0xFFD90429,
-                                ).withValues(alpha: 0.4),
+                                ).withOpacity(0.4),
                                 blurRadius: 30,
                                 spreadRadius: 5,
                                 offset: const Offset(0, 10),
@@ -234,7 +234,7 @@ class _PulseRing extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: const Color(0xFFEF233C).withValues(alpha: 0.1),
+          color: const Color(0xFFEF233C).withOpacity(0.1),
           width: 2,
         ),
       ),
@@ -268,14 +268,14 @@ class _AmbulanceCard extends StatelessWidget {
         boxShadow: Theme.of(context).brightness == Brightness.dark
             ? [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
+                  color: Colors.black.withOpacity(0.2),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
               ]
             : [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.03),
+                  color: Colors.black.withOpacity(0.03),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -286,7 +286,7 @@ class _AmbulanceCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.1),
+              color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(icon, color: color, size: 28),

@@ -198,7 +198,7 @@ class _EmptyState extends StatelessWidget {
               boxShadow: Theme.of(context).brightness == Brightness.dark
                   ? [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: Colors.black.withOpacity(0.2),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -208,7 +208,7 @@ class _EmptyState extends StatelessWidget {
             child: Icon(
               icon,
               size: 56,
-              color: AppColors.primary.withValues(alpha: 0.2),
+              color: AppColors.primary.withOpacity(0.2),
             ),
           ),
           const SizedBox(height: 32),
