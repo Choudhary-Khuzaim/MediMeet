@@ -11,32 +11,32 @@ class MentalHealthScreen extends StatelessWidget {
       {
         'title': 'Anxiety',
         'icon': Icons.self_improvement_rounded,
-        'color': Color(0xFF48CAE4),
+        'color': const Color(0xFF48CAE4),
       },
       {
         'title': 'Stress',
         'icon': Icons.spa_rounded,
-        'color': Color(0xFFB5179E),
+        'color': const Color(0xFFB5179E),
       },
       {
         'title': 'Depression',
         'icon': Icons.wb_sunny_rounded,
-        'color': Color(0xFFF72585),
+        'color': const Color(0xFFF72585),
       },
       {
         'title': 'Insomnia',
         'icon': Icons.nights_stay_rounded,
-        'color': Color(0xFF7209B7),
+        'color': const Color(0xFF7209B7),
       },
       {
         'title': 'Relationships',
         'icon': Icons.favorite_rounded,
-        'color': Color(0xFF4361EE),
+        'color': const Color(0xFF4361EE),
       },
       {
         'title': 'Career',
         'icon': Icons.work_rounded,
-        'color': Color(0xFF4CC9F0),
+        'color': const Color(0xFF4CC9F0),
       },
     ];
 
@@ -161,7 +161,8 @@ class MentalHealthScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withOpacity(
+                          Theme.of(context).brightness == Brightness.dark
                               ? 0.2
                               : 0.05,
                         ),
@@ -215,19 +216,19 @@ class MentalHealthScreen extends StatelessWidget {
                         : const Color(0xFFD0E6FF),
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.lightbulb_rounded,
                       color: Color(0xFF4361EE),
                       size: 30,
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Daily Mindfulness',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -235,7 +236,7 @@ class MentalHealthScreen extends StatelessWidget {
                               color: Color(0xFF4361EE),
                             ),
                           ),
-                          const SizedBox(height: 2),
+                          SizedBox(height: 2),
                           Text(
                             'Take 5 deep breaths and focus on the present moment.',
                             style: TextStyle(
@@ -255,7 +256,7 @@ class MentalHealthScreen extends StatelessWidget {
           // Categories Grid
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
                 'Browse Categories',
                 style: TextStyle(
@@ -284,7 +285,8 @@ class MentalHealthScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withOpacity(
+                          Theme.of(context).brightness == Brightness.dark
                               ? 0.1
                               : 0.02,
                         ),
@@ -324,7 +326,7 @@ class MentalHealthScreen extends StatelessWidget {
           // Top Therapists Section
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(24, 8, 24, 16),
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -336,7 +338,7 @@ class MentalHealthScreen extends StatelessWidget {
                       color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
-                  Text(
+                  const Text(
                     'See All',
                     style: TextStyle(
                       color: AppColors.primary,
@@ -352,7 +354,7 @@ class MentalHealthScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                _TherapistCard(
+                const _TherapistCard(
                   name: 'Dr. Sarah Ahmed',
                   expertise: 'Clinical Psychologist',
                   rating: '4.9',
@@ -360,7 +362,7 @@ class MentalHealthScreen extends StatelessWidget {
                   image:
                       'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&h=200&fit=crop',
                 ),
-                _TherapistCard(
+                const _TherapistCard(
                   name: 'Prof. Faisal Khan',
                   expertise: 'Psychiatrist',
                   rating: '4.8',
@@ -427,7 +429,8 @@ class _TherapistCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+            color: Colors.black.withOpacity(
+              Theme.of(context).brightness == Brightness.dark
                   ? 0.2
                   : 0.03,
             ),

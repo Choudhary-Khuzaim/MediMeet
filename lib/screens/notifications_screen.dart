@@ -76,7 +76,7 @@ class NotificationsScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               'Mark all read',
               style: TextStyle(
                 color: AppColors.primary,
@@ -263,7 +263,7 @@ class NotificationsScreen extends StatelessWidget {
                                 const SizedBox(height: 10),
                                 Text(
                                   notification['time'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.textMuted,
@@ -316,7 +316,7 @@ class NotificationsScreen extends StatelessWidget {
             ),
           ).animate().fadeIn(delay: 300.ms),
           const SizedBox(height: 12),
-          Text(
+          const Text(
             'You don\'t have any new notifications\nat the moment.',
             textAlign: TextAlign.center,
             style: TextStyle(

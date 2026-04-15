@@ -274,7 +274,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.info_outline_rounded,
                       color: AppColors.info,
                       size: 24,
@@ -283,7 +283,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Expanded(
                       child: Text(
                         localizations.passwordRequirements,
-                        style: TextStyle(fontSize: 14, color: AppColors.info),
+                        style: const TextStyle(fontSize: 14, color: AppColors.info),
                       ),
                     ),
                   ],

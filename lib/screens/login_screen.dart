@@ -99,8 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(Theme.of(context).brightness ==
-                                          Brightness.dark
+                                color: Colors.black.withOpacity(
+                                  Theme.of(context).brightness == Brightness.dark
                                       ? 0.2
                                       : 0.03,
                                 ),
@@ -280,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context,
                               ).textTheme.bodyMedium?.color,
                             ),
-                            children: [
+                            children: const [
                               TextSpan(
                                 text: 'Join Medimeet',
                                 style: TextStyle(
@@ -382,7 +382,8 @@ class _LoginScreenState extends State<LoginScreen> {
             border: Border.all(color: Theme.of(context).dividerColor),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                color: Colors.black.withOpacity(
+                  Theme.of(context).brightness == Brightness.dark
                       ? 0.2
                       : 0.03,
                 ),

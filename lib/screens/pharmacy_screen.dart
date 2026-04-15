@@ -10,32 +10,32 @@ class PharmacyScreen extends StatelessWidget {
       {
         'icon': Icons.thermostat_rounded,
         'label': 'Fever',
-        'color': Color(0xFFEF4444),
+        'color': const Color(0xFFEF4444),
       },
       {
         'icon': Icons.healing_rounded,
         'label': 'Pain Relief',
-        'color': Color(0xFFF59E0B),
+        'color': const Color(0xFFF59E0B),
       },
       {
         'icon': Icons.eco_rounded,
         'label': 'Vitamins',
-        'color': Color(0xFF10B981),
+        'color': const Color(0xFF10B981),
       },
       {
         'icon': Icons.child_care_rounded,
         'label': 'Baby Care',
-        'color': Color(0xFF3B82F6),
+        'color': const Color(0xFF3B82F6),
       },
       {
         'icon': Icons.face_retouching_natural_rounded,
         'label': 'Skin Care',
-        'color': Color(0xFFEC4899),
+        'color': const Color(0xFFEC4899),
       },
       {
         'icon': Icons.sanitizer_rounded,
         'label': 'Hygiene',
-        'color': Color(0xFF8B5CF6),
+        'color': const Color(0xFF8B5CF6),
       },
     ];
 

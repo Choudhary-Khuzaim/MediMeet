@@ -17,7 +17,7 @@ class AmbulanceScreen extends StatelessWidget {
             floating: false,
             pinned: true,
             elevation: 0,
-            backgroundColor: Color(0xFFD62828),
+            backgroundColor: const Color(0xFFD62828),
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
@@ -81,9 +81,9 @@ class AmbulanceScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         // Pulse rings
-                        _PulseRing(delay: 0),
-                        _PulseRing(delay: 1),
-                        _PulseRing(delay: 2),
+                        const _PulseRing(delay: 0),
+                        const _PulseRing(delay: 1),
+                        const _PulseRing(delay: 2),
                         Container(
                           width: 180,
                           height: 180,
@@ -189,21 +189,21 @@ class AmbulanceScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                _AmbulanceCard(
+                const _AmbulanceCard(
                   title: 'Basic Life Support (BLS)',
                   desc: 'Oxygen, Pulse Ox, First Aid Kit',
                   price: 'Rs. 2,500',
                   icon: Icons.airport_shuttle_rounded,
                   color: Colors.blue,
                 ),
-                _AmbulanceCard(
+                const _AmbulanceCard(
                   title: 'Advanced Cardiac (ACLS)',
                   desc: 'Ventilator, Monitor, Defibrillator',
                   price: 'Rs. 6,000',
                   icon: Icons.local_hospital_rounded,
                   color: Colors.orange,
                 ),
-                _AmbulanceCard(
+                const _AmbulanceCard(
                   title: 'Air Ambulance',
                   desc: 'Critical long distance transport',
                   price: 'Rs. 75,000',
@@ -325,7 +325,7 @@ class _AmbulanceCard extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.surfaceMuted,
               shape: BoxShape.circle,
             ),

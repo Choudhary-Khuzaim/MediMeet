@@ -89,7 +89,8 @@ class HomeCareScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withOpacity(
+                          Theme.of(context).brightness == Brightness.dark
                               ? 0.2
                               : 0.05,
                         ),
@@ -200,7 +201,7 @@ class HomeCareScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                _ModernHomeCareCard(
+                const _ModernHomeCareCard(
                   title: 'General Nursing',
                   desc:
                       'Injections, wound dressing, and routine check-ups at home.',
@@ -208,21 +209,21 @@ class HomeCareScreen extends StatelessWidget {
                   icon: Icons.person_add_alt_1_rounded,
                   color: Colors.blue,
                 ),
-                _ModernHomeCareCard(
+                const _ModernHomeCareCard(
                   title: 'Physiotherapy',
                   desc: 'Specialized exercises for recovery and pain relief.',
                   price: 'Rs. 2,500 / Session',
                   icon: Icons.accessibility_new_rounded,
                   color: Colors.orange,
                 ),
-                _ModernHomeCareCard(
+                const _ModernHomeCareCard(
                   title: 'Elderly Companion',
                   desc: 'Dedicated care and assistance for senior citizens.',
                   price: 'Rs. 3,000 / Day',
                   icon: Icons.elderly_rounded,
                   color: Colors.green,
                 ),
-                _ModernHomeCareCard(
+                const _ModernHomeCareCard(
                   title: 'Post-Surgery Care',
                   desc:
                       'Intensive monitoring and support after major operations.',
@@ -263,7 +264,8 @@ class _ModernHomeCareCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+            color: Colors.black.withOpacity(
+              Theme.of(context).brightness == Brightness.dark
                   ? 0.2
                   : 0.03,
             ),
@@ -335,16 +337,16 @@ class _ModernHomeCareCard extends StatelessWidget {
                 bottom: Radius.circular(24),
               ),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.calendar_month_rounded,
                   size: 16,
                   color: AppColors.primary,
                 ),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   'Book Appointment',
                   style: TextStyle(
                     color: AppColors.primary,
