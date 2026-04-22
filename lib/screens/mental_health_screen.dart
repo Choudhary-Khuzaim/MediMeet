@@ -216,7 +216,7 @@ class MentalHealthScreen extends StatelessWidget {
                         : const Color(0xFFD0E6FF),
                   ),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
                     Icon(
                       Icons.lightbulb_rounded,
