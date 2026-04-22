@@ -114,10 +114,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               // Title
               Text(
                 localizations.changePassword,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).textTheme.displayLarge?.color,
                   letterSpacing: -0.5,
                 ),
                 textAlign: TextAlign.center,
@@ -125,9 +125,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               const SizedBox(height: 8),
               Text(
                 localizations.changePasswordSubtitle,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.textSecondary,
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
                 ),
                 textAlign: TextAlign.center,
               ),

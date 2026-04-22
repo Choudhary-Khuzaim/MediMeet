@@ -241,7 +241,7 @@ class MentalHealthScreen extends StatelessWidget {
                             'Take 5 deep breaths and focus on the present moment.',
                             style: TextStyle(
                               fontSize: 13,
-                              color: AppColors.textSecondary,
+                              color: Theme.of(context).textTheme.bodyMedium?.color,
                             ),
                           ),
                         ],
@@ -279,44 +279,57 @@ class MentalHealthScreen extends StatelessWidget {
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
                 final cat = categories[index];
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(
-                          Theme.of(context).brightness == Brightness.dark
-                              ? 0.1
-                              : 0.02,
-                        ),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
+                return InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DoctorsListScreen(
+                        initialCategory: cat['title'],
                       ),
-                    ],
+                    ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: cat['color'].withOpacity(0.1),
-                          shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(
+                            Theme.of(context).brightness == Brightness.dark
+                                ? 0.1
+                                : 0.02,
+                          ),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
                         ),
-                        child: Icon(cat['icon'], color: cat['color'], size: 24),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        cat['title'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).textTheme.titleMedium?.color,
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: cat['color'].withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child:
+                              Icon(cat['icon'], color: cat['color'], size: 24),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 8),
+                        Text(
+                          cat['title'],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                Theme.of(context).textTheme.titleMedium?.color,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }, childCount: categories.length),
@@ -338,11 +351,21 @@ class MentalHealthScreen extends StatelessWidget {
                       color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
-                  const Text(
-                    'See All',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DoctorsListScreen(
+                          initialCategory: 'Psychiatrist',
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      'See All',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -507,18 +530,29 @@ class _TherapistCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
+          InkWell(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DoctorsListScreen(
+                  initialCategory: 'Psychiatrist',
+                ),
+              ),
             ),
-            child: const Text(
-              'Book',
-              style: TextStyle(
-                color: AppColors.primary,
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Text(
+                'Book',
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
               ),
             ),
           ),

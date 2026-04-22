@@ -297,10 +297,10 @@ class DoctorDetailScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Consultation Price',
                       style: TextStyle(
-                        color: AppColors.textMuted,
+                        color: Theme.of(context).textTheme.bodySmall?.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),
@@ -391,8 +391,8 @@ class DoctorDetailScreen extends StatelessWidget {
           ),
           Text(
             label,
-            style: const TextStyle(
-              color: AppColors.textMuted,
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodySmall?.color,
               fontSize: 11,
               fontWeight: FontWeight.w600,
             ),

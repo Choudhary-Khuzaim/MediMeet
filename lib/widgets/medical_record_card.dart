@@ -85,7 +85,7 @@ class MedicalRecordCard extends StatelessWidget {
                                   'Dr. ${record.doctorName}',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: AppColors.textSecondary,
+                                    color: Theme.of(context).textTheme.bodyMedium?.color,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),

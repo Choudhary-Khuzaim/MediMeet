@@ -75,19 +75,19 @@ class HelpCenterScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     localizations.helpCenter,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.displayMedium?.color,
                       letterSpacing: -0.5,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     localizations.helpIntro,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                       height: 1.5,
                     ),
                   ),
@@ -152,18 +152,18 @@ class HelpCenterScreen extends StatelessWidget {
                         children: [
                           Text(
                             channel.title,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
+                              color: Theme.of(context).textTheme.titleMedium?.color,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             channel.subtitle,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 14,
-                              color: AppColors.textSecondary,
+                              color: Theme.of(context).textTheme.bodyMedium?.color,
                             ),
                           ),
                         ],
@@ -204,18 +204,18 @@ class HelpCenterScreen extends StatelessWidget {
                   children: [
                     Text(
                       faq.question,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.titleMedium?.color,
                       ),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       faq.answer,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         height: 1.5,
                       ),
                     ),

@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appointmentProvider = Provider.of<AppointmentProvider>(context);
+    final localizations = AppLocalizations.of(context)!;
 
     final upcomingAppointments = appointmentProvider.upcomingAppointments;
     final doctors = DoctorService.getDoctors().take(3).toList();
@@ -64,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 TextSpan(
                                   text: 'Medi',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.w900,
                                     color: AppColors.primary,
@@ -97,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             child: Text(
                               'HEALTHCARE COMPANION',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.primary,
@@ -118,6 +119,7 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
                                 color: Theme.of(context).dividerColor,
+                                width: 1.5,
                               ),
                             ),
                             child: Icon(
@@ -159,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 12),
                           Text(
-                            'Search doctors, clinics...',
+                            localizations.search,
                             style: TextStyle(
                               color: Theme.of(
                                 context,
@@ -202,7 +204,10 @@ class HomeScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(26, 32, 26, 12),
-              child: _SectionHeader(title: 'Quick Actions', onSeeAll: () {}),
+              child: _SectionHeader(
+                title: localizations.quickActions,
+                onSeeAll: () {},
+              ),
             ).animate().fadeIn(delay: 500.ms),
           ),
 
@@ -218,7 +223,7 @@ class HomeScreen extends StatelessWidget {
               delegate: SliverChildListDelegate([
                 _ServiceCard(
                       icon: Icons.person_search_rounded,
-                      label: 'Find Doctors',
+                      label: localizations.doctors,
                       subtitle: '500+ Experts',
                       color: AppColors.primary,
                       onTap: () => Navigator.push(
@@ -233,7 +238,7 @@ class HomeScreen extends StatelessWidget {
                     .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
                       icon: Icons.event_available_rounded,
-                      label: 'My Bookings',
+                      label: localizations.appointments,
                       subtitle: 'Easy Schedule',
                       color: AppColors.secondary,
                       onTap: () => Navigator.push(
@@ -248,7 +253,7 @@ class HomeScreen extends StatelessWidget {
                     .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
                       icon: Icons.history_edu_rounded,
-                      label: 'Health Records',
+                      label: localizations.records,
                       subtitle: 'Access Digitally',
                       color: AppColors.accent,
                       onTap: () => Navigator.push(
@@ -297,7 +302,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: _SectionHeader(title: 'Specialties'),
+                    child: _SectionHeader(title: localizations.specialization),
                   ),
                   const SizedBox(height: 18),
                   SizedBox(
@@ -386,7 +391,7 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
                 child: _SectionHeader(
-                  title: 'Upcoming Schedule',
+                  title: localizations.upcomingAppointments,
                   onSeeAll: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -422,7 +427,7 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
               child: _SectionHeader(
-                title: 'Top Rated Doctors',
+                title: localizations.doctors,
                 onSeeAll: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -535,9 +540,9 @@ class _SectionHeader extends StatelessWidget {
         if (onSeeAll != null)
           TextButton(
             onPressed: onSeeAll,
-            child: const Text(
-              'See All',
-              style: TextStyle(
+            child: Text(
+              AppLocalizations.of(context)?.viewAll ?? 'See All',
+              style: const TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
               ),
@@ -932,19 +937,19 @@ class _AppointmentPreviewCard extends StatelessWidget {
                     children: [
                       Text(
                         appointment.doctorName,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                          color: Theme.of(context).textTheme.titleMedium?.color,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         appointment.doctorSpecialty,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: AppColors.textMuted,
+                          color: Theme.of(context).textTheme.bodySmall?.color,
                         ),
                       ),
                     ],
@@ -981,10 +986,10 @@ class _AppointmentPreviewCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     DateFormat('MMM dd, yyyy').format(appointment.dateTime),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                     ),
                   ),
                   const Spacer(),
@@ -998,10 +1003,10 @@ class _AppointmentPreviewCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     DateFormat('hh:mm a').format(appointment.dateTime),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                     ),
                   ),
                 ],

@@ -55,6 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -121,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     // Welcome Text
                     Text(
-                      'Welcome Back to\nMedimeet',
+                      localizations.welcomeBack,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         fontSize: 34,
                         color: Theme.of(context).textTheme.displayLarge?.color,
@@ -132,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 16),
 
                     Text(
-                      'Your premium health companion is ready. Log in to access your dashboard.',
+                      localizations.welcomeMessage,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Theme.of(context).textTheme.bodyMedium?.color,
                         fontSize: 15,
@@ -144,16 +146,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Input Fields
                     _buildPremiumField(
                       controller: _emailController,
-                      label: 'Email Address',
+                      label: localizations.email,
                       hint: 'name@example.com',
                       icon: Icons.alternate_email_rounded,
                       validator: (v) {
-                        if (v == null || v.isEmpty) return 'Enter your email';
+                        if (v == null || v.isEmpty) return localizations.feedbackEmailError;
                         final emailRegex = RegExp(
                           r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );
                         if (!emailRegex.hasMatch(v) && v != 'admin') {
-                          return 'Enter a valid email address';
+                          return localizations.feedbackEmailInvalid;
                         }
                         return null;
                       },
@@ -163,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     _buildPremiumField(
                       controller: _passwordController,
-                      label: 'Security Password',
+                      label: localizations.password,
                       hint: '••••••••',
                       icon: Icons.lock_outline_rounded,
                       isPassword: true,
@@ -171,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onToggle: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
                       validator: (v) =>
-                          v!.isEmpty ? 'Enter your password' : null,
+                          v!.isEmpty ? localizations.password : null,
                     ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
                     Align(
@@ -183,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             builder: (_) => const ForgotPasswordScreen(),
                           ),
                         ),
-                        child: const Text('Forgot Password?'),
+                        child: Text(localizations.forgotPassword),
                       ),
                     ).animate().fadeIn(delay: 800.ms),
 
@@ -206,9 +208,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : const Text(
-                                'Sign In',
-                                style: TextStyle(
+                            : Text(
+                                localizations.login,
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -274,16 +276,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: RichText(
                           text: TextSpan(
-                            text: "Don't have an account? ",
+                            text: "${localizations.dontHaveAccount} ",
                             style: TextStyle(
                               color: Theme.of(
                                 context,
                               ).textTheme.bodyMedium?.color,
                             ),
-                            children: const [
+                            children: [
                               TextSpan(
-                                text: 'Join Medimeet',
-                                style: TextStyle(
+                                text: localizations.signup,
+                                style: const TextStyle(
                                   color: AppColors.primary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,

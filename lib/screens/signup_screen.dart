@@ -59,6 +59,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -102,8 +104,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             BoxShadow(
                               color: Colors.black.withOpacity(Theme.of(context).brightness ==
                                         Brightness.dark
-                                    ? 0.2
-                                    : 0.03,
+                                     ? 0.2
+                                     : 0.03,
                               ),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
@@ -120,7 +122,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                     const SizedBox(height: 30),
                     Text(
-                      'Create Your\nAccount',
+                      localizations.signup,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         fontSize: 34,
                         color: Theme.of(context).textTheme.displayLarge?.color,
@@ -130,7 +132,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                     const SizedBox(height: 12),
                     Text(
-                      'Join thousands of users who trust Medimeet for their healthcare needs.',
+                      localizations.welcomeMessage,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Theme.of(context).textTheme.bodyMedium?.color,
                         fontSize: 15,
@@ -142,25 +144,26 @@ class _SignupScreenState extends State<SignupScreen> {
                     // Input Fields
                     _buildInputField(
                       controller: _nameController,
-                      label: 'Full Name',
+                      label: localizations.fullName,
                       hint: 'John Doe',
                       icon: Icons.person_outline_rounded,
+                      validator: (v) => v!.isEmpty ? localizations.feedbackNameError : null,
                     ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 20),
                     _buildInputField(
                       controller: _emailController,
-                      label: 'Email Address',
+                      label: localizations.email,
                       hint: 'name@example.com',
                       icon: Icons.alternate_email_rounded,
                       type: TextInputType.emailAddress,
                       validator: (v) {
-                        if (v == null || v.isEmpty) return 'Enter your email';
+                        if (v == null || v.isEmpty) return localizations.feedbackEmailError;
                         final emailRegex = RegExp(
                           r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );
                         if (!emailRegex.hasMatch(v)) {
-                          return 'Enter a valid email address';
+                          return localizations.feedbackEmailInvalid;
                         }
                         return null;
                       },
@@ -169,26 +172,28 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(height: 20),
                     _buildInputField(
                       controller: _phoneController,
-                      label: 'Phone Number',
+                      label: localizations.phone,
                       hint: '+1 234 567 890',
                       icon: Icons.phone_android_rounded,
                       type: TextInputType.phone,
+                      validator: (v) => v!.isEmpty ? localizations.phoneNumber : null,
                     ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 20),
                     _buildInputField(
                       controller: _passwordController,
-                      label: 'Security Password',
+                      label: localizations.password,
                       hint: '••••••••',
                       icon: Icons.lock_outline_rounded,
                       isPass: true,
                       obscure: _obscurePassword,
                       onToggle: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
+                      validator: (v) => v!.isEmpty ? localizations.password : null,
                     ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 24),
-                    _buildTermsCheck().animate().fadeIn(delay: 900.ms),
+                    _buildTermsCheck(localizations.termsOfService).animate().fadeIn(delay: 900.ms),
 
                     const SizedBox(height: 40),
 
@@ -209,9 +214,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : const Text(
-                                'Create Account',
-                                style: TextStyle(
+                            : Text(
+                                localizations.signup,
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -226,7 +231,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         onTap: () => Navigator.pop(context),
                         child: RichText(
                           text: TextSpan(
-                            text: 'Already have an account? ',
+                            text: "${localizations.alreadyHaveAccount} ",
                             style: TextStyle(
                               color: Theme.of(
                                 context,
@@ -234,8 +239,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             children: [
                               TextSpan(
-                                text: 'Sign In',
-                                style: TextStyle(
+                                text: localizations.login,
+                                style: const TextStyle(
                                   color: AppColors.primary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -309,7 +314,7 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _buildTermsCheck() {
+  Widget _buildTermsCheck(String termsLabel) {
     return InkWell(
       onTap: () => setState(() => _agreeToTerms = !_agreeToTerms),
       borderRadius: BorderRadius.circular(12),
@@ -349,7 +354,7 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'I agree to the Terms of Service and Privacy Policy',
+                'I agree to the $termsLabel',
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium?.color,
                   fontSize: 13,
