@@ -47,8 +47,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   _SwitchTile(
                     icon: Icons.notifications_outlined,
-                    title: 'Push Notifications',
-                    subtitle: 'Receive push notifications',
+                    title: localizations.notifications,
+                    subtitle: localizations.notificationsSubtitle,
                     value: _notificationsEnabled,
                     onChanged: (value) {
                       setState(() {
@@ -125,7 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
               child: _SettingsSection(
-                title: 'Account',
+                title: localizations.account,
                 children: [
                   _ListTile(
                     icon: Icons.lock_outline_rounded,
@@ -143,7 +143,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _ListTile(
                     icon: Icons.privacy_tip_outlined,
                     title: localizations.privacyPolicy,
-                    subtitle: localizations.privacyIntro,
+                    subtitle: localizations.privacyPolicySubtitle,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -179,7 +179,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _ListTile(
                     icon: Icons.help_outline_rounded,
                     title: localizations.helpCenter,
-                    subtitle: localizations.helpIntro,
+                    subtitle: localizations.helpCenterSubtitle,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -204,7 +204,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   _ListTile(
                     icon: Icons.info_outline_rounded,
-                    title: 'About',
+                    title: localizations.about,
                     subtitle: 'App version 2.3.0',
                     onTap: () {
                       Navigator.push(

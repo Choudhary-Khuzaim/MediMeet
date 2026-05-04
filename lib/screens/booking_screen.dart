@@ -7,6 +7,7 @@ import '../models/doctor.dart';
 import '../models/appointment.dart';
 import '../providers/appointment_provider.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 
 class BookingScreen extends StatefulWidget {
   final Doctor doctor;
@@ -54,10 +55,13 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   void _bookAppointment() {
+    final l10n = AppLocalizations.of(context)!;
+    final messenger = ScaffoldMessenger.of(context);
+
     if (_selectedTime.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please select a preferred time slot'),
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(l10n.selectTimeWarning),
           backgroundColor: AppColors.warning,
           behavior: SnackBarBehavior.floating,
         ),
@@ -66,9 +70,9 @@ class _BookingScreenState extends State<BookingScreen> {
     }
 
     if (_reasonController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please specify the reason for your visit'),
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(l10n.selectReasonWarning),
           backgroundColor: AppColors.warning,
           behavior: SnackBarBehavior.floating,
         ),
@@ -89,7 +93,7 @@ class _BookingScreenState extends State<BookingScreen> {
         parsedTime.minute,
       );
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger.showSnackBar(
         const SnackBar(
           content: Text('Error parsing selected time'),
           backgroundColor: AppColors.error,
@@ -116,11 +120,13 @@ class _BookingScreenState extends State<BookingScreen> {
       listen: false,
     ).addAppointment(appointment);
 
-    // Show success snackbar on the previous screen (Doctor Detail or Home)
+    // Close Screens
     Navigator.pop(context); // Close Booking Screen
-    Navigator.pop(context); // Close Detail Screen
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context); // Close Detail Screen if it exists
+    }
 
-    ScaffoldMessenger.of(context).showSnackBar(
+    messenger.showSnackBar(
       SnackBar(
         content: Row(
           children: [
@@ -128,7 +134,7 @@ class _BookingScreenState extends State<BookingScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'Appointment with ${widget.doctor.name} confirmed!',
+                '${l10n.appointmentConfirmed} (${widget.doctor.name})',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
@@ -139,20 +145,14 @@ class _BookingScreenState extends State<BookingScreen> {
         margin: const EdgeInsets.all(20),
         duration: const Duration(seconds: 4),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        action: SnackBarAction(
-          label: 'VIEW',
-          textColor: Colors.white,
-          onPressed: () {
-            // Logic to navigate to appointments tab could go here
-            // For now, it just closes
-          },
-        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -160,7 +160,7 @@ class _BookingScreenState extends State<BookingScreen> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'Book Appointment',
+          l10n.bookAppointment,
           style: TextStyle(
             color: Theme.of(context).textTheme.titleLarge?.color,
             fontWeight: FontWeight.bold,
@@ -242,7 +242,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ).animate().fadeIn().slideY(begin: 0.2),
 
             const SizedBox(height: 32),
-            _sectionHeader('Select Date'),
+            _sectionHeader(l10n.selectDate),
             const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
@@ -317,7 +317,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2),
 
             const SizedBox(height: 32),
-            _sectionHeader('Select Time Slot'),
+            _sectionHeader(l10n.selectTimeSlot),
             const SizedBox(height: 16),
             Wrap(
               spacing: 12,
@@ -369,22 +369,22 @@ class _BookingScreenState extends State<BookingScreen> {
             ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
 
             const SizedBox(height: 32),
-            _sectionHeader('Reason & Notes'),
+            _sectionHeader(l10n.reasonAndNotes),
             const SizedBox(height: 16),
             TextField(
               controller: _reasonController,
-              decoration: const InputDecoration(
-                hintText: 'Reason for visit (e.g. Health checkup)',
-                prefixIcon: Icon(Icons.info_outline_rounded, size: 20),
+              decoration: InputDecoration(
+                hintText: l10n.reasonHint,
+                prefixIcon: const Icon(Icons.info_outline_rounded, size: 20),
               ),
             ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
             const SizedBox(height: 16),
             TextField(
               controller: _notesController,
               maxLines: 3,
-              decoration: const InputDecoration(
-                hintText: 'Additional notes (Optional)',
-                prefixIcon: Icon(Icons.note_outlined, size: 20),
+              decoration: InputDecoration(
+                hintText: l10n.notesHint,
+                prefixIcon: const Icon(Icons.note_outlined, size: 20),
               ),
             ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
@@ -401,9 +401,9 @@ class _BookingScreenState extends State<BookingScreen> {
                   elevation: 8,
                   shadowColor: AppColors.primary.withOpacity(0.3),
                 ),
-                child: const Text(
-                  'Confirm Appointment',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                child: Text(
+                  l10n.confirmAppointment,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ).animate().fadeIn(delay: 800.ms).scale(),

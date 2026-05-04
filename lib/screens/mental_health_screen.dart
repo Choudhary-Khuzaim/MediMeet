@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 import 'doctors_list_screen.dart';
 
-class MentalHealthScreen extends StatelessWidget {
+class MentalHealthScreen extends StatefulWidget {
   const MentalHealthScreen({super.key});
 
   @override
+  State<MentalHealthScreen> createState() => _MentalHealthScreenState();
+}
+
+class _MentalHealthScreenState extends State<MentalHealthScreen> {
+  String? _selectedMood;
+
+  @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final List<Map<String, dynamic>> categories = [
       {
         'title': 'Anxiety',
@@ -81,9 +90,9 @@ class MentalHealthScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            const Text(
-                              'Inner Peace',
-                              style: TextStyle(
+                            Text(
+                              l10n.innerPeace,
+                              style: const TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -92,7 +101,7 @@ class MentalHealthScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Your mental well-being matters to us',
+                              l10n.mentalWellbeingMsg,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.white.withOpacity(0.9),
@@ -118,18 +127,18 @@ class MentalHealthScreen extends StatelessWidget {
                                   color: Colors.white.withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Row(
+                                child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.psychology_rounded,
                                       color: Colors.white,
                                       size: 20,
                                     ),
-                                    SizedBox(width: 8),
+                                    const SizedBox(width: 8),
                                     Text(
-                                      'Talk to a Specialist',
-                                      style: TextStyle(
+                                      l10n.talkToSpecialist,
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -174,7 +183,7 @@ class MentalHealthScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'How are you feeling today?',
+                        l10n.moodQuestion,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -182,14 +191,39 @@ class MentalHealthScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          _MoodIcon(emoji: '😊', label: 'Happy'),
-                          _MoodIcon(emoji: '😐', label: 'Calm'),
-                          _MoodIcon(emoji: '😔', label: 'Sad'),
-                          _MoodIcon(emoji: '😫', label: 'Stressed'),
-                          _MoodIcon(emoji: '😴', label: 'Tired'),
+                          _MoodIcon(
+                            emoji: '😊',
+                            label: 'Happy',
+                            isSelected: _selectedMood == 'Happy',
+                            onTap: () => setState(() => _selectedMood = 'Happy'),
+                          ),
+                          _MoodIcon(
+                            emoji: '😐',
+                            label: 'Calm',
+                            isSelected: _selectedMood == 'Calm',
+                            onTap: () => setState(() => _selectedMood = 'Calm'),
+                          ),
+                          _MoodIcon(
+                            emoji: '😔',
+                            label: 'Sad',
+                            isSelected: _selectedMood == 'Sad',
+                            onTap: () => setState(() => _selectedMood = 'Sad'),
+                          ),
+                          _MoodIcon(
+                            emoji: '😫',
+                            label: 'Stressed',
+                            isSelected: _selectedMood == 'Stressed',
+                            onTap: () => setState(() => _selectedMood = 'Stressed'),
+                          ),
+                          _MoodIcon(
+                            emoji: '😴',
+                            label: 'Tired',
+                            isSelected: _selectedMood == 'Tired',
+                            onTap: () => setState(() => _selectedMood = 'Tired'),
+                          ),
                         ],
                       ),
                     ],
@@ -218,27 +252,27 @@ class MentalHealthScreen extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.lightbulb_rounded,
                       color: Color(0xFF4361EE),
                       size: 30,
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Daily Mindfulness',
-                            style: TextStyle(
+                            l10n.dailyMindfulness,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                               color: Color(0xFF4361EE),
                             ),
                           ),
-                          SizedBox(height: 2),
+                          const SizedBox(height: 2),
                           Text(
-                            'Take 5 deep breaths and focus on the present moment.',
+                            l10n.mindfulnessTip,
                             style: TextStyle(
                               fontSize: 13,
                               color: Theme.of(context).textTheme.bodyMedium?.color,
@@ -258,7 +292,7 @@ class MentalHealthScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
-                'Browse Categories',
+                l10n.browseCategories,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -344,7 +378,7 @@ class MentalHealthScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Recommended Therapists',
+                    l10n.recommendedTherapists,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -360,9 +394,9 @@ class MentalHealthScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const Text(
-                      'See All',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.viewAll,
+                      style: const TextStyle(
                         color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                       ),
@@ -377,21 +411,23 @@ class MentalHealthScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                const _TherapistCard(
+                _TherapistCard(
                   name: 'Dr. Sarah Ahmed',
                   expertise: 'Clinical Psychologist',
                   rating: '4.9',
                   reviews: '120',
                   image:
                       'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&h=200&fit=crop',
+                  l10n: l10n,
                 ),
-                const _TherapistCard(
+                _TherapistCard(
                   name: 'Prof. Faisal Khan',
                   expertise: 'Psychiatrist',
                   rating: '4.8',
                   reviews: '85',
                   image:
                       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop',
+                  l10n: l10n,
                 ),
               ]),
             ),
@@ -405,24 +441,50 @@ class MentalHealthScreen extends StatelessWidget {
 class _MoodIcon extends StatelessWidget {
   final String emoji;
   final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  const _MoodIcon({required this.emoji, required this.label});
+  const _MoodIcon({
+    required this.emoji,
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(emoji, style: const TextStyle(fontSize: 28)),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 10,
-            color: Theme.of(context).textTheme.bodySmall?.color,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? AppColors.primary.withOpacity(0.1)
+                  : Colors.transparent,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: isSelected ? AppColors.primary : Colors.transparent,
+                width: 2,
+              ),
+            ),
+            child: Text(emoji, style: const TextStyle(fontSize: 28)),
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              color: isSelected
+                  ? AppColors.primary
+                  : Theme.of(context).textTheme.bodySmall?.color,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -433,6 +495,7 @@ class _TherapistCard extends StatelessWidget {
   final String rating;
   final String reviews;
   final String image;
+  final AppLocalizations l10n;
 
   const _TherapistCard({
     required this.name,
@@ -440,6 +503,7 @@ class _TherapistCard extends StatelessWidget {
     required this.rating,
     required this.reviews,
     required this.image,
+    required this.l10n,
   });
 
   @override
@@ -546,9 +610,9 @@ class _TherapistCard extends StatelessWidget {
                 color: AppColors.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text(
-                'Book',
-                style: TextStyle(
+              child: Text(
+                l10n.book,
+                style: const TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 12,

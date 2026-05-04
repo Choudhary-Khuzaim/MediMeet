@@ -1,11 +1,73 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
+import 'doctors_list_screen.dart';
 
-class HomeCareScreen extends StatelessWidget {
+class HomeCareScreen extends StatefulWidget {
   const HomeCareScreen({super.key});
 
   @override
+  State<HomeCareScreen> createState() => _HomeCareScreenState();
+}
+
+class _HomeCareScreenState extends State<HomeCareScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
+  final List<Map<String, dynamic>> _allServices = [
+    {
+      'title': 'General Nursing',
+      'desc': 'Injections, wound dressing, and routine check-ups at home.',
+      'price': 'Rs. 1,500 / Visit',
+      'icon': Icons.person_add_alt_1_rounded,
+      'color': Colors.blue,
+      'category': 'Nursing',
+    },
+    {
+      'title': 'Physiotherapy',
+      'desc': 'Specialized exercises for recovery and pain relief.',
+      'price': 'Rs. 2,500 / Session',
+      'icon': Icons.accessibility_new_rounded,
+      'color': Colors.orange,
+      'category': 'Physiotherapist',
+    },
+    {
+      'title': 'Elderly Companion',
+      'desc': 'Dedicated care and assistance for senior citizens.',
+      'price': 'Rs. 3,000 / Day',
+      'icon': Icons.elderly_rounded,
+      'color': Colors.green,
+      'category': 'Caregiver',
+    },
+    {
+      'title': 'Post-Surgery Care',
+      'desc': 'Intensive monitoring and support after major operations.',
+      'price': 'Rs. 5,000 / Day',
+      'icon': Icons.healing_rounded,
+      'color': Colors.red,
+      'category': 'Nursing',
+    },
+  ];
+
+  List<Map<String, dynamic>> get _filteredServices {
+    if (_searchQuery.isEmpty) return _allServices;
+    return _allServices
+        .where((s) =>
+            s['title'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
+            s['desc'].toLowerCase().contains(_searchQuery.toLowerCase()))
+        .toList();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
@@ -48,9 +110,9 @@ class HomeCareScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            const Text(
-                              'Home Care',
-                              style: TextStyle(
+                            Text(
+                              l10n.homeCare,
+                              style: const TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -59,7 +121,7 @@ class HomeCareScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Professional medical care where you feel most comfortable.',
+                              l10n.homeCareMsg,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.white.withOpacity(0.8),
@@ -99,15 +161,17 @@ class HomeCareScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(Icons.search_rounded, color: AppColors.textMuted),
-                      SizedBox(width: 12),
+                      const Icon(Icons.search_rounded, color: AppColors.textMuted),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: TextField(
+                          controller: _searchController,
+                          onChanged: (val) => setState(() => _searchQuery = val),
                           decoration: InputDecoration(
-                            hintText: 'Search for home services...',
-                            hintStyle: TextStyle(
+                            hintText: l10n.searchHomeServices,
+                            hintStyle: const TextStyle(
                               color: AppColors.textMuted,
                               fontSize: 14,
                             ),
@@ -155,7 +219,7 @@ class HomeCareScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Trusted Professionals',
+                            l10n.trustedProfessionals,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -165,7 +229,7 @@ class HomeCareScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'All our caregivers are background checked and certified.',
+                            l10n.trustedProfessionalsDesc,
                             style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(
@@ -187,7 +251,7 @@ class HomeCareScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               child: Text(
-                'Available Services',
+                l10n.availableServices,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -199,40 +263,35 @@ class HomeCareScreen extends StatelessWidget {
 
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                const _ModernHomeCareCard(
-                  title: 'General Nursing',
-                  desc:
-                      'Injections, wound dressing, and routine check-ups at home.',
-                  price: 'Rs. 1,500 / Visit',
-                  icon: Icons.person_add_alt_1_rounded,
-                  color: Colors.blue,
-                ),
-                const _ModernHomeCareCard(
-                  title: 'Physiotherapy',
-                  desc: 'Specialized exercises for recovery and pain relief.',
-                  price: 'Rs. 2,500 / Session',
-                  icon: Icons.accessibility_new_rounded,
-                  color: Colors.orange,
-                ),
-                const _ModernHomeCareCard(
-                  title: 'Elderly Companion',
-                  desc: 'Dedicated care and assistance for senior citizens.',
-                  price: 'Rs. 3,000 / Day',
-                  icon: Icons.elderly_rounded,
-                  color: Colors.green,
-                ),
-                const _ModernHomeCareCard(
-                  title: 'Post-Surgery Care',
-                  desc:
-                      'Intensive monitoring and support after major operations.',
-                  price: 'Rs. 5,000 / Day',
-                  icon: Icons.healing_rounded,
-                  color: Colors.red,
-                ),
-              ]),
-            ),
+            sliver: _filteredServices.isEmpty
+                ? SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(40),
+                      child: Center(
+                        child: Text(
+                          l10n.noRecords,
+                          style: const TextStyle(color: AppColors.textMuted),
+                        ),
+                      ),
+                    ),
+                  )
+                : SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final service = _filteredServices[index];
+                        return _ModernHomeCareCard(
+                          title: service['title'],
+                          desc: service['desc'],
+                          price: service['price'],
+                          icon: service['icon'],
+                          color: service['color'],
+                          category: service['category'],
+                          l10n: l10n,
+                        );
+                      },
+                      childCount: _filteredServices.length,
+                    ),
+                  ),
           ),
         ],
       ),
@@ -246,6 +305,8 @@ class _ModernHomeCareCard extends StatelessWidget {
   final String price;
   final IconData icon;
   final Color color;
+  final String category;
+  final AppLocalizations l10n;
 
   const _ModernHomeCareCard({
     required this.title,
@@ -253,6 +314,8 @@ class _ModernHomeCareCard extends StatelessWidget {
     required this.price,
     required this.icon,
     required this.color,
+    required this.category,
+    required this.l10n,
   });
 
   @override
@@ -326,35 +389,48 @@ class _ModernHomeCareCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Theme.of(context).dividerColor.withOpacity(0.05)
-                  : AppColors.surfaceMuted.withOpacity(0.5),
-              borderRadius: const BorderRadius.vertical(
-                bottom: Radius.circular(24),
+          InkWell(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DoctorsListScreen(
+                  initialCategory: category,
+                ),
               ),
             ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.calendar_month_rounded,
-                  size: 16,
-                  color: AppColors.primary,
+            borderRadius: const BorderRadius.vertical(
+              bottom: Radius.circular(24),
+            ),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Theme.of(context).dividerColor.withOpacity(0.05)
+                    : AppColors.surfaceMuted.withOpacity(0.5),
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(24),
                 ),
-                SizedBox(width: 8),
-                Text(
-                  'Book Appointment',
-                  style: TextStyle(
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.calendar_month_rounded,
+                    size: 16,
                     color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
                   ),
-                ),
-              ],
+                  const SizedBox(width: 8),
+                  Text(
+                    l10n.bookAppointment,
+                    style: const TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

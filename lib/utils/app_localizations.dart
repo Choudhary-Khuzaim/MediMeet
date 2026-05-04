@@ -276,6 +276,66 @@ class AppLocalizations {
       ? 'شرائط کے بارے میں سوالات کے لیے legal@medimeet.pk پر رابطہ کریں۔'
       : 'For questions about these terms, contact legal@medimeet.pk.';
 
+  // Mental Health
+  String get mentalHealth => _isUrdu ? 'ذہنی صحت' : 'Mental Health';
+  String get innerPeace => _isUrdu ? 'دلی سکون' : 'Inner Peace';
+  String get mentalWellbeingMsg => _isUrdu
+      ? 'آپ کی ذہنی صحت ہمارے لیے اہم ہے'
+      : 'Your mental well-being matters to us';
+  String get talkToSpecialist =>
+      _isUrdu ? 'ماہر سے بات کریں' : 'Talk to a Specialist';
+  String get moodQuestion => _isUrdu ? 'آج آپ کیسا محسوس کر رہے ہیں؟' : 'How are you feeling today?';
+  String get dailyMindfulness => _isUrdu ? 'روزانہ کی توجہ' : 'Daily Mindfulness';
+  String get mindfulnessTip => _isUrdu
+      ? '5 گہری سانسیں لیں اور موجودہ لمحے پر توجہ دیں۔'
+      : 'Take 5 deep breaths and focus on the present moment.';
+  String get browseCategories => _isUrdu ? 'زمرہ جات دیکھیں' : 'Browse Categories';
+  String get recommendedTherapists => _isUrdu ? 'تجویز کردہ معالج' : 'Recommended Therapists';
+  String get book => _isUrdu ? 'بک کریں' : 'Book';
+
+  // Home Care
+  String get homeCare => _isUrdu ? 'ہوم کیئر' : 'Home Care';
+  String get homeCareMsg => _isUrdu
+      ? 'پیشہ ورانہ طبی دیکھ بھال وہاں جہاں آپ سب سے زیادہ آرام دہ محسوس کریں۔'
+      : 'Professional medical care where you feel most comfortable.';
+  String get searchHomeServices =>
+      _isUrdu ? 'ہوم سروسز تلاش کریں...' : 'Search for home services...';
+  String get trustedProfessionals => _isUrdu ? 'قابل اعتماد پیشہ ور افراد' : 'Trusted Professionals';
+  String get trustedProfessionalsDesc => _isUrdu
+      ? 'ہمارے تمام دیکھ بھال کرنے والے تصدیق شدہ ہیں۔'
+      : 'All our caregivers are background checked and certified.';
+  String get availableServices => _isUrdu ? 'دستیاب خدمات' : 'Available Services';
+
+  // Booking
+  String get reasonAndNotes => _isUrdu ? 'وجہ اور نوٹس' : 'Reason & Notes';
+  String get reasonHint => _isUrdu ? 'دورے کی وجہ (مثلاً چیک اپ)' : 'Reason for visit (e.g. Health checkup)';
+  String get notesHint => _isUrdu ? 'اضافی نوٹس (اختیاری)' : 'Additional notes (Optional)';
+  String get confirmAppointment => _isUrdu ? 'اپائنٹمنٹ کی تصدیق کریں' : 'Confirm Appointment';
+  String get selectTimeWarning => _isUrdu ? 'براہ کرم وقت منتخب کریں' : 'Please select a preferred time slot';
+  String get selectReasonWarning => _isUrdu ? 'براہ کرم دورے کی وجہ بتائیں' : 'Please specify the reason for your visit';
+  String get appointmentConfirmed => _isUrdu ? 'اپائنٹمنٹ کنفرم ہو گئی!' : 'Appointment confirmed!';
+
+  // Health Stats
+  String get bloodGroupTitle => _isUrdu ? 'بلڈ گروپ' : 'Blood';
+  String get heightTitle => _isUrdu ? 'قد' : 'Height';
+  String get weightTitle => _isUrdu ? 'وزن' : 'Weight';
+
+  // Sections
+  String get accountSettings => _isUrdu ? 'اکاؤنٹ کی ترتیبات' : 'ACCOUNT SETTINGS';
+  String get preferences => _isUrdu ? 'ترجیحات' : 'PREFERENCES';
+  String get supportAndMore => _isUrdu ? 'سپورٹ اور مزید' : 'SUPPORT & MORE';
+
+  // Profile
+  String get personalInfoSubtitle => _isUrdu ? 'نام، ای میل، فون نمبر' : 'Name, Email, Phone Number';
+  String get notificationsSubtitle => _isUrdu ? 'الرٹس اور یاد دہانیاں' : 'Alerts & Reminders';
+  String get recordsSubtitle => _isUrdu ? 'تشخیص اور پرانی ملاقاتیں' : 'Diagnoses & Past Visits';
+  String get appearance => _isUrdu ? 'ظاہری شکل' : 'Appearance';
+  String get appearanceSubtitle => _isUrdu ? 'تھیم، ڈارک موڈ' : 'Theme, Dark Mode';
+  String get helpCenterSubtitle => _isUrdu ? 'سوالات اور سپورٹ' : 'FAQ & Contact Support';
+  String get privacyPolicySubtitle => _isUrdu ? 'ڈیٹا کی حفاظت' : 'How we handle your data';
+  String get logOutSession => _isUrdu ? 'سیشن ختم کریں' : 'Log Out Session';
+  String get signOutConfirm => _isUrdu ? 'کیا آپ واقعی سیشن ختم کرنا چاہتے ہیں؟' : 'Are you sure you want to end your medical session?';
+
   bool get _isUrdu => locale.languageCode == 'ur';
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 import '../providers/auth_provider.dart';
 import 'settings_screen.dart';
 import 'notifications_screen.dart';
@@ -19,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final authProvider = Provider.of<AuthProvider>(context);
     final String userName = authProvider.userName ?? 'Khuzaim Sajjad';
     final String userEmail = authProvider.userEmail ?? 'khuzaim@medimeet.pk';
@@ -116,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               radius: 50,
                               backgroundColor: AppColors.primaryLight,
                               child: Text(
-                                userName[0].toUpperCase(),
+                                userName.isNotEmpty ? userName[0].toUpperCase() : 'U',
                                 style: const TextStyle(
                                   fontSize: 40,
                                   fontWeight: FontWeight.w900,
@@ -188,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Row(
                     children: [
                       _healthCard(
-                        'Blood',
+                        l10n.bloodGroupTitle,
                         'O+',
                         Icons.water_drop_rounded,
                         Colors.red,
@@ -197,7 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       const SizedBox(width: 12),
                       _healthCard(
-                        'Height',
+                        l10n.heightTitle,
                         '178 cm',
                         Icons.height_rounded,
                         Colors.blue,
@@ -206,7 +208,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       const SizedBox(width: 12),
                       _healthCard(
-                        'Weight',
+                        l10n.weightTitle,
                         '72 kg',
                         Icons.monitor_weight_rounded,
                         Colors.green,
@@ -220,12 +222,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 32),
 
                 // Account Menu
-                _buildSectionHeader('ACCOUNT SETTINGS', context),
+                _buildSectionHeader(l10n.accountSettings, context),
                 _buildMenuContainer([
                   _menuItem(
                     icon: Icons.person_outline_rounded,
-                    title: 'Personal Information',
-                    subtitle: 'Name, Email, Phone Number',
+                    title: l10n.personalInformation,
+                    subtitle: l10n.personalInfoSubtitle,
                     color: Colors.blue,
                     index: 0,
                     context: context,
@@ -238,8 +240,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   _menuItem(
                     icon: Icons.notifications_none_rounded,
-                    title: 'Notifications',
-                    subtitle: 'Alerts & Reminders',
+                    title: l10n.notifications,
+                    subtitle: l10n.notificationsSubtitle,
                     color: Colors.orange,
                     index: 1,
                     context: context,
@@ -252,8 +254,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   _menuItem(
                     icon: Icons.history_edu_rounded,
-                    title: 'Medical Records',
-                    subtitle: 'Diagnoses & Past Visits',
+                    title: l10n.records,
+                    subtitle: l10n.recordsSubtitle,
                     color: Colors.teal,
                     index: 2,
                     context: context,
@@ -269,12 +271,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 24),
 
                 // Preferences Menu
-                _buildSectionHeader('PREFERENCES', context),
+                _buildSectionHeader(l10n.preferences, context),
                 _buildMenuContainer([
                   _menuItem(
                     icon: Icons.palette_outlined,
-                    title: 'Appearance',
-                    subtitle: 'Theme, Dark Mode',
+                    title: l10n.appearance,
+                    subtitle: l10n.appearanceSubtitle,
                     color: Colors.purple,
                     index: 0,
                     context: context,
@@ -287,8 +289,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   _menuItem(
                     icon: Icons.translate_rounded,
-                    title: 'Language',
-                    subtitle: 'English (US)',
+                    title: l10n.language,
+                    subtitle: Localizations.localeOf(context).languageCode == 'ur' ? 'اردو' : 'English',
                     color: Colors.indigo,
                     index: 1,
                     context: context,
@@ -304,12 +306,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 24),
 
                 // Support & More
-                _buildSectionHeader('SUPPORT & MORE', context),
+                _buildSectionHeader(l10n.supportAndMore, context),
                 _buildMenuContainer([
                   _menuItem(
                     icon: Icons.help_outline_rounded,
-                    title: 'Help Center',
-                    subtitle: 'FAQ & Contact Support',
+                    title: l10n.helpCenter,
+                    subtitle: l10n.helpCenterSubtitle,
                     color: Colors.amber,
                     index: 0,
                     context: context,
@@ -322,8 +324,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   _menuItem(
                     icon: Icons.policy_outlined,
-                    title: 'Privacy Policy',
-                    subtitle: 'How we handle your data',
+                    title: l10n.privacyPolicy,
+                    subtitle: l10n.privacyPolicySubtitle,
                     color: Colors.green,
                     index: 1,
                     context: context,
@@ -342,7 +344,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: InkWell(
-                    onTap: () => _showLogoutDialog(context),
+                    onTap: () => _showLogoutDialog(context, l10n),
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 18),
@@ -353,18 +355,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: AppColors.error.withOpacity(0.1),
                         ),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.logout_rounded,
                             color: AppColors.error,
                             size: 22,
                           ),
-                          SizedBox(width: 12),
+                          const SizedBox(width: 12),
                           Text(
-                            'Log Out Session',
-                            style: TextStyle(
+                            l10n.logOutSession,
+                            style: const TextStyle(
                               color: AppColors.error,
                               fontSize: 16,
                               fontWeight: FontWeight.w900,
@@ -528,17 +530,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ).animate(delay: (index * 100).ms).fadeIn(delay: 600.ms);
   }
 
-  void _showLogoutDialog(BuildContext context) {
+  void _showLogoutDialog(BuildContext context, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-        title: const Text(
-          'Sign Out',
-          style: TextStyle(fontWeight: FontWeight.w900),
+        title: Text(
+          l10n.logout,
+          style: const TextStyle(fontWeight: FontWeight.w900),
         ),
         content: Text(
-          'Are you sure you want to end your medical session? You will need to login again to access your records.',
+          l10n.signOutConfirm,
           style: TextStyle(
             color: Theme.of(context).textTheme.bodyMedium?.color,
             height: 1.5,
@@ -548,7 +550,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Cancel',
+              l10n.cancel,
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodySmall?.color,
                 fontWeight: FontWeight.bold,
@@ -574,9 +576,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text(
-                'Sign Out',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              child: Text(
+                l10n.logout,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ),
