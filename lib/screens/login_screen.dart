@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medimeet/utils/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../utils/app_colors.dart';
@@ -102,7 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(
-                                  Theme.of(context).brightness == Brightness.dark
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
                                       ? 0.2
                                       : 0.03,
                                 ),
@@ -125,10 +127,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       localizations.welcomeBack,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 34,
-                        color: Theme.of(context).textTheme.displayLarge?.color,
-                        height: 1.1,
-                      ),
+                            fontSize: 34,
+                            color:
+                                Theme.of(context).textTheme.displayLarge?.color,
+                            height: 1.1,
+                          ),
                     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.3),
 
                     const SizedBox(height: 16),
@@ -136,9 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       localizations.welcomeMessage,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Theme.of(context).textTheme.bodyMedium?.color,
-                        fontSize: 15,
-                      ),
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
+                            fontSize: 15,
+                          ),
                     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3),
 
                     const SizedBox(height: 48),
@@ -150,7 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: 'name@example.com',
                       icon: Icons.alternate_email_rounded,
                       validator: (v) {
-                        if (v == null || v.isEmpty) return localizations.feedbackEmailError;
+                        if (v == null || v.isEmpty)
+                          return localizations.feedbackEmailError;
                         final emailRegex = RegExp(
                           r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );
@@ -228,14 +233,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
                             'OR USE SOCIALS',
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  letterSpacing: 2,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(
-                                    context,
-                                  ).textTheme.bodySmall?.color,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(
+                                        context,
+                                      ).textTheme.bodySmall?.color,
+                                    ),
                           ),
                         ),
                         const Expanded(child: Divider()),
@@ -385,9 +390,7 @@ class _LoginScreenState extends State<LoginScreen> {
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(
-                  Theme.of(context).brightness == Brightness.dark
-                      ? 0.2
-                      : 0.03,
+                  Theme.of(context).brightness == Brightness.dark ? 0.2 : 0.03,
                 ),
                 blurRadius: 10,
                 offset: const Offset(0, 4),

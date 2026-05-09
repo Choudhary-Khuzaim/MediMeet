@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medimeet/utils/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../utils/app_colors.dart';
@@ -102,10 +103,10 @@ class _SignupScreenState extends State<SignupScreen> {
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(Theme.of(context).brightness ==
-                                        Brightness.dark
-                                     ? 0.2
-                                     : 0.03,
+                              color: Colors.black.withOpacity(
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? 0.2
+                                    : 0.03,
                               ),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
@@ -124,19 +125,21 @@ class _SignupScreenState extends State<SignupScreen> {
                     Text(
                       localizations.signup,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 34,
-                        color: Theme.of(context).textTheme.displayLarge?.color,
-                        height: 1.1,
-                      ),
+                            fontSize: 34,
+                            color:
+                                Theme.of(context).textTheme.displayLarge?.color,
+                            height: 1.1,
+                          ),
                     ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.3),
 
                     const SizedBox(height: 12),
                     Text(
                       localizations.welcomeMessage,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Theme.of(context).textTheme.bodyMedium?.color,
-                        fontSize: 15,
-                      ),
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
+                            fontSize: 15,
+                          ),
                     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3),
 
                     const SizedBox(height: 40),
@@ -147,7 +150,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       label: localizations.fullName,
                       hint: 'John Doe',
                       icon: Icons.person_outline_rounded,
-                      validator: (v) => v!.isEmpty ? localizations.feedbackNameError : null,
+                      validator: (v) =>
+                          v!.isEmpty ? localizations.feedbackNameError : null,
                     ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 20),
@@ -158,7 +162,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       icon: Icons.alternate_email_rounded,
                       type: TextInputType.emailAddress,
                       validator: (v) {
-                        if (v == null || v.isEmpty) return localizations.feedbackEmailError;
+                        if (v == null || v.isEmpty)
+                          return localizations.feedbackEmailError;
                         final emailRegex = RegExp(
                           r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );
@@ -176,7 +181,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       hint: '+1 234 567 890',
                       icon: Icons.phone_android_rounded,
                       type: TextInputType.phone,
-                      validator: (v) => v!.isEmpty ? localizations.phoneNumber : null,
+                      validator: (v) =>
+                          v!.isEmpty ? localizations.phoneNumber : null,
                     ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 20),
@@ -189,11 +195,14 @@ class _SignupScreenState extends State<SignupScreen> {
                       obscure: _obscurePassword,
                       onToggle: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
-                      validator: (v) => v!.isEmpty ? localizations.password : null,
+                      validator: (v) =>
+                          v!.isEmpty ? localizations.password : null,
                     ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 24),
-                    _buildTermsCheck(localizations.termsOfService).animate().fadeIn(delay: 900.ms),
+                    _buildTermsCheck(localizations.termsOfService)
+                        .animate()
+                        .fadeIn(delay: 900.ms),
 
                     const SizedBox(height: 40),
 

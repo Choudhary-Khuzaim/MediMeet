@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medimeet/utils/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -43,7 +44,8 @@ class HomeScreen extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                    color: Colors.black.withOpacity(
+                      Theme.of(context).brightness == Brightness.dark
                           ? 0.2
                           : 0.03,
                     ),
@@ -222,62 +224,62 @@ class HomeScreen extends StatelessWidget {
               ),
               delegate: SliverChildListDelegate([
                 _ServiceCard(
-                      icon: Icons.person_search_rounded,
-                      label: localizations.doctors,
-                      subtitle: '500+ Experts',
-                      color: AppColors.primary,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const DoctorsListScreen(),
-                        ),
-                      ),
-                    )
+                  icon: Icons.person_search_rounded,
+                  label: localizations.doctors,
+                  subtitle: '500+ Experts',
+                  color: AppColors.primary,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DoctorsListScreen(),
+                    ),
+                  ),
+                )
                     .animate(delay: 600.ms)
                     .fadeIn()
                     .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
-                      icon: Icons.event_available_rounded,
-                      label: localizations.appointments,
-                      subtitle: 'Easy Schedule',
-                      color: AppColors.secondary,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AppointmentsScreen(),
-                        ),
-                      ),
-                    )
+                  icon: Icons.event_available_rounded,
+                  label: localizations.appointments,
+                  subtitle: 'Easy Schedule',
+                  color: AppColors.secondary,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AppointmentsScreen(),
+                    ),
+                  ),
+                )
                     .animate(delay: 700.ms)
                     .fadeIn()
                     .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
-                      icon: Icons.history_edu_rounded,
-                      label: localizations.records,
-                      subtitle: 'Access Digitally',
-                      color: AppColors.accent,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MedicalRecordsScreen(),
-                        ),
-                      ),
-                    )
+                  icon: Icons.history_edu_rounded,
+                  label: localizations.records,
+                  subtitle: 'Access Digitally',
+                  color: AppColors.accent,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MedicalRecordsScreen(),
+                    ),
+                  ),
+                )
                     .animate(delay: 800.ms)
                     .fadeIn()
                     .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
-                      icon: Icons.storefront_rounded,
-                      label: 'Pharmacy',
-                      subtitle: 'Fast Delivery',
-                      color: AppColors.success,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const PharmacyScreen(),
-                        ),
-                      ),
-                    )
+                  icon: Icons.storefront_rounded,
+                  label: 'Pharmacy',
+                  subtitle: 'Fast Delivery',
+                  color: AppColors.success,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PharmacyScreen(),
+                    ),
+                  ),
+                )
                     .animate(delay: 900.ms)
                     .fadeIn()
                     .scale(begin: const Offset(0.8, 0.8)),
@@ -411,8 +413,8 @@ class HomeScreen extends StatelessWidget {
                   itemCount: upcomingAppointments.take(3).length,
                   itemBuilder: (context, index) {
                     return _AppointmentPreviewCard(
-                          appointment: upcomingAppointments[index],
-                        )
+                      appointment: upcomingAppointments[index],
+                    )
                         .animate(delay: (index * 100).ms)
                         .fadeIn()
                         .slideX(begin: 0.2);
@@ -442,18 +444,17 @@ class HomeScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
               final doctor = doctors[index];
               return Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: DoctorCard(
-                      doctor: doctor,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              DoctorDetailScreen(doctor: doctor),
-                        ),
-                      ),
+                padding: const EdgeInsets.only(bottom: 8),
+                child: DoctorCard(
+                  doctor: doctor,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DoctorDetailScreen(doctor: doctor),
                     ),
-                  )
+                  ),
+                ),
+              )
                   .animate()
                   .fadeIn(delay: (index * 100).ms)
                   .slideY(begin: 0.2, curve: Curves.easeOut);
