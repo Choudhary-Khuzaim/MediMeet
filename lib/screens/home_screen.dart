@@ -208,7 +208,14 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(26, 32, 26, 12),
               child: _SectionHeader(
                 title: localizations.quickActions,
-                onSeeAll: () {},
+                onSeeAll: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('More actions coming soon!'),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                },
               ),
             ).animate().fadeIn(delay: 500.ms),
           ),

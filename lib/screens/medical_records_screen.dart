@@ -87,7 +87,15 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Adding records feature is coming soon!'),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: AppColors.primary,
+            ),
+          );
+        },
         backgroundColor: AppColors.primary,
         elevation: 8,
         label: const Text(

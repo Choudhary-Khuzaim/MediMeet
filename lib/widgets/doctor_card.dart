@@ -157,7 +157,7 @@ class DoctorCard extends StatelessWidget {
                             ),
                             Text(
                               doctor.consultationFee,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.primary,
