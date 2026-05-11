@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 gradient: RadialGradient(
                   colors: [
                     AppColors.primary.withOpacity(0.1),
-                    AppColors.background,
+                    Theme.of(context).scaffoldBackgroundColor,
                   ],
                 ),
               ),
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onToggle: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
                       validator: (v) =>
-                          v!.isEmpty ? localizations.password : null,
+                          v!.isEmpty ? 'Password is required' : null,
                     ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
                     Align(

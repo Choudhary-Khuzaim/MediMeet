@@ -505,7 +505,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          SliverToBoxAdapter(child: SizedBox(height: 100)),
+          const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
@@ -934,7 +934,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundColor: AppColors.background,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     backgroundImage: NetworkImage(appointment.doctorImageUrl),
                   ),
                 ),
@@ -981,7 +981,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: AppColors.background,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Row(

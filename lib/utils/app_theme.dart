@@ -285,8 +285,8 @@ class AppTheme {
         backgroundColor: AppColors.darkSurface,
         indicatorColor: AppColors.primary.withOpacity(0.15),
         elevation: 0,
-        labelTextStyle: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return GoogleFonts.outfit(
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -299,8 +299,8 @@ class AppTheme {
             color: AppColors.darkTextSecondary,
           );
         }),
-        iconTheme: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return const IconThemeData(color: AppColors.primary);
           }
           return const IconThemeData(color: AppColors.darkTextSecondary);

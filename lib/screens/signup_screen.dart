@@ -182,7 +182,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       icon: Icons.phone_android_rounded,
                       type: TextInputType.phone,
                       validator: (v) =>
-                          v!.isEmpty ? localizations.phoneNumber : null,
+                          v!.isEmpty ? 'Phone number is required' : null,
                     ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 20),
@@ -196,7 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       onToggle: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
                       validator: (v) =>
-                          v!.isEmpty ? localizations.password : null,
+                          v!.isEmpty ? 'Password is required' : null,
                     ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 24),
