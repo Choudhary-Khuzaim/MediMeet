@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appointmentProvider = Provider.of<AppointmentProvider>(context);
     final localizations = AppLocalizations.of(context)!;
+    final bool _isUrdu = Localizations.localeOf(context).languageCode == 'ur';
 
     final upcomingAppointments = appointmentProvider.upcomingAppointments;
     final doctors = DoctorService.getDoctors().take(3).toList();
@@ -277,8 +278,8 @@ class HomeScreen extends StatelessWidget {
                     .scale(begin: const Offset(0.8, 0.8)),
                 _ServiceCard(
                   icon: Icons.storefront_rounded,
-                  label: 'Pharmacy',
-                  subtitle: 'Fast Delivery',
+                  label: localizations.pharmacy,
+                  subtitle: localizations.fastDelivery,
                   color: AppColors.success,
                   onTap: () => Navigator.push(
                     context,
@@ -323,7 +324,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         _SpecialtyCard(
                           icon: Icons.favorite_rounded,
-                          label: 'Cardiology',
+                          label: _isUrdu ? 'امراض قلب' : 'Cardiology',
                           color: const Color(0xFFEF4444),
                           onTap: () => Navigator.push(
                             context,
@@ -336,7 +337,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.psychology_rounded,
-                          label: 'Neurology',
+                          label: _isUrdu ? 'اعصابی امراض' : 'Neurology',
                           color: const Color(0xFF8B5CF6),
                           onTap: () => Navigator.push(
                             context,
@@ -349,7 +350,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.child_care_rounded,
-                          label: 'Pediatrics',
+                          label: _isUrdu ? 'بچوں کے امراض' : 'Pediatrics',
                           color: const Color(0xFFF59E0B),
                           onTap: () => Navigator.push(
                             context,
@@ -362,7 +363,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.face_retouching_natural_rounded,
-                          label: 'Dermatology',
+                          label: _isUrdu ? 'جلدی امراض' : 'Dermatology',
                           color: const Color(0xFFEC4899),
                           onTap: () => Navigator.push(
                             context,
@@ -375,7 +376,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.mood_rounded,
-                          label: 'Psychiatry',
+                          label: _isUrdu ? 'ذہنی امراض' : 'Psychiatry',
                           color: const Color(0xFF10B981),
                           onTap: () => Navigator.push(
                             context,

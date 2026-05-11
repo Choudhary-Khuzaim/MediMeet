@@ -16,6 +16,7 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final authProvider = Provider.of<AuthProvider>(context);
     final String userName = authProvider.userName ?? 'User';
     final String userEmail = authProvider.userEmail ?? 'user@example.com';
@@ -41,7 +42,7 @@ class MainDrawer extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: 'Medi',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w900,
                               color: AppColors.primary,
@@ -156,7 +157,7 @@ class MainDrawer extends StatelessWidget {
                 _drawerItem(
                   context,
                   icon: Icons.person_outline_rounded,
-                  label: 'Account Profile',
+                  label: l10n.profile,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -171,7 +172,7 @@ class MainDrawer extends StatelessWidget {
                 _drawerItem(
                   context,
                   icon: Icons.notifications_none_rounded,
-                  label: 'Notifications',
+                  label: l10n.notifications,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -187,7 +188,7 @@ class MainDrawer extends StatelessWidget {
                 _drawerItem(
                   context,
                   icon: Icons.calendar_today_rounded,
-                  label: 'My Appointments',
+                  label: l10n.appointments,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -202,7 +203,7 @@ class MainDrawer extends StatelessWidget {
                 _drawerItem(
                   context,
                   icon: Icons.history_edu_rounded,
-                  label: 'Medical Records',
+                  label: l10n.records,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -227,7 +228,7 @@ class MainDrawer extends StatelessWidget {
                 _drawerItem(
                   context,
                   icon: Icons.settings_outlined,
-                  label: 'Settings',
+                  label: l10n.settings,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -242,7 +243,7 @@ class MainDrawer extends StatelessWidget {
                 _drawerItem(
                   context,
                   icon: Icons.help_outline_rounded,
-                  label: 'Help & Support',
+                  label: l10n.helpCenter,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -257,7 +258,7 @@ class MainDrawer extends StatelessWidget {
                 _drawerItem(
                   context,
                   icon: Icons.info_outline_rounded,
-                  label: 'About MediMeet',
+                  label: l10n.about,
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -290,18 +291,18 @@ class MainDrawer extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.logout_rounded,
                       color: AppColors.error,
                       size: 20,
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Text(
-                      'Sign Out',
-                      style: TextStyle(
+                      l10n.logout,
+                      style: const TextStyle(
                         color: AppColors.error,
                         fontWeight: FontWeight.bold,
                         fontSize: 15,

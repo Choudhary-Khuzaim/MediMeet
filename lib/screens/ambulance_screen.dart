@@ -1,11 +1,37 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 
-class AmbulanceScreen extends StatelessWidget {
+class AmbulanceScreen extends StatefulWidget {
   const AmbulanceScreen({super.key});
 
   @override
+  State<AmbulanceScreen> createState() => _AmbulanceScreenState();
+}
+
+class _AmbulanceScreenState extends State<AmbulanceScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _pulseController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _pulseController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
@@ -27,16 +53,19 @@ class AmbulanceScreen extends StatelessWidget {
                     end: Alignment.bottomRight,
                   ),
                 ),
-                child: const SafeArea(
+                child: SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 20,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
-                          'Emergency SOS',
-                          style: TextStyle(
+                          l10n.emergencySos,
+                          style: const TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -44,8 +73,11 @@ class AmbulanceScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Help is just a button away',
-                          style: TextStyle(fontSize: 14, color: Colors.white70),
+                          l10n.helpJustAway,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white70,
+                          ),
                         ),
                       ],
                     ),
@@ -62,7 +94,7 @@ class AmbulanceScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Need Help Immediately?',
+                    l10n.needHelpImmediately,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -70,20 +102,32 @@ class AmbulanceScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Press and hold the button for 2 seconds',
-                    style: TextStyle(color: AppColors.textMuted, fontSize: 14),
+                  Text(
+                    l10n.sosHoldMessage,
+                    style: const TextStyle(color: AppColors.textMuted, fontSize: 14),
                   ),
                   const SizedBox(height: 50),
                   // Animated SOS Button
                   GestureDetector(
+                    onLongPress: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Dispatching emergency services...'),
+                          backgroundColor: Color(0xFFD90429),
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                    },
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
                         // Pulse rings
-                        const _PulseRing(delay: 0),
-                        const _PulseRing(delay: 1),
-                        const _PulseRing(delay: 2),
+                        ...List.generate(3, (index) {
+                          return _AnimatedPulseRing(
+                            controller: _pulseController,
+                            delay: index * 0.3,
+                          );
+                        }),
                         Container(
                           width: 180,
                           height: 180,
@@ -105,18 +149,18 @@ class AmbulanceScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: const Column(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.emergency_rounded,
                                 color: Colors.white,
                                 size: 60,
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
-                                'SOS',
-                                style: TextStyle(
+                                l10n.sos,
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w900,
                                   fontSize: 28,
@@ -145,14 +189,14 @@ class AmbulanceScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: Theme.of(context).dividerColor),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(Icons.location_on_rounded, color: Color(0xFFD90429)),
-                    SizedBox(width: 12),
+                    const Icon(Icons.location_on_rounded, color: Color(0xFFD90429)),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        'Your Current Location: Gulberg III, Lahore',
-                        style: TextStyle(
+                        '${l10n.currentPosition}: Gulberg III, Lahore',
+                        style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                         ),
@@ -160,7 +204,7 @@ class AmbulanceScreen extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.chevron_right_rounded,
                       color: AppColors.textMuted,
                     ),
@@ -171,15 +215,15 @@ class AmbulanceScreen extends StatelessWidget {
           ),
 
           // Ambulance Categories
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(24, 24, 24, 16),
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
               child: Text(
-                'Available Ambulances',
+                l10n.availableAmbulances,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).textTheme.titleLarge?.color,
                 ),
               ),
             ),
@@ -220,24 +264,30 @@ class AmbulanceScreen extends StatelessWidget {
   }
 }
 
-class _PulseRing extends StatelessWidget {
+class _AnimatedPulseRing extends StatelessWidget {
+  final AnimationController controller;
   final double delay;
-  const _PulseRing({required this.delay});
+
+  const _AnimatedPulseRing({required this.controller, required this.delay});
 
   @override
   Widget build(BuildContext context) {
-    // Note: In a real app, we'd use an AnimationController for the pulse effect.
-    // For now, we simulate the look.
-    return Container(
-      width: 240,
-      height: 240,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: const Color(0xFFEF233C).withOpacity(0.1),
-          width: 2,
-        ),
-      ),
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        double value = (controller.value + delay) % 1.0;
+        return Container(
+          width: 180 + (100 * value),
+          height: 180 + (100 * value),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: const Color(0xFFEF233C).withOpacity(1.0 - value),
+              width: 2,
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -336,6 +336,37 @@ class AppLocalizations {
   String get logOutSession => _isUrdu ? 'سیشن ختم کریں' : 'Log Out Session';
   String get signOutConfirm => _isUrdu ? 'کیا آپ واقعی سیشن ختم کرنا چاہتے ہیں؟' : 'Are you sure you want to end your medical session?';
 
+  // Ambulance
+  String get ambulance => _isUrdu ? 'ایمبولینس' : 'Ambulance';
+  String get emergencySos => _isUrdu ? 'ایمرجنسی SOS' : 'Emergency SOS';
+  String get helpJustAway => _isUrdu ? 'مدد صرف ایک بٹن دور ہے' : 'Help is just a button away';
+  String get needHelpImmediately => _isUrdu ? 'کیا آپ کو فوری مدد کی ضرورت ہے؟' : 'Need Help Immediately?';
+  String get sosHoldMessage => _isUrdu ? 'بٹن کو 2 سیکنڈ تک دبائے رکھیں' : 'Press and hold the button for 2 seconds';
+  String get sos => _isUrdu ? 'ایس او ایس' : 'SOS';
+  String get currentPosition => _isUrdu ? 'آپ کا موجودہ مقام' : 'Your Current Location';
+  String get availableAmbulances => _isUrdu ? 'دستیاب ایمبولینسیں' : 'Available Ambulances';
+
+  // Pharmacy
+  String get mediShop => _isUrdu ? 'میڈی شاپ' : 'MediShop';
+  String get authenticMedicines => _isUrdu ? 'اصلی ادویات آپ کی دہلیز پر' : 'Authentic medicines delivered to your doorstep';
+  String get flatOffer => _isUrdu ? 'فلیٹ 20% رعایت' : 'Flat 20% OFF';
+  String get offerDesc => _isUrdu ? 'تمام صحت کی ضروریات پر' : 'On all healthcare essentials';
+  String get shopNow => _isUrdu ? 'ابھی خریدیں' : 'SHOP NOW';
+  String get categories => _isUrdu ? 'زمرہ جات' : 'Categories';
+  String get bestSellers => _isUrdu ? 'بہترین فروخت' : 'Best Sellers';
+
+  // Lab Tests
+  String get labTests => _isUrdu ? 'لیب ٹیسٹ' : 'Lab Tests';
+  String get accurateResults => _isUrdu ? 'مصدقہ لیبز اور درست نتائج' : 'Certified labs & accurate results';
+  String get freeHomeCollection => _isUrdu ? 'مفت ہوم سیمپل کلیکشن' : 'Free Home Sample Collection';
+  String get bookVisit => _isUrdu ? 'وزٹ بک کریں' : 'BOOK VISIT';
+  String get browseByCategory => _isUrdu ? 'زمرہ کے لحاظ سے دیکھیں' : 'Browse By Category';
+  String get popularTests => _isUrdu ? 'مشہور لیب ٹیسٹ' : 'Popular Lab Tests';
+
+  // Home Screen Extra
+  String get pharmacy => _isUrdu ? 'فارمیسی' : 'Pharmacy';
+  String get fastDelivery => _isUrdu ? 'تیز ترسیل' : 'Fast Delivery';
+
   bool get _isUrdu => locale.languageCode == 'ur';
 }
 

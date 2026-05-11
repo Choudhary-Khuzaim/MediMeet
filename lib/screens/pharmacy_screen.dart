@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 
 class PharmacyScreen extends StatelessWidget {
   const PharmacyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final List<Map<String, dynamic>> categories = [
       {
         'icon': Icons.thermostat_rounded,
@@ -111,9 +113,9 @@ class PharmacyScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            const Text(
-                              'MediShop',
-                              style: TextStyle(
+                            Text(
+                              l10n.mediShop,
+                              style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -122,7 +124,7 @@ class PharmacyScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Authentic medicines delivered to your doorstep',
+                              l10n.authenticMedicines,
                               style: TextStyle(
                                 fontSize: 13,
                                 color: Colors.white.withOpacity(0.8),
@@ -180,18 +182,18 @@ class PharmacyScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Flat 20% OFF',
-                        style: TextStyle(
+                      Text(
+                        l10n.flatOffer,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 4),
-                      const Text(
-                        'On all healthcare essentials',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      Text(
+                        l10n.offerDesc,
+                        style: const TextStyle(color: Colors.white, fontSize: 14),
                       ),
                       const SizedBox(height: 12),
                       Container(
@@ -203,9 +205,9 @@ class PharmacyScreen extends StatelessWidget {
                           color: AppColors.accent,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Text(
-                          'SHOP NOW',
-                          style: TextStyle(
+                        child: Text(
+                          l10n.shopNow,
+                          style: const TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
@@ -227,7 +229,7 @@ class PharmacyScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
-                    'Categories',
+                    l10n.categories,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -297,14 +299,17 @@ class PharmacyScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Best Sellers',
+                    l10n.bestSellers,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
-                  TextButton(onPressed: () {}, child: const Text('View All')),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(l10n.viewAll),
+                  ),
                 ],
               ),
             ),

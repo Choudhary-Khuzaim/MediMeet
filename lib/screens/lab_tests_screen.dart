@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 
 class LabTestsScreen extends StatelessWidget {
   const LabTestsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final List<Map<String, dynamic>> categories = [
       {
         'icon': Icons.bloodtype_rounded,
         'label': 'Blood Test',
-        'color': Color(0xFFEF4444),
+        'color': const Color(0xFFEF4444),
       },
       {
         'icon': Icons.favorite_rounded,
         'label': 'Heart',
-        'color': Color(0xFFE11D48),
+        'color': const Color(0xFFE11D48),
       },
       {
         'icon': Icons.monitor_heart_rounded,
         'label': 'Vital',
-        'color': Color(0xFF2563EB),
+        'color': const Color(0xFF2563EB),
       },
       {
         'icon': Icons.biotech_rounded,
         'label': 'Hormone',
-        'color': Color(0xFF7C3AED),
+        'color': const Color(0xFF7C3AED),
       },
       {
         'icon': Icons.coronavirus_rounded,
         'label': 'Covid',
-        'color': Color(0xFF059669),
+        'color': const Color(0xFF059669),
       },
     ];
 
@@ -104,9 +106,9 @@ class LabTestsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 10),
-                        const Text(
-                          'Lab Tests',
-                          style: TextStyle(
+                        Text(
+                          l10n.labTests,
+                          style: const TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -115,7 +117,7 @@ class LabTestsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Certified labs & accurate results',
+                          l10n.accurateResults,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.white.withOpacity(0.8),
@@ -156,9 +158,9 @@ class LabTestsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Free Home Sample Collection',
-                            style: TextStyle(
+                          Text(
+                            l10n.freeHomeCollection,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -182,9 +184,9 @@ class LabTestsScreen extends StatelessWidget {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Text(
-                              'BOOK VISIT',
-                              style: TextStyle(
+                            child: Text(
+                              l10n.bookVisit,
+                              style: const TextStyle(
                                 color: Color(0xFF0077B6),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
@@ -213,7 +215,7 @@ class LabTestsScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
-                    'Browse By Category',
+                    l10n.browseByCategory,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -243,7 +245,8 @@ class LabTestsScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(Theme.of(context).brightness ==
+                                    color: Colors.black.withOpacity(
+                                      Theme.of(context).brightness ==
                                               Brightness.dark
                                           ? 0.2
                                           : 0.03,
@@ -287,7 +290,7 @@ class LabTestsScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
-                'Popular Lab Tests',
+                l10n.popularTests,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -310,7 +313,8 @@ class LabTestsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(Theme.of(context).brightness == Brightness.dark
+                        color: Colors.black.withOpacity(
+                          Theme.of(context).brightness == Brightness.dark
                               ? 0.2
                               : 0.03,
                         ),
