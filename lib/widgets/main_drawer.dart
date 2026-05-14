@@ -10,6 +10,7 @@ import '../screens/medical_records_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/help_center_screen.dart';
 import '../screens/about_app_screen.dart';
+import '../utils/app_localizations.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
