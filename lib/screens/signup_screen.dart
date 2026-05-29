@@ -162,8 +162,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       icon: Icons.alternate_email_rounded,
                       type: TextInputType.emailAddress,
                       validator: (v) {
-                        if (v == null || v.isEmpty)
+                        if (v == null || v.isEmpty) {
                           return localizations.feedbackEmailError;
+                        }
                         final emailRegex = RegExp(
                           r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );

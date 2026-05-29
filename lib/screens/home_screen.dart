@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appointmentProvider = Provider.of<AppointmentProvider>(context);
     final localizations = AppLocalizations.of(context)!;
-    final bool _isUrdu = Localizations.localeOf(context).languageCode == 'ur';
+    final bool isUrdu = Localizations.localeOf(context).languageCode == 'ur';
 
     final upcomingAppointments = appointmentProvider.upcomingAppointments;
     final doctors = DoctorService.getDoctors().take(3).toList();
@@ -66,9 +66,9 @@ class HomeScreen extends StatelessWidget {
                           RichText(
                             text: TextSpan(
                               children: [
-                                TextSpan(
+                                const TextSpan(
                                   text: 'Medi',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.w900,
                                     color: AppColors.primary,
@@ -99,9 +99,9 @@ class HomeScreen extends StatelessWidget {
                               color: AppColors.primary.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Text(
+                            child: const Text(
                               'HEALTHCARE COMPANION',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.primary,
@@ -297,9 +297,9 @@ class HomeScreen extends StatelessWidget {
 
           // Featured Banner
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
-              child: const _FeaturedBanner(),
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(24, 32, 24, 0),
+              child: _FeaturedBanner(),
             ).animate().fadeIn(delay: 1.seconds).slideY(begin: 0.2),
           ),
 
@@ -324,7 +324,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         _SpecialtyCard(
                           icon: Icons.favorite_rounded,
-                          label: _isUrdu ? 'امراض قلب' : 'Cardiology',
+                          label: isUrdu ? 'امراض قلب' : 'Cardiology',
                           color: const Color(0xFFEF4444),
                           onTap: () => Navigator.push(
                             context,
@@ -337,7 +337,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.psychology_rounded,
-                          label: _isUrdu ? 'اعصابی امراض' : 'Neurology',
+                          label: isUrdu ? 'اعصابی امراض' : 'Neurology',
                           color: const Color(0xFF8B5CF6),
                           onTap: () => Navigator.push(
                             context,
@@ -350,7 +350,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.child_care_rounded,
-                          label: _isUrdu ? 'بچوں کے امراض' : 'Pediatrics',
+                          label: isUrdu ? 'بچوں کے امراض' : 'Pediatrics',
                           color: const Color(0xFFF59E0B),
                           onTap: () => Navigator.push(
                             context,
@@ -363,7 +363,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.face_retouching_natural_rounded,
-                          label: _isUrdu ? 'جلدی امراض' : 'Dermatology',
+                          label: isUrdu ? 'جلدی امراض' : 'Dermatology',
                           color: const Color(0xFFEC4899),
                           onTap: () => Navigator.push(
                             context,
@@ -376,7 +376,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         _SpecialtyCard(
                           icon: Icons.mood_rounded,
-                          label: _isUrdu ? 'ذہنی امراض' : 'Psychiatry',
+                          label: isUrdu ? 'ذہنی امراض' : 'Psychiatry',
                           color: const Color(0xFF10B981),
                           onTap: () => Navigator.push(
                             context,
@@ -470,9 +470,9 @@ class HomeScreen extends StatelessWidget {
           ),
 
           // Health Tips Section
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+              padding: EdgeInsets.fromLTRB(24, 32, 24, 16),
               child: _SectionHeader(title: 'Daily Health Insights'),
             ),
           ),

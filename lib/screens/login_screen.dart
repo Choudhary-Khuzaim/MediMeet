@@ -154,8 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: 'name@example.com',
                       icon: Icons.alternate_email_rounded,
                       validator: (v) {
-                        if (v == null || v.isEmpty)
+                        if (v == null || v.isEmpty) {
                           return localizations.feedbackEmailError;
+                        }
                         final emailRegex = RegExp(
                           r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );
