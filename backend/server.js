@@ -3,7 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
-
+const userRoutes = require('./routes/userRoutes');
 // Load env vars
 dotenv.config();
 
@@ -20,6 +20,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('MediMeet Backend API is running...');
 });
+
+// API Routes
+app.use('/api/users', userRoutes);
 
 // Error Handling Middlewares
 app.use(notFound);
