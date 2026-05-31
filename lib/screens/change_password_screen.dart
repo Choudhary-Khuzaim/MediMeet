@@ -143,8 +143,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscureCurrentPassword
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
                     ),
                     onPressed: () {
                       setState(() {
@@ -173,8 +173,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscureNewPassword
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
                     ),
                     onPressed: () {
                       setState(() {
@@ -209,8 +209,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscureConfirmPassword
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
                     ),
                     onPressed: () {
                       setState(() {

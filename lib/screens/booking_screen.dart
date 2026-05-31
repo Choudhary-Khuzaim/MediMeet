@@ -37,6 +37,22 @@ class _BookingScreenState extends State<BookingScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    // Find the first available day starting from today
+    DateTime checkDay = DateTime.now();
+    for (int i = 0; i < 30; i++) {
+      final candidate = checkDay.add(Duration(days: i));
+      final dayName = DateFormat('EEEE').format(candidate);
+      if (widget.doctor.availableDays.contains(dayName)) {
+        _selectedDay = candidate;
+        _focusedDay = candidate;
+        break;
+      }
+    }
+  }
+
+  @override
   void dispose() {
     _reasonController.dispose();
     _notesController.dispose();
@@ -57,6 +73,22 @@ class _BookingScreenState extends State<BookingScreen> {
   void _bookAppointment() {
     final l10n = AppLocalizations.of(context)!;
     final messenger = ScaffoldMessenger.of(context);
+
+    final selectedDayName = DateFormat('EEEE').format(_selectedDay);
+    if (!widget.doctor.availableDays.contains(selectedDayName)) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            Localizations.localeOf(context).languageCode == 'ur'
+                ? '${widget.doctor.name} اس دن دستیاب نہیں ہیں ($selectedDayName)'
+                : '${widget.doctor.name} is not available on $selectedDayName',
+          ),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
 
     if (_selectedTime.isEmpty) {
       messenger.showSnackBar(
