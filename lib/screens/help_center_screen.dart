@@ -113,10 +113,10 @@ class HelpCenterScreen extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               localizations.helpQuickLinks,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
             const SizedBox(height: 12),
@@ -128,7 +128,7 @@ class HelpCenterScreen extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: AppColors.border.withOpacity(0.4),
+                    color: Theme.of(context).dividerColor.withOpacity(0.4),
                   ),
                 ),
                 child: Row(
@@ -181,10 +181,10 @@ class HelpCenterScreen extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               localizations.helpFaqTitle,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
             const SizedBox(height: 12),
@@ -196,7 +196,7 @@ class HelpCenterScreen extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: AppColors.border.withOpacity(0.4),
+                    color: Theme.of(context).dividerColor.withOpacity(0.4),
                   ),
                 ),
                 child: Column(

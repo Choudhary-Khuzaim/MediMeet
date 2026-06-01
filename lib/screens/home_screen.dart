@@ -916,7 +916,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
             offset: const Offset(0, 5),
           ),
         ],
-        border: Border.all(color: AppColors.border.withOpacity(0.5)),
+        border: Border.all(color: Theme.of(context).dividerColor.withOpacity(0.5)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -1002,7 +1002,7 @@ class _AppointmentPreviewCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Container(width: 1, height: 12, color: AppColors.border),
+                  Container(width: 1, height: 12, color: Theme.of(context).dividerColor),
                   const Spacer(),
                   const Icon(
                     Icons.access_time_rounded,

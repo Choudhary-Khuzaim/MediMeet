@@ -128,7 +128,7 @@ class MedicalRecordCard extends StatelessWidget {
                               margin: const EdgeInsets.symmetric(
                                 horizontal: 16,
                               ),
-                              color: AppColors.border,
+                              color: Theme.of(context).dividerColor,
                             ),
                             _buildInfoItem(
                               context,

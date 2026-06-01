@@ -94,19 +94,19 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
                   const SizedBox(height: 16),
                   Text(
                     localizations.feedbackTitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.displayLarge?.color,
                       letterSpacing: -0.5,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     localizations.feedbackSubtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                       height: 1.5,
                     ),
                   ),
@@ -116,10 +116,10 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
             const SizedBox(height: 24),
             Text(
               localizations.feedbackCategory,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+                color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
             const SizedBox(height: 12),
@@ -139,13 +139,13 @@ class _SendFeedbackScreenState extends State<SendFeedbackScreen> {
                   labelStyle: TextStyle(
                     color: isSelected
                         ? AppColors.primary
-                        : AppColors.textSecondary,
+                        : Theme.of(context).textTheme.bodyMedium?.color,
                     fontWeight: FontWeight.w600,
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                     side: BorderSide(
-                      color: isSelected ? AppColors.primary : AppColors.border,
+                      color: isSelected ? AppColors.primary : Theme.of(context).dividerColor,
                     ),
                   ),
                   backgroundColor: Theme.of(context).colorScheme.surface,

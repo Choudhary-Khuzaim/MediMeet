@@ -316,12 +316,12 @@ class NotificationsScreen extends StatelessWidget {
             ),
           ).animate().fadeIn(delay: 300.ms),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             'You don\'t have any new notifications\nat the moment.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15,
-              color: AppColors.textSecondary,
+              color: Theme.of(context).textTheme.bodyMedium?.color,
               height: 1.5,
             ),
           ).animate().fadeIn(delay: 500.ms),

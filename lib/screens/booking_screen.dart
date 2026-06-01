@@ -333,8 +333,8 @@ class _BookingScreenState extends State<BookingScreen> {
                     color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
-                  disabledTextStyle: const TextStyle(
-                    color: AppColors.textMuted,
+                  disabledTextStyle: TextStyle(
+                    color: Theme.of(context).disabledColor,
                   ),
                   defaultTextStyle: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
@@ -372,7 +372,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       border: Border.all(
                         color: isSelected
                             ? AppColors.primary
-                            : AppColors.border,
+                            : Theme.of(context).dividerColor,
                         width: 2,
                       ),
                       boxShadow: isSelected

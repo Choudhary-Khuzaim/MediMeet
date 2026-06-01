@@ -422,7 +422,6 @@ class _SwitchTile extends StatelessWidget {
         activeColor: AppColors.primary,
         activeTrackColor: AppColors.primary.withOpacity(0.3),
         inactiveThumbColor: Colors.white,
-        inactiveTrackColor: AppColors.border,
       ),
     );
   }
@@ -467,9 +466,9 @@ class _ListTile extends StatelessWidget {
           color: Theme.of(context).textTheme.bodyMedium?.color,
         ),
       ),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.chevron_right_rounded,
-        color: AppColors.textSecondary,
+        color: Theme.of(context).textTheme.bodyMedium?.color,
       ),
       onTap: onTap,
     );

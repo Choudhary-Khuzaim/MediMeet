@@ -289,11 +289,11 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             'Try searching with a different keyword\nor add a new medical record.',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.textSecondary,
+              color: Theme.of(context).textTheme.bodyMedium?.color,
               fontSize: 15,
               height: 1.5,
             ),
@@ -321,7 +321,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
               width: 50,
               height: 5,
               decoration: BoxDecoration(
-                color: AppColors.border,
+                color: Theme.of(context).dividerColor,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -371,7 +371,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                       ],
                     ),
                     const SizedBox(height: 32),
-                    Divider(color: AppColors.border.withOpacity(0.5)),
+                    Divider(color: Theme.of(context).dividerColor.withOpacity(0.5)),
                     const SizedBox(height: 32),
                     _buildDetailRow(
                       Icons.person_rounded,
@@ -436,7 +436,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           decoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.border.withOpacity(0.5)),
+            border: Border.all(color: Theme.of(context).dividerColor.withOpacity(0.5)),
           ),
           child: Icon(icon, color: AppColors.primary, size: 22),
         ),

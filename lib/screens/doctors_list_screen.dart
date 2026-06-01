@@ -136,7 +136,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                             border: Border.all(
                               color: isSelected
                                   ? AppColors.primary
-                                  : AppColors.divider,
+                                  : Theme.of(context).dividerColor,
                             ),
                             boxShadow: isSelected
                                 ? [
@@ -212,11 +212,11 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
           color: AppColors.textMuted.withOpacity(0.2),
         ),
         const SizedBox(height: 16),
-        const Text(
+        Text(
           'No doctors match your search',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: AppColors.textSecondary,
+            color: Theme.of(context).textTheme.bodyMedium?.color,
           ),
         ),
         const Text(

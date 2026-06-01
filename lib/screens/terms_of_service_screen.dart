@@ -60,19 +60,19 @@ class TermsOfServiceScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     localizations.termsOfService,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.displayLarge?.color,
                       letterSpacing: -0.5,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     localizations.termsIntro,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                       height: 1.5,
                     ),
                   ),
@@ -89,7 +89,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(
-                      color: AppColors.border.withOpacity(0.3),
+                      color: Theme.of(context).dividerColor.withOpacity(0.3),
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -104,18 +104,18 @@ class TermsOfServiceScreen extends StatelessWidget {
                     children: [
                       Text(
                         section.title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
+                          color: Theme.of(context).textTheme.titleLarge?.color,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         section.body,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 15,
-                          color: AppColors.textSecondary,
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
                           height: 1.6,
                         ),
                       ),
@@ -127,9 +127,9 @@ class TermsOfServiceScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               localizations.termsContact,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: AppColors.textSecondary,
+                color: Theme.of(context).textTheme.bodyMedium?.color,
               ),
               textAlign: TextAlign.center,
             ),
