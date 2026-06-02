@@ -34,17 +34,18 @@ class _LoginScreenState extends State<LoginScreen> {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
       final success = await authProvider.login(
         _emailController.text.trim(),
-        _passwordController.text.trim(),
+        _passwordController.text,
       );
       if (mounted) {
         setState(() => _isLoading = false);
         if (!success) {
+          final localizations = AppLocalizations.of(context)!;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Invalid credentials'),
+            SnackBar(
+              content: Text(localizations.invalidCredentials),
               backgroundColor: AppColors.error,
               behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
             ),
@@ -315,9 +316,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _showSocialSnackbar(BuildContext context, String platform) {
+    final bool isUrdu = Localizations.localeOf(context).languageCode == 'ur';
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$platform Sign In coming soon'),
+        content: Text(
+          isUrdu
+              ? '$platform سائن ان جلد آرہا ہے'
+              : '$platform Sign In coming soon',
+        ),
         backgroundColor: AppColors.primary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

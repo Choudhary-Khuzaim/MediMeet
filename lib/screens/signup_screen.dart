@@ -23,11 +23,12 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _agreeToTerms = false;
 
   void _handleSignup() async {
+    final localizations = AppLocalizations.of(context)!;
     if (_formKey.currentState!.validate()) {
       if (!_agreeToTerms) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Please accept terms & conditions'),
+          SnackBar(
+            content: Text(localizations.acceptTerms),
             backgroundColor: AppColors.warning,
             behavior: SnackBarBehavior.floating,
           ),
@@ -47,8 +48,8 @@ class _SignupScreenState extends State<SignupScreen> {
         if (success) {
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Account created successfully!'),
+            SnackBar(
+              content: Text(localizations.accountCreated),
               backgroundColor: AppColors.success,
               behavior: SnackBarBehavior.floating,
             ),
@@ -183,7 +184,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       icon: Icons.phone_android_rounded,
                       type: TextInputType.phone,
                       validator: (v) =>
-                          v!.isEmpty ? 'Phone number is required' : null,
+                          v!.isEmpty ? localizations.phoneRequired : null,
                     ).animate().fadeIn(delay: 700.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 20),
@@ -196,8 +197,15 @@ class _SignupScreenState extends State<SignupScreen> {
                       obscure: _obscurePassword,
                       onToggle: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
-                      validator: (v) =>
-                          v!.isEmpty ? 'Password is required' : null,
+                      validator: (v) {
+                        if (v == null || v.isEmpty) {
+                          return localizations.passwordRequired;
+                        }
+                        if (v.length < 6) {
+                          return localizations.passwordMinLength;
+                        }
+                        return null;
+                      },
                     ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
 
                     const SizedBox(height: 24),
@@ -364,7 +372,7 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'I agree to the $termsLabel',
+                AppLocalizations.of(context)!.agreeToTermsText(termsLabel),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium?.color,
                   fontSize: 13,

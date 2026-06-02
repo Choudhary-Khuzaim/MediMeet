@@ -367,6 +367,15 @@ class AppLocalizations {
   String get pharmacy => _isUrdu ? 'فارمیسی' : 'Pharmacy';
   String get fastDelivery => _isUrdu ? 'تیز ترسیل' : 'Fast Delivery';
 
+  // Authentication & Validation
+  String get passwordRequired => _isUrdu ? 'پاس ورڈ درکار ہے' : 'Password is required';
+  String get phoneRequired => _isUrdu ? 'فون نمبر درکار ہے' : 'Phone number is required';
+  String get acceptTerms => _isUrdu ? 'براہ کرم سروس کی شرائط اور ضوابط کو قبول کریں' : 'Please accept terms & conditions';
+  String get accountCreated => _isUrdu ? 'اکاؤنٹ کامیابی سے بن گیا!' : 'Account created successfully!';
+  String get invalidCredentials => _isUrdu ? 'غلط ای میل یا پاس ورڈ' : 'Invalid credentials';
+  String agreeToTermsText(String termsLabel) =>
+      _isUrdu ? 'میں $termsLabel سے متفق ہوں' : 'I agree to the $termsLabel';
+
   bool get _isUrdu => locale.languageCode == 'ur';
 }
 
