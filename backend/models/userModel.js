@@ -27,6 +27,18 @@ const userSchema = new mongoose.Schema(
             enum: ['patient', 'doctor'],
             default: 'patient',
         },
+        doctorProfile: {
+            specialty: { type: String },
+            imageUrl: { type: String },
+            rating: { type: Number, default: 5.0 },
+            totalReviews: { type: Number, default: 0 },
+            hospital: { type: String },
+            experience: { type: String },
+            education: { type: String },
+            description: { type: String },
+            availableDays: [{ type: String }],
+            consultationFee: { type: String },
+        },
     },
     {
         timestamps: true,
