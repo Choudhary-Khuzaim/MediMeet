@@ -211,8 +211,8 @@ class HomeScreen extends StatelessWidget {
                 title: localizations.quickActions,
                 onSeeAll: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('More actions coming soon!'),
+                    SnackBar(
+                      content: Text(localizations.moreActionsSoon),
                       behavior: SnackBarBehavior.floating,
                     ),
                   );
@@ -234,7 +234,7 @@ class HomeScreen extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.person_search_rounded,
                   label: localizations.doctors,
-                  subtitle: '500+ Experts',
+                  subtitle: isUrdu ? '500+ ماہرین' : '500+ Experts',
                   color: AppColors.primary,
                   onTap: () => Navigator.push(
                     context,
@@ -249,7 +249,7 @@ class HomeScreen extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.event_available_rounded,
                   label: localizations.appointments,
-                  subtitle: 'Easy Schedule',
+                  subtitle: isUrdu ? 'آسان شیڈول' : 'Easy Schedule',
                   color: AppColors.secondary,
                   onTap: () => Navigator.push(
                     context,
@@ -264,7 +264,7 @@ class HomeScreen extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.history_edu_rounded,
                   label: localizations.records,
-                  subtitle: 'Access Digitally',
+                  subtitle: isUrdu ? 'ڈیجیٹل رسائی' : 'Access Digitally',
                   color: AppColors.accent,
                   onTap: () => Navigator.push(
                     context,
@@ -470,10 +470,10 @@ class HomeScreen extends StatelessWidget {
           ),
 
           // Health Tips Section
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(24, 32, 24, 16),
-              child: _SectionHeader(title: 'Daily Health Insights'),
+              padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+              child: _SectionHeader(title: localizations.dailyHealthInsights),
             ),
           ),
 
@@ -484,22 +484,20 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 physics: const ClampingScrollPhysics(),
-                children: const [
+                children: [
                   _HealthTipCard(
-                    title: 'Hydration Strategy',
-                    desc:
-                        'Drinking water before meals can improve digestion and hydration levels.',
+                    title: localizations.hydrationStrategy,
+                    desc: localizations.hydrationStrategyDesc,
                     image:
                         'https://images.unsplash.com/photo-1548919973-5cfe5d4fc474?w=400&h=300&fit=crop',
-                    tag: 'Lifestyle',
+                    tag: localizations.lifestyle,
                   ),
                   _HealthTipCard(
-                    title: 'Mindfulness Practice',
-                    desc:
-                        'A simple 5-minute breathing exercise can significantly reduce daily stress.',
+                    title: localizations.mindfulnessPractice,
+                    desc: localizations.mindfulnessPracticeDesc,
                     image:
                         'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop',
-                    tag: 'Mental Health',
+                    tag: localizations.mentalHealthTag,
                   ),
                 ],
               ),
@@ -642,6 +640,8 @@ class _FeaturedBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isUrdu = Localizations.localeOf(context).languageCode == 'ur';
+
     return Container(
       width: double.infinity,
       height: 190,
@@ -681,9 +681,9 @@ class _FeaturedBanner extends StatelessWidget {
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Text(
-                    'NEW FEATURE',
-                    style: TextStyle(
+                  child: Text(
+                    isUrdu ? 'نئی خصوصیت' : 'NEW FEATURE',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
@@ -692,9 +692,9 @@ class _FeaturedBanner extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Quick Health\nCheckup',
-                  style: TextStyle(
+                Text(
+                  isUrdu ? 'فوری ہیلتھ\nچیک اپ' : 'Quick Health\nCheckup',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -720,9 +720,9 @@ class _FeaturedBanner extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
-                    'Start Now',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  child: Text(
+                    isUrdu ? 'ابھی شروع کریں' : 'Start Now',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

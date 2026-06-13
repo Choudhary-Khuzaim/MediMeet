@@ -14,50 +14,6 @@ class _HomeCareScreenState extends State<HomeCareScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
 
-  final List<Map<String, dynamic>> _allServices = [
-    {
-      'title': 'General Nursing',
-      'desc': 'Injections, wound dressing, and routine check-ups at home.',
-      'price': 'Rs. 1,500 / Visit',
-      'icon': Icons.person_add_alt_1_rounded,
-      'color': Colors.blue,
-      'category': 'Nursing',
-    },
-    {
-      'title': 'Physiotherapy',
-      'desc': 'Specialized exercises for recovery and pain relief.',
-      'price': 'Rs. 2,500 / Session',
-      'icon': Icons.accessibility_new_rounded,
-      'color': Colors.orange,
-      'category': 'Physiotherapist',
-    },
-    {
-      'title': 'Elderly Companion',
-      'desc': 'Dedicated care and assistance for senior citizens.',
-      'price': 'Rs. 3,000 / Day',
-      'icon': Icons.elderly_rounded,
-      'color': Colors.green,
-      'category': 'Caregiver',
-    },
-    {
-      'title': 'Post-Surgery Care',
-      'desc': 'Intensive monitoring and support after major operations.',
-      'price': 'Rs. 5,000 / Day',
-      'icon': Icons.healing_rounded,
-      'color': Colors.red,
-      'category': 'Nursing',
-    },
-  ];
-
-  List<Map<String, dynamic>> get _filteredServices {
-    if (_searchQuery.isEmpty) return _allServices;
-    return _allServices
-        .where((s) =>
-            s['title'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
-            s['desc'].toLowerCase().contains(_searchQuery.toLowerCase()))
-        .toList();
-  }
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -67,6 +23,49 @@ class _HomeCareScreenState extends State<HomeCareScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
+    final List<Map<String, dynamic>> services = [
+      {
+        'title': l10n.generalNursing,
+        'desc': l10n.generalNursingDesc,
+        'price': l10n.generalNursingPrice,
+        'icon': Icons.person_add_alt_1_rounded,
+        'color': Colors.blue,
+        'category': 'Nursing',
+      },
+      {
+        'title': l10n.physiotherapy,
+        'desc': l10n.physiotherapyDesc,
+        'price': l10n.physiotherapyPrice,
+        'icon': Icons.accessibility_new_rounded,
+        'color': Colors.orange,
+        'category': 'Physiotherapist',
+      },
+      {
+        'title': l10n.elderlyCompanion,
+        'desc': l10n.elderlyCompanionDesc,
+        'price': l10n.elderlyCompanionPrice,
+        'icon': Icons.elderly_rounded,
+        'color': Colors.green,
+        'category': 'Caregiver',
+      },
+      {
+        'title': l10n.postSurgeryCare,
+        'desc': l10n.postSurgeryCareDesc,
+        'price': l10n.postSurgeryCarePrice,
+        'icon': Icons.healing_rounded,
+        'color': Colors.red,
+        'category': 'Nursing',
+      },
+    ];
+
+    final filteredServices = _searchQuery.isEmpty
+        ? services
+        : services
+            .where((s) =>
+                s['title'].toString().toLowerCase().contains(_searchQuery.toLowerCase()) ||
+                s['desc'].toString().toLowerCase().contains(_searchQuery.toLowerCase()))
+            .toList();
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -263,7 +262,7 @@ class _HomeCareScreenState extends State<HomeCareScreen> {
 
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
-            sliver: _filteredServices.isEmpty
+            sliver: filteredServices.isEmpty
                 ? SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.all(40),
@@ -278,7 +277,7 @@ class _HomeCareScreenState extends State<HomeCareScreen> {
                 : SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final service = _filteredServices[index];
+                        final service = filteredServices[index];
                         return _ModernHomeCareCard(
                           title: service['title'],
                           desc: service['desc'],
@@ -289,7 +288,7 @@ class _HomeCareScreenState extends State<HomeCareScreen> {
                           l10n: l10n,
                         );
                       },
-                      childCount: _filteredServices.length,
+                      childCount: filteredServices.length,
                     ),
                   ),
           ),

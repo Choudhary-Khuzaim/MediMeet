@@ -376,6 +376,155 @@ class AppLocalizations {
   String agreeToTermsText(String termsLabel) =>
       _isUrdu ? 'میں $termsLabel سے متفق ہوں' : 'I agree to the $termsLabel';
 
+  // Settings Screen
+  String get emailNotificationsSubtitle => _isUrdu ? 'ای میل اپڈیٹس حاصل کریں' : 'Receive email updates';
+  String get smsNotificationsSubtitle => _isUrdu ? 'ایس ایم ایس اپڈیٹس حاصل کریں' : 'Receive SMS updates';
+  String get appointmentRemindersSubtitle => _isUrdu ? 'اپائنٹمنٹ سے پہلے یاد دہانیاں حاصل کریں' : 'Get reminders before appointments';
+
+  // Doctors List Screen
+  String get findSpecialist => _isUrdu ? 'ماہر تلاش کریں' : 'Find Specialist';
+  String get searchDoctors => _isUrdu ? 'ڈاکٹرز تلاش کریں...' : 'Search doctors...';
+  String get noDoctorsMatch => _isUrdu ? 'آپ کی تلاش کے مطابق کوئی ڈاکٹر نہیں ملا' : 'No doctors match your search';
+  String get tryDifferentKeywords => _isUrdu ? 'مختلف الفاظ کے ساتھ دوبارہ کوشش کریں' : 'Try different keywords';
+  String get all => _isUrdu ? 'سب' : 'All';
+  String get cardiologist => _isUrdu ? 'امراضِ قلب' : 'Cardiologist';
+  String get neurologist => _isUrdu ? 'اعصابی امراض' : 'Neurologist';
+  String get pediatrician => _isUrdu ? 'بچوں کے امراض' : 'Pediatrician';
+  String get psychiatrist => _isUrdu ? 'ذہنی امراض' : 'Psychiatrist';
+  String get dermatologist => _isUrdu ? 'جلدی امراض' : 'Dermatologist';
+  String get orthopedicSurgeon => _isUrdu ? 'ہڈیوں کے امراض' : 'Orthopedic Surgeon';
+
+  // Appointments Screen
+  String get mySchedule => _isUrdu ? 'میرا شیڈول' : 'My Schedule';
+  String get upcomingLabel => _isUrdu ? 'آنے والے' : 'UPCOMING';
+  String get completedLabel => _isUrdu ? 'مکمل' : 'COMPLETED';
+  String get historyLabel => _isUrdu ? 'ہسٹری' : 'HISTORY';
+  String get noUpcomingVisits => _isUrdu ? 'کوئی آنے والی ملاقات نہیں ہے' : 'No upcoming visits';
+  String get noHistoryFound => _isUrdu ? 'کوئی پرانی ملاقات نہیں ملی' : 'No history found';
+  String get keepRegularCheckups => _isUrdu ? 'صحت مند رہنے کے لیے باقاعدگی سے چیک اپ کروائیں۔\nکسی بھی وقت اپنی اگلی ملاقات بک کریں۔' : 'Keep regular checkups to stay healthy.\nBook your next visit anytime.';
+  String get cancelVisit => _isUrdu ? 'ملاقات منسوخ کریں' : 'Cancel Visit';
+  String get cancelConfirmation => _isUrdu ? 'کیا آپ واقعی اس ملاقات کو منسوخ کرنا چاہتے ہیں؟ یہ عمل واپس نہیں لیا جا سکتا۔' : 'Are you sure you want to cancel this appointment? This action cannot be undone.';
+  String get goBack => _isUrdu ? 'واپس جائیں' : 'Go Back';
+  String get appointmentCancelled => _isUrdu ? 'ملاقات منسوخ کر دی گئی' : 'Appointment Cancelled';
+
+  // Medical Records Screen
+  String get medicalRecords => _isUrdu ? 'طبی ریکارڈز' : 'Medical Records';
+  String get recentRecords => _isUrdu ? 'حالیہ ریکارڈز' : 'Recent Records';
+  String get filesTotal => _isUrdu ? 'کل فائلیں' : 'Files Total';
+  String get noRecentCheckup => _isUrdu ? 'کوئی حالیہ چیک اپ ریکارڈ نہیں ملا۔' : 'No recent checkup records found.';
+  String get searchDiagnosisDoctor => _isUrdu ? 'بیماری یا ڈاکٹر کے نام سے تلاش کریں...' : 'Search by diagnosis or doctor...';
+  String get noRecordsFound => _isUrdu ? 'کوئی ریکارڈ نہیں ملا' : 'No records found';
+  String get trySearchingDifferent => _isUrdu ? 'مختلف الفاظ کے ساتھ تلاش کریں\nیا نیا طبی ریکارڈ شامل کریں۔' : 'Try searching with a different keyword\nor add a new medical record.';
+  String get addRecord => _isUrdu ? 'ریکارڈ شامل کریں' : 'Add Record';
+  String get addingRecordsComingSoon => _isUrdu ? 'ریکارڈز شامل کرنے کی خصوصیت جلد آرہی ہے!' : 'Adding records feature is coming soon!';
+  String get patientRecord => _isUrdu ? 'مریض کا ریکارڈ' : 'Patient Record';
+  String get doctorLabel => _isUrdu ? 'ڈاکٹر' : 'Doctor';
+  String get dateOfVisit => _isUrdu ? 'ملاقات کی تاریخ' : 'Date of Visit';
+  String get patientSymptoms => _isUrdu ? 'مریض کی علامات' : 'Patient Symptoms';
+  String get clinicalDiagnosis => _isUrdu ? 'طبی تشخیص' : 'Clinical Diagnosis';
+  String get prescriptionAdvice => _isUrdu ? 'نسخہ اور مشورہ' : 'Prescription & Advice';
+  String get specialNotes => _isUrdu ? 'خصوصی نوٹس' : 'Special Notes';
+  String lastCheckupDaysAgoText(int daysAgo, String doctorName) => _isUrdu
+      ? 'آپ کا آخری چیک اپ $daysAgo دن پہلے ڈاکٹر $doctorName کے ساتھ تھا۔'
+      : 'Your last checkup was $daysAgo days ago with Dr. $doctorName.';
+
+  // Mental Health Screen
+  String get happy => _isUrdu ? 'خوش' : 'Happy';
+  String get calm => _isUrdu ? 'پرسکون' : 'Calm';
+  String get sad => _isUrdu ? 'اداس' : 'Sad';
+  String get stressed => _isUrdu ? 'پریشان' : 'Stressed';
+  String get tired => _isUrdu ? 'تھکا ہوا' : 'Tired';
+  String get anxiety => _isUrdu ? 'بے چینی' : 'Anxiety';
+  String get stress => _isUrdu ? 'تناؤ' : 'Stress';
+  String get depression => _isUrdu ? 'افسردگی' : 'Depression';
+  String get insomnia => _isUrdu ? 'بے خوابی' : 'Insomnia';
+  String get relationships => _isUrdu ? 'تعلقات' : 'Relationships';
+  String get career => _isUrdu ? 'کیریئر' : 'Career';
+  String get clinicalPsychologist => _isUrdu ? 'کلینیکل ماہر نفسیات' : 'Clinical Psychologist';
+  String get psychiatristExpert => _isUrdu ? 'ماہر نفسیات' : 'Psychiatrist';
+  String reviewsCountText(String reviews) => _isUrdu ? '($reviews جائزے)' : '($reviews reviews)';
+
+  // Home Care Screen
+  String get generalNursing => _isUrdu ? 'جنرل نرسنگ' : 'General Nursing';
+  String get generalNursingDesc => _isUrdu ? 'گھر پر انجیکشن، زخم کی پٹی، اور معمول کا معائنہ۔' : 'Injections, wound dressing, and routine check-ups at home.';
+  String get generalNursingPrice => _isUrdu ? 'روپے 1,500 / وزٹ' : 'Rs. 1,500 / Visit';
+  String get physiotherapy => _isUrdu ? 'فزیو تھراپی' : 'Physiotherapy';
+  String get physiotherapyDesc => _isUrdu ? 'صحت یابی اور درد سے نجات کے لیے خصوصی ورزشیں۔' : 'Specialized exercises for recovery and pain relief.';
+  String get physiotherapyPrice => _isUrdu ? 'روپے 2,500 / سیشن' : 'Rs. 2,500 / Session';
+  String get elderlyCompanion => _isUrdu ? 'بزرگوں کی دیکھ بھال' : 'Elderly Companion';
+  String get elderlyCompanionDesc => _isUrdu ? 'بزرگ شہریوں کے لیے وقف دیکھ بھال اور مدد۔' : 'Dedicated care and assistance for senior citizens.';
+  String get elderlyCompanionPrice => _isUrdu ? 'روپے 3,000 / دن' : 'Rs. 3,000 / Day';
+  String get postSurgeryCare => _isUrdu ? 'سرجری کے بعد دیکھ بھال' : 'Post-Surgery Care';
+  String get postSurgeryCareDesc => _isUrdu ? 'بڑے آپریشنوں کے بعد شدید نگرانی اور مدد۔' : 'Intensive monitoring and support after major operations.';
+  String get postSurgeryCarePrice => _isUrdu ? 'روپے 5,000 / دن' : 'Rs. 5,000 / Day';
+  String get nursing => _isUrdu ? 'نرسنگ' : 'Nursing';
+  String get caregiver => _isUrdu ? 'دیکھ بھال کرنے والا' : 'Caregiver';
+
+  // Lab Tests Screen
+  String get bloodTest => _isUrdu ? 'خون کا ٹیسٹ' : 'Blood Test';
+  String get vital => _isUrdu ? 'اہم نشانات' : 'Vital';
+  String get hormone => _isUrdu ? 'ہارمون' : 'Hormone';
+  String get covid => _isUrdu ? 'کووڈ' : 'Covid';
+  String get fullBodyCheckup => _isUrdu ? 'مکمل جسم کا معائنہ' : 'Full Body Checkup';
+  String get fullBodyCheckupDesc => _isUrdu ? 'مکمل صحت کی تشخیص کے لیے 60+ پیرامیٹرز شامل ہیں۔' : 'Includes 60+ parameters for complete health assessment.';
+  String get bloodGlucose => _isUrdu ? 'بلڈ گلوکوز (نہار منہ)' : 'Blood Glucose (Fasting)';
+  String get bloodGlucoseDesc => _isUrdu ? '8 سے 10 گھنٹے نہار منہ رہنے کے بعد شوگر کا معائنہ۔' : 'Measure blood sugar level after 8-10 hours fasting.';
+  String get lipidProfile => _isUrdu ? 'لیپڈ پروفائل' : 'Lipid Profile';
+  String get lipidProfileDesc => _isUrdu ? 'کولیسٹرول اور دل کے خطرے کی جانچ۔' : 'Screening for cholesterol and heart risk.';
+  String get thyroidProfile => _isUrdu ? 'تھائیرائڈ پروفائل (T3, T4, TSH)' : 'Thyroid Profile (T3, T4, TSH)';
+  String get thyroidProfileDesc => _isUrdu ? 'تھائیرائڈ غدود کے کام کی تشخیص۔' : 'Assessment of thyroid gland function.';
+  String get lft => _isUrdu ? 'جگر کا ٹیسٹ (LFT)' : 'Liver Function Test (LFT)';
+  String get lftDesc => _isUrdu ? 'جگر کے نقصان اور بیماری کی جانچ۔' : 'Checks for liver damage and disease.';
+  String get freeHomeCollectionDesc => _isUrdu ? 'ابھی بک کریں اور ہمارا عملہ آپ کے وقت پر تشریف لائے گا۔' : 'Book now and our team will visit you at your time.';
+  String get tenPercentOff => _isUrdu ? '10% چھوٹ' : '10% OFF';
+  String get newTag => _isUrdu ? 'نیا' : 'New';
+  String get twentyFourFortyEightHours => _isUrdu ? '24-48 گھنٹے' : '24-48 Hours';
+  String get twelveHours => _isUrdu ? '12 گھنٹے' : '12 Hours';
+  String get twentyFourHours => _isUrdu ? '24 گھنٹے' : '24 Hours';
+
+  // Notifications Screen
+  String get markAllRead => _isUrdu ? 'سب پڑھے ہوئے نشان زد کریں' : 'Mark all read';
+  String get todayLabel => _isUrdu ? 'آج' : 'Today';
+  String get earlierLabel => _isUrdu ? 'پہلے' : 'Earlier';
+  String unreadNotificationsCount(int count) => _isUrdu ? '$count نئی' : '$count New';
+  String get allCaughtUp => _isUrdu ? 'سب کچھ اپ ڈیٹ ہے!' : 'All caught up!';
+  String get noNewNotifications => _isUrdu ? 'اس وقت آپ کے پاس کوئی نیا نوٹیفکیشن نہیں ہے۔' : 'You don\'t have any new notifications at the moment.';
+  String get appointmentConfirmedTitle => _isUrdu ? 'اپائنٹمنٹ کی تصدیق ہو گئی' : 'Appointment Confirmed';
+  String get appointmentConfirmedSub => _isUrdu ? 'ڈاکٹر سارہ خان کے ساتھ آپ کی ملاقات کل صبح 10:00 بجے کے لیے طے شدہ ہے۔' : 'Your appointment with Dr. Sarah Khan is confirmed for tomorrow at 10:00 AM.';
+  String get medicineReminderTitle => _isUrdu ? 'دوا کی یاد دہانی' : 'Medicine Reminder';
+  String get medicineReminderSub => _isUrdu ? 'آپ کے پیناڈول کی صبح کی خوراک لینے کا وقت ہو گیا ہے۔' : 'It\'s time to take your morning dosage of Panadol.';
+  String get systemUpdateTitle => _isUrdu ? 'سسٹم اپ ڈیٹ' : 'System Update';
+  String get systemUpdateSub => _isUrdu ? 'آپ کی میڈیمیٹ ایپ میں نئی خصوصیات شامل کی گئی ہیں۔ انہیں دیکھیں۔' : 'New features have been added to your MediMeet app. Check them out!';
+  String get healthTipTitle => _isUrdu ? 'صحت کی ٹپ' : 'Health Tip';
+  String get healthTipSub => _isUrdu ? 'دن میں 8 گلاس پانی پینا آپ کو ہائیڈریٹڈ اور فعال رکھتا ہے۔' : 'Drinking 8 glasses of water a day keeps you hydrated and active.';
+  String get twoHoursAgo => _isUrdu ? '2 گھنٹے پہلے' : '2h ago';
+  String get fiveHoursAgo => _isUrdu ? '5 گھنٹے پہلے' : '5h ago';
+  String get oneDayAgo => _isUrdu ? '1 دن پہلے' : '1d ago';
+  String get twoDaysAgo => _isUrdu ? '2 دن پہلے' : '2d ago';
+
+  // Home Screen Extra
+  String get dailyHealthInsights => _isUrdu ? 'روزانہ صحت کی معلومات' : 'Daily Health Insights';
+  String get moreActionsSoon => _isUrdu ? 'مزید کارروائیاں جلد آرہی ہیں!' : 'More actions coming soon!';
+  String get hydrationStrategy => _isUrdu ? 'پانی پینے کی حکمت عملی' : 'Hydration Strategy';
+  String get hydrationStrategyDesc => _isUrdu ? 'کھانے سے پہلے پانی پینا ہاضمہ اور ہائیڈریشن کی سطح کو بہتر بنا سکتا ہے۔' : 'Drinking water before meals can improve digestion and hydration levels.';
+  String get mindfulnessPractice => _isUrdu ? 'ذہنی سکون کی مشق' : 'Mindfulness Practice';
+  String get mindfulnessPracticeDesc => _isUrdu ? 'صرف 5 منٹ سانس کی مشق روزانہ کے تناؤ کو نمایاں طور پر کم کر سکتی ہے۔' : 'A simple 5-minute breathing exercise can significantly reduce daily stress.';
+  String get lifestyle => _isUrdu ? 'لائف سٹائل' : 'Lifestyle';
+  String get mentalHealthTag => _isUrdu ? 'ذہنی صحت' : 'Mental Health';
+
+  // Ambulance Screen
+  String get blsTitle => _isUrdu ? 'بنیادی زندگی کا سہارا (BLS)' : 'Basic Life Support (BLS)';
+  String get blsDesc => _isUrdu ? 'آکسیجن، پلس آکس، ابتدائی طبی امداد کا کٹ' : 'Oxygen, Pulse Ox, First Aid Kit';
+  String get aclsTitle => _isUrdu ? 'ایڈوانسڈ کارڈیک (ACLS)' : 'Advanced Cardiac (ACLS)';
+  String get aclsDesc => _isUrdu ? 'وینٹی لیٹر، مانیٹر، ڈیفبریلیٹر' : 'Ventilator, Monitor, Defibrillator';
+  String get airAmbulanceTitle => _isUrdu ? 'فضائی ایمبولینس' : 'Air Ambulance';
+  String get airAmbulanceDesc => _isUrdu ? 'طویل فاصلے کے لیے ایمرجنسی ٹرانسپورٹ' : 'Critical long distance transport';
+  String get blsPrice => _isUrdu ? 'روپے 2,500' : 'Rs. 2,500';
+  String get aclsPrice => _isUrdu ? 'روپے 6,000' : 'Rs. 6,000';
+  String get airAmbulancePrice => _isUrdu ? 'روپے 75,000' : 'Rs. 75,000';
+  String get dispatchingEmergency => _isUrdu ? 'ایمرجنسی سروسز بھیجی جا رہی ہیں...' : 'Dispatching emergency services...';
+  String get gulbergLahore => _isUrdu ? 'گلبرگ III، لاہور' : 'Gulberg III, Lahore';
+
   bool get _isUrdu => locale.languageCode == 'ur';
 }
 

@@ -111,9 +111,9 @@ class _AmbulanceScreenState extends State<AmbulanceScreen>
                   GestureDetector(
                     onLongPress: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Dispatching emergency services...'),
-                          backgroundColor: Color(0xFFD90429),
+                        SnackBar(
+                          content: Text(l10n.dispatchingEmergency),
+                          backgroundColor: const Color(0xFFD90429),
                           behavior: SnackBarBehavior.floating,
                         ),
                       );
@@ -195,7 +195,7 @@ class _AmbulanceScreenState extends State<AmbulanceScreen>
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        '${l10n.currentPosition}: Gulberg III, Lahore',
+                        '${l10n.currentPosition}: ${l10n.gulbergLahore}',
                         style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
@@ -233,24 +233,24 @@ class _AmbulanceScreenState extends State<AmbulanceScreen>
             padding: const EdgeInsets.symmetric(horizontal: 24),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                const _AmbulanceCard(
-                  title: 'Basic Life Support (BLS)',
-                  desc: 'Oxygen, Pulse Ox, First Aid Kit',
-                  price: 'Rs. 2,500',
+                _AmbulanceCard(
+                  title: l10n.blsTitle,
+                  desc: l10n.blsDesc,
+                  price: l10n.blsPrice,
                   icon: Icons.airport_shuttle_rounded,
                   color: Colors.blue,
                 ),
-                const _AmbulanceCard(
-                  title: 'Advanced Cardiac (ACLS)',
-                  desc: 'Ventilator, Monitor, Defibrillator',
-                  price: 'Rs. 6,000',
+                _AmbulanceCard(
+                  title: l10n.aclsTitle,
+                  desc: l10n.aclsDesc,
+                  price: l10n.aclsPrice,
                   icon: Icons.local_hospital_rounded,
                   color: Colors.orange,
                 ),
-                const _AmbulanceCard(
-                  title: 'Air Ambulance',
-                  desc: 'Critical long distance transport',
-                  price: 'Rs. 75,000',
+                _AmbulanceCard(
+                  title: l10n.airAmbulanceTitle,
+                  desc: l10n.airAmbulanceDesc,
+                  price: l10n.airAmbulancePrice,
                   icon: Icons.airplanemode_active_rounded,
                   color: Colors.purple,
                 ),

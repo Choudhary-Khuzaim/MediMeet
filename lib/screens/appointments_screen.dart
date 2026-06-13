@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../providers/appointment_provider.dart';
 import '../widgets/appointment_card.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -30,6 +31,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -37,7 +40,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
         backgroundColor: Theme.of(context).colorScheme.surface,
         centerTitle: false,
         title: Text(
-          'My Schedule',
+          l10n.mySchedule,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -64,7 +67,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
             borderRadius: BorderRadius.circular(2),
             insets: const EdgeInsets.symmetric(horizontal: 16),
           ),
-          tabs: const [Text('UPCOMING'), Text('COMPLETED'), Text('HISTORY')],
+          tabs: [Text(l10n.upcomingLabel), Text(l10n.completedLabel), Text(l10n.historyLabel)],
         ),
       ),
       body: Consumer<AppointmentProvider>(
@@ -73,9 +76,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
             controller: _tabController,
             physics: const ClampingScrollPhysics(),
             children: [
-              _buildList(provider.upcomingAppointments, provider, true),
-              _buildList(provider.completedAppointments, provider, false),
-              _buildList(provider.historyAppointments, provider, false),
+              _buildList(provider.upcomingAppointments, provider, true, l10n),
+              _buildList(provider.completedAppointments, provider, false, l10n),
+              _buildList(provider.historyAppointments, provider, false, l10n),
             ],
           );
         },
@@ -87,11 +90,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
     List<dynamic> list,
     AppointmentProvider provider,
     bool isUpcoming,
+    AppLocalizations l10n,
   ) {
     if (list.isEmpty) {
       return _EmptyState(
         icon: isUpcoming ? Icons.calendar_today_rounded : Icons.history_rounded,
-        message: isUpcoming ? 'No upcoming visits' : 'No history found',
+        message: isUpcoming ? l10n.noUpcomingVisits : l10n.noHistoryFound,
       ).animate().fadeIn().scale(begin: const Offset(0.9, 0.9));
     }
     return ListView.builder(
@@ -105,7 +109,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
           child: AppointmentCard(
             appointment: item,
             onCancel: isUpcoming && item.status == 'upcoming'
-                ? () => _showCancelDialog(context, provider, item.id)
+                ? () => _showCancelDialog(context, provider, item.id, l10n)
                 : null,
           ),
         ).animate(delay: (index * 100).ms).fadeIn().slideY(begin: 0.2);
@@ -117,18 +121,19 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
     BuildContext context,
     AppointmentProvider provider,
     String id,
+    AppLocalizations l10n,
   ) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-        title: const Text(
-          'Cancel Visit',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          l10n.cancelVisit,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         content: Text(
-          'Are you sure you want to cancel this appointment? This action cannot be undone.',
+          l10n.cancelConfirmation,
           style: TextStyle(
             color: Theme.of(context).textTheme.bodyMedium?.color,
             height: 1.5,
@@ -139,7 +144,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Go Back',
+              l10n.goBack,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).textTheme.bodySmall?.color,
@@ -152,8 +157,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
               provider.cancelAppointment(id);
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Appointment Cancelled'),
+                SnackBar(
+                  content: Text(l10n.appointmentCancelled),
                   backgroundColor: AppColors.warning,
                   behavior: SnackBarBehavior.floating,
                 ),
@@ -168,9 +173,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
-            child: const Text(
-              'Cancel Visit',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            child: Text(
+              l10n.cancelVisit,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -223,7 +228,7 @@ class _EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Keep regular checkups to stay healthy.\nBook your next visit anytime.',
+            AppLocalizations.of(context)!.keepRegularCheckups,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyMedium?.color,

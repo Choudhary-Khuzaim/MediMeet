@@ -196,31 +196,31 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                         children: [
                           _MoodIcon(
                             emoji: '😊',
-                            label: 'Happy',
+                            label: l10n.happy,
                             isSelected: _selectedMood == 'Happy',
                             onTap: () => setState(() => _selectedMood = 'Happy'),
                           ),
                           _MoodIcon(
                             emoji: '😐',
-                            label: 'Calm',
+                            label: l10n.calm,
                             isSelected: _selectedMood == 'Calm',
                             onTap: () => setState(() => _selectedMood = 'Calm'),
                           ),
                           _MoodIcon(
                             emoji: '😔',
-                            label: 'Sad',
+                            label: l10n.sad,
                             isSelected: _selectedMood == 'Sad',
                             onTap: () => setState(() => _selectedMood = 'Sad'),
                           ),
                           _MoodIcon(
                             emoji: '😫',
-                            label: 'Stressed',
+                            label: l10n.stressed,
                             isSelected: _selectedMood == 'Stressed',
                             onTap: () => setState(() => _selectedMood = 'Stressed'),
                           ),
                           _MoodIcon(
                             emoji: '😴',
-                            label: 'Tired',
+                            label: l10n.tired,
                             isSelected: _selectedMood == 'Tired',
                             onTap: () => setState(() => _selectedMood = 'Tired'),
                           ),
@@ -353,7 +353,19 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          cat['title'],
+                          cat['title'] == 'Anxiety'
+                              ? l10n.anxiety
+                              : cat['title'] == 'Stress'
+                                  ? l10n.stress
+                                  : cat['title'] == 'Depression'
+                                      ? l10n.depression
+                                      : cat['title'] == 'Insomnia'
+                                          ? l10n.insomnia
+                                          : cat['title'] == 'Relationships'
+                                              ? l10n.relationships
+                                              : cat['title'] == 'Career'
+                                                  ? l10n.career
+                                                  : cat['title'],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 11,
@@ -556,7 +568,11 @@ class _TherapistCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  expertise,
+                  expertise == 'Clinical Psychologist'
+                      ? l10n.clinicalPsychologist
+                      : expertise == 'Psychiatrist'
+                          ? l10n.psychiatristExpert
+                          : expertise,
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyMedium?.color,
                     fontSize: 13,
@@ -583,7 +599,7 @@ class _TherapistCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '($reviews reviews)',
+                      l10n.reviewsCountText(reviews),
                       style: TextStyle(
                         color: Theme.of(context).textTheme.bodySmall?.color,
                         fontSize: 11,

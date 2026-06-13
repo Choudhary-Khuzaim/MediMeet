@@ -4,6 +4,7 @@ import '../services/doctor_service.dart';
 import '../widgets/doctor_card.dart';
 import '../utils/app_colors.dart';
 import 'doctor_detail_screen.dart';
+import '../utils/app_localizations.dart';
 
 class DoctorsListScreen extends StatefulWidget {
   final String initialCategory;
@@ -55,13 +56,15 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(
-          'Find Specialist',
+          l10n.findSpecialist,
           style: TextStyle(
             fontWeight: FontWeight.w900,
             fontSize: 24,
@@ -78,7 +81,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search doctors...',
+                hintText: l10n.searchDoctors,
                 prefixIcon: const Icon(
                   Icons.search_rounded,
                   color: AppColors.primary,
@@ -149,7 +152,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                                 : null,
                           ),
                           child: Text(
-                            cat,
+                            _getCategoryDisplay(cat, l10n),
                             style: TextStyle(
                               color: isSelected
                                   ? Colors.white
@@ -174,7 +177,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
           // Result List
           Expanded(
             child: _filteredDoctors.isEmpty
-                ? _buildNotFound()
+                ? _buildNotFound(l10n)
                 : ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     physics: const ClampingScrollPhysics(),
@@ -202,7 +205,28 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
     );
   }
 
-  Widget _buildNotFound() {
+  String _getCategoryDisplay(String category, AppLocalizations l10n) {
+    switch (category) {
+      case 'All':
+        return l10n.all;
+      case 'Cardiologist':
+        return l10n.cardiologist;
+      case 'Neurologist':
+        return l10n.neurologist;
+      case 'Pediatrician':
+        return l10n.pediatrician;
+      case 'Psychiatrist':
+        return l10n.psychiatrist;
+      case 'Dermatologist':
+        return l10n.dermatologist;
+      case 'Orthopedic Surgeon':
+        return l10n.orthopedicSurgeon;
+      default:
+        return category;
+    }
+  }
+
+  Widget _buildNotFound(AppLocalizations l10n) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -213,15 +237,15 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
         ),
         const SizedBox(height: 16),
         Text(
-          'No doctors match your search',
+          l10n.noDoctorsMatch,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).textTheme.bodyMedium?.color,
           ),
         ),
-        const Text(
-          'Try different keywords',
-          style: TextStyle(color: AppColors.textMuted, fontSize: 12),
+        Text(
+          l10n.tryDifferentKeywords,
+          style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
         ),
       ],
     );

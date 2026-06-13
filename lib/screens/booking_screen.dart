@@ -43,7 +43,7 @@ class _BookingScreenState extends State<BookingScreen> {
     DateTime checkDay = DateTime.now();
     for (int i = 0; i < 30; i++) {
       final candidate = checkDay.add(Duration(days: i));
-      final dayName = DateFormat('EEEE').format(candidate);
+      final dayName = DateFormat('EEEE', 'en_US').format(candidate);
       if (widget.doctor.availableDays.contains(dayName)) {
         _selectedDay = candidate;
         _focusedDay = candidate;
@@ -65,7 +65,7 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   bool _canSelectDay(DateTime day) {
-    final dayName = DateFormat('EEEE').format(day);
+    final dayName = DateFormat('EEEE', 'en_US').format(day);
     return widget.doctor.availableDays.contains(dayName) &&
         day.isAfter(DateTime.now().subtract(const Duration(days: 1)));
   }
@@ -74,14 +74,16 @@ class _BookingScreenState extends State<BookingScreen> {
     final l10n = AppLocalizations.of(context)!;
     final messenger = ScaffoldMessenger.of(context);
 
-    final selectedDayName = DateFormat('EEEE').format(_selectedDay);
+    final selectedDayName = DateFormat('EEEE', 'en_US').format(_selectedDay);
     if (!widget.doctor.availableDays.contains(selectedDayName)) {
+      final localeCode = Localizations.localeOf(context).languageCode;
+      final displayDayName = DateFormat('EEEE', localeCode).format(_selectedDay);
       messenger.showSnackBar(
         SnackBar(
           content: Text(
-            Localizations.localeOf(context).languageCode == 'ur'
-                ? '${widget.doctor.name} اس دن دستیاب نہیں ہیں ($selectedDayName)'
-                : '${widget.doctor.name} is not available on $selectedDayName',
+            localeCode == 'ur'
+                ? '${widget.doctor.name} اس دن دستیاب نہیں ہیں ($displayDayName)'
+                : '${widget.doctor.name} is not available on $displayDayName',
           ),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,

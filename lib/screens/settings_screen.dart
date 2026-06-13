@@ -58,8 +58,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   _SwitchTile(
                     icon: Icons.email_outlined,
-                    title: 'Email Notifications',
-                    subtitle: 'Receive email updates',
+                    title: localizations.emailNotifications,
+                    subtitle: localizations.emailNotificationsSubtitle,
                     value: _emailNotifications,
                     onChanged: (value) {
                       setState(() {
@@ -69,8 +69,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   _SwitchTile(
                     icon: Icons.sms_outlined,
-                    title: 'SMS Notifications',
-                    subtitle: 'Receive SMS updates',
+                    title: localizations.smsNotifications,
+                    subtitle: localizations.smsNotificationsSubtitle,
                     value: _smsNotifications,
                     onChanged: (value) {
                       setState(() {
@@ -80,8 +80,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   _SwitchTile(
                     icon: Icons.alarm_outlined,
-                    title: 'Appointment Reminders',
-                    subtitle: 'Get reminders before appointments',
+                    title: localizations.appointmentReminders,
+                    subtitle: localizations.appointmentRemindersSubtitle,
                     value: _reminderEnabled,
                     onChanged: (value) {
                       setState(() {

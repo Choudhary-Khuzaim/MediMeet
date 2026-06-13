@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final List<Map<String, dynamic>> todayNotifications = [
       {
-        'title': 'Appointment Confirmed',
-        'subtitle':
-            'Your appointment with Dr. Sarah Khan is confirmed for tomorrow at 10:00 AM.',
-        'time': '2h ago',
+        'title': l10n.appointmentConfirmedTitle,
+        'subtitle': l10n.appointmentConfirmedSub,
+        'time': l10n.twoHoursAgo,
         'icon': Icons.calendar_today_rounded,
         'color': AppColors.primary,
         'isUnread': true,
         'type': 'appointment',
       },
       {
-        'title': 'Medicine Reminder',
-        'subtitle': 'It\'s time to take your morning dosage of Panadol.',
-        'time': '5h ago',
+        'title': l10n.medicineReminderTitle,
+        'subtitle': l10n.medicineReminderSub,
+        'time': l10n.fiveHoursAgo,
         'icon': Icons.medical_services_rounded,
         'color': AppColors.secondary,
         'isUnread': true,
@@ -31,20 +32,18 @@ class NotificationsScreen extends StatelessWidget {
 
     final List<Map<String, dynamic>> earlierNotifications = [
       {
-        'title': 'System Update',
-        'subtitle':
-            'New features have been added to your MediMeet app. Check them out!',
-        'time': '1d ago',
+        'title': l10n.systemUpdateTitle,
+        'subtitle': l10n.systemUpdateSub,
+        'time': l10n.oneDayAgo,
         'icon': Icons.system_update_rounded,
         'color': Colors.orange,
         'isUnread': false,
         'type': 'system',
       },
       {
-        'title': 'Health Tip',
-        'subtitle':
-            'Drinking 8 glasses of water a day keeps you hydrated and active.',
-        'time': '2d ago',
+        'title': l10n.healthTipTitle,
+        'subtitle': l10n.healthTipSub,
+        'time': l10n.twoDaysAgo,
         'icon': Icons.lightbulb_outline_rounded,
         'color': Colors.blue,
         'isUnread': false,
@@ -66,7 +65,7 @@ class NotificationsScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          'Notifications',
+          l10n.notifications,
           style: TextStyle(
             color: Theme.of(context).textTheme.titleLarge?.color,
             fontWeight: FontWeight.bold,
@@ -76,9 +75,9 @@ class NotificationsScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {},
-            child: const Text(
-              'Mark all read',
-              style: TextStyle(
+            child: Text(
+              l10n.markAllRead,
+              style: const TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
                 fontSize: 13,
@@ -89,12 +88,12 @@ class NotificationsScreen extends StatelessWidget {
         ],
       ),
       body: (todayNotifications.isEmpty && earlierNotifications.isEmpty)
-          ? _buildEmptyState(context)
+          ? _buildEmptyState(context, l10n)
           : CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
                 if (todayNotifications.isNotEmpty)
-                  _buildSectionHeader(context, 'Today', unreadCount),
+                  _buildSectionHeader(context, l10n.todayLabel, unreadCount, l10n),
                 if (todayNotifications.isNotEmpty)
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
@@ -107,7 +106,7 @@ class NotificationsScreen extends StatelessWidget {
                     ),
                   ),
                 if (earlierNotifications.isNotEmpty)
-                  _buildSectionHeader(context, 'Earlier', 0),
+                  _buildSectionHeader(context, l10n.earlierLabel, 0, l10n),
                 if (earlierNotifications.isNotEmpty)
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
@@ -129,6 +128,7 @@ class NotificationsScreen extends StatelessWidget {
     BuildContext context,
     String title,
     int unreadCount,
+    AppLocalizations l10n,
   ) {
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
@@ -144,7 +144,7 @@ class NotificationsScreen extends StatelessWidget {
                 color: Theme.of(context).textTheme.titleLarge?.color,
               ),
             ),
-            if (title == 'Today' && unreadCount > 0)
+            if ((title == 'Today' || title == l10n.todayLabel) && unreadCount > 0)
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -155,7 +155,7 @@ class NotificationsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  '$unreadCount New',
+                  l10n.unreadNotificationsCount(unreadCount),
                   style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 11,
@@ -289,7 +289,7 @@ class NotificationsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState(BuildContext context) {
+  Widget _buildEmptyState(BuildContext context, AppLocalizations l10n) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -308,7 +308,7 @@ class NotificationsScreen extends StatelessWidget {
           ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
           const SizedBox(height: 24),
           Text(
-            'All caught up!',
+            l10n.allCaughtUp,
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -317,7 +317,7 @@ class NotificationsScreen extends StatelessWidget {
           ).animate().fadeIn(delay: 300.ms),
           const SizedBox(height: 12),
           Text(
-            'You don\'t have any new notifications\nat the moment.',
+            l10n.noNewNotifications,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15,

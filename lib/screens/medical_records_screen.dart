@@ -5,6 +5,7 @@ import '../models/medical_record.dart';
 import '../services/medical_record_service.dart';
 import '../widgets/medical_record_card.dart';
 import '../utils/app_colors.dart';
+import '../utils/app_localizations.dart';
 
 class MedicalRecordsScreen extends StatefulWidget {
   const MedicalRecordsScreen({super.key});
@@ -55,21 +56,23 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          _buildAppBar(context),
+          _buildAppBar(context, l10n),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-              child: _buildSummaryCard(context),
+              child: _buildSummaryCard(context, l10n),
             ),
           ),
-          SliverToBoxAdapter(child: _buildSearchSection(context)),
+          SliverToBoxAdapter(child: _buildSearchSection(context, l10n)),
           if (_filteredRecords.isEmpty)
-            SliverFillRemaining(child: _buildEmptyState())
+            SliverFillRemaining(child: _buildEmptyState(l10n))
           else
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -78,7 +81,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                   return MedicalRecordCard(
                     record: _filteredRecords[index],
                     onTap: () =>
-                        _showRecordDetails(context, _filteredRecords[index]),
+                        _showRecordDetails(context, _filteredRecords[index], l10n),
                   ).animate(delay: (index * 50).ms).fadeIn().slideY(begin: 0.1);
                 }, childCount: _filteredRecords.length),
               ),
@@ -89,8 +92,8 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Adding records feature is coming soon!'),
+            SnackBar(
+              content: Text(l10n.addingRecordsComingSoon),
               behavior: SnackBarBehavior.floating,
               backgroundColor: AppColors.primary,
             ),
@@ -98,16 +101,16 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
         },
         backgroundColor: AppColors.primary,
         elevation: 8,
-        label: const Text(
-          'Add Record',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        label: Text(
+          l10n.addRecord,
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         icon: const Icon(Icons.add_rounded, color: Colors.white),
       ).animate().scale(delay: 500.ms, curve: Curves.easeOutBack),
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
+  Widget _buildAppBar(BuildContext context, AppLocalizations l10n) {
     return SliverAppBar(
       expandedHeight: 80,
       floating: true,
@@ -116,7 +119,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       centerTitle: true,
       title: Text(
-        'Medical Records',
+        l10n.medicalRecords,
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
@@ -133,7 +136,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
     );
   }
 
-  Widget _buildSummaryCard(BuildContext context) {
+  Widget _buildSummaryCard(BuildContext context, AppLocalizations l10n) {
     final lastDoctor = _allRecords.isNotEmpty
         ? _allRecords.first.doctorName
         : null;
@@ -163,9 +166,9 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Recent Records',
-                    style: TextStyle(
+                  Text(
+                    l10n.recentRecords,
+                    style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -173,7 +176,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${_allRecords.length} Files Total',
+                    '${_allRecords.length} ${l10n.filesTotal}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -208,8 +211,8 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
               Expanded(
                 child: Text(
                   _allRecords.isNotEmpty
-                      ? 'Your last checkup was $daysAgo days ago with Dr. $lastDoctor.'
-                      : 'No recent checkup records found.',
+                      ? l10n.lastCheckupDaysAgoText(daysAgo, lastDoctor!)
+                      : l10n.noRecentCheckup,
                   style: const TextStyle(color: Colors.white70, fontSize: 12),
                 ),
               ),
@@ -220,7 +223,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
     ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.1);
   }
 
-  Widget _buildSearchSection(BuildContext context) {
+  Widget _buildSearchSection(BuildContext context, AppLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
       child: Container(
@@ -233,7 +236,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           controller: _searchController,
           onChanged: (_) => setState(() {}), // Refresh to show/hide clear icon
           decoration: InputDecoration(
-            hintText: 'Search by diagnosis or doctor...',
+            hintText: l10n.searchDiagnosisDoctor,
             hintStyle: const TextStyle(
               color: AppColors.textMuted,
               fontSize: 14,
@@ -262,7 +265,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(AppLocalizations l10n) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -281,7 +284,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
           const SizedBox(height: 24),
           Text(
-            'No records found',
+            l10n.noRecordsFound,
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -290,7 +293,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'Try searching with a different keyword\nor add a new medical record.',
+            l10n.trySearchingDifferent,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyMedium?.color,
@@ -303,7 +306,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
     );
   }
 
-  void _showRecordDetails(BuildContext context, MedicalRecord record) {
+  void _showRecordDetails(BuildContext context, MedicalRecord record, AppLocalizations l10n) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -358,7 +361,7 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                                 ),
                               ),
                               Text(
-                                'Patient Record #${record.id.length > 8 ? record.id.substring(0, 8).toUpperCase() : record.id.toUpperCase()}',
+                                '${l10n.patientRecord} #${record.id.length > 8 ? record.id.substring(0, 8).toUpperCase() : record.id.toUpperCase()}',
                                 style: const TextStyle(
                                   color: AppColors.textMuted,
                                   fontSize: 13,
@@ -375,39 +378,39 @@ class _MedicalRecordsScreenState extends State<MedicalRecordsScreen> {
                     const SizedBox(height: 32),
                     _buildDetailRow(
                       Icons.person_rounded,
-                      'Doctor',
+                      l10n.doctorLabel,
                       'Dr. ${record.doctorName}',
                       record.doctorSpecialty,
                     ),
                     const SizedBox(height: 24),
                     _buildDetailRow(
                       Icons.calendar_month_rounded,
-                      'Date of Visit',
+                      l10n.dateOfVisit,
                       DateFormat('EEEE, MMM dd yyyy').format(record.date),
                       null,
                     ),
                     const SizedBox(height: 32),
                     _buildSection(
-                      'Patient Symptoms',
+                      l10n.patientSymptoms,
                       record.symptoms.join(', '),
                       AppColors.secondary,
                     ),
                     const SizedBox(height: 24),
                     _buildSection(
-                      'Clinical Diagnosis',
+                      l10n.clinicalDiagnosis,
                       record.diagnosis,
                       AppColors.primary,
                     ),
                     const SizedBox(height: 24),
                     _buildSection(
-                      'Prescription & Advice',
+                      l10n.prescriptionAdvice,
                       record.prescription,
                       AppColors.success,
                     ),
                     if (record.notes.isNotEmpty) ...[
                       const SizedBox(height: 24),
                       _buildSection(
-                        'Special Notes',
+                        l10n.specialNotes,
                         record.notes,
                         Colors.orange,
                       ),
